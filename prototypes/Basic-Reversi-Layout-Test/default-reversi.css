@@ -1,0 +1,39 @@
+body {
+}
+
+
+.main-view {
+  background-color: #ddffdd;
+  height: 160px;
+  width: 200px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-view-left {
+  background-color: #ddffff;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+.main-view-right {
+  background-color: #ddddff;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+.main-label {
+  background-color: #ffff88;
+  width: 100%;
+}
+
+.user-left {
+
+}
+
+.user-right {
+  float: right;
+}
