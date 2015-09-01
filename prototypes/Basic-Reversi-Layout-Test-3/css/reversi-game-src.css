@@ -64,17 +64,22 @@ html, body {
 }
 
 .game-logo-text {
+    position: absolute;
     text-align: left;
     color: red;
     font-size: 42px;
-    margin-left: 0px;
-    margin-top: 7px;
+    left: 62px;
+    top: 1px;
 }
 .header-img {
     width: 58px;
     height: 58px;
     border: 1px solid #585858;
     top: 1px;
+}
+#header-img-home-id {
+    position: absolute;
+    left: 2px;
 }
 #header-img-info-id {
     position: absolute;

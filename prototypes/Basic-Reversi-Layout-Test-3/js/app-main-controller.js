@@ -51,7 +51,7 @@
             console.log("$('#header-img-statistic-id').click().");
             self.appScreenService.switchToScreen('statistic-screen-id');
         });
-        $('#game-logo-text-id').click(function () {
+        $('#header-img-home-id').click(function () {
             console.log("$('#game-logo-text-id').click().");
             self.appScreenService.switchToScreen('game-screen-id');
         });

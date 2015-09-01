@@ -17,6 +17,7 @@
     <div class="central-rectangle" id="central-rectangle-id">
 
         <div class="game-logo" id="game-logo-id">
+            <img class="header-img" id="header-img-home-id" src="./images/home-8x.png" alt="H">
             <p class="game-logo-text" id="game-logo-text-id">Reversi</p>
             <img class="header-img" id="header-img-info-id" src="./images/question-mark-8x.png" alt="?">
             <img class="header-img" id="header-img-setup-id" src="./images/cog-8x.png" alt="*">
@@ -41,17 +42,32 @@
                     </p>
                     <p>
                         <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
-                            <button type="button" ng-click="main.localTowPlayerGame()" class="btn btn-lg btn-default btn-block">Zweispieler Spiel</button>
+                            <button type="button" ng-click="main.localTowPlayerGame()" class="btn btn-lg btn-default btn-block">Zweispieler Spiel
+                                <span class="">
+                                   <img class="startup-menu-img" align="right" src="./images/people-8x.png" alt="2">
+                                </span>
+                            </button>
                         </div>
                     </p>
                     <p>
                         <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
-                            <button type="button" ng-click="main.localPlayWithComputer()" class="btn btn-lg btn-default btn-block">Spiel mit Computer</button>
+                            <button type="button" ng-click="main.localPlayWithComputer()" class="btn btn-lg btn-default btn-block">Spiel mit Computer
+                                <span class="">
+                                   <img class="startup-menu-img" align="right" src="./images/computer-8x.png" alt="C">
+                                </span>
+                            </button>
                         </div>
                     </p>
                     <p>
                         <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
-                            <button type="button" ng-click="main.onlinePlay()" class="btn btn-lg btn-default btn-block">Spiel Online-Gegener</button>
+                            <button type="button" ng-click="main.onlinePlay()" class="btn btn-lg btn-default btn-block">Spiel Online-Gegener
+                                <!--
+                                <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
+                                -->
+                                <span class="">
+                                   <img class="startup-menu-img" align="right" src="./images/network-8x.png" alt="N">
+                                </span>
+                            </button>
                         </div>
                     </p>
                 </div>
@@ -142,8 +158,11 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <div class="col-sm-offset-1 col-sm-10 col-xs-12">
+                            <div class="col-sm-offset-1 col-sm-3 col-xs-5">
                                 <button type="submit" class="btn btn-default">Sign in</button>
+                            </div>
+                            <div class="col-sm-3 col-xs-5">
+                                <button type="submit" class="btn btn-default">Register</button>
                             </div>
                         </div>
                     </form>

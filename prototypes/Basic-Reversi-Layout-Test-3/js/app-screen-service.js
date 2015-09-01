@@ -14,8 +14,7 @@
             self.actualScreenId = "";
 
 
-            // Functionen 
-
+            // Functionen
             self.resizeGameEx = function(minMargin) {
                 // game size and all we have to see
                 var gameSize = {
@@ -89,21 +88,50 @@
             }
 
             self.resizeHtmlElements = function(gsr) {
-                if (gsr.gameSizeWidth < 350) {
-                    var logoFontSize = '28px';
+                if (gsr.gameSizeWidth < 340) {
+                    var logoFontSize = '10px';
                     var isFontSize = $('#game-logo-text-id').css('font-size');
                     if (logoFontSize !== isFontSize) {
                         $('#game-logo-text-id').css('font-size', '' + logoFontSize);
-                        $('#game-logo-text-id').css('margin-top', '' + 14 + 'px');
+                        $('#game-logo-text-id').css('top', '' + 22 + 'px');
+                    }
+                } else if (gsr.gameSizeWidth < 380) {
+                        var logoFontSize = '16px';
+                        var isFontSize = $('#game-logo-text-id').css('font-size');
+                        if (logoFontSize !== isFontSize) {
+                            $('#game-logo-text-id').css('font-size', '' + logoFontSize);
+                            $('#game-logo-text-id').css('top', '' + 20 + 'px');
+                        }
+                } else if (gsr.gameSizeWidth < 450) {
+                    var logoFontSize = '24px';
+                    var isFontSize = $('#game-logo-text-id').css('font-size');
+                    if (logoFontSize !== isFontSize) {
+                        $('#game-logo-text-id').css('font-size', '' + logoFontSize);
+                        $('#game-logo-text-id').css('top', '' + 16 + 'px');
                     }
                 } else {
                     var logoFontSize = '42px';
                     var isFontSize = $('#game-logo-text-id').css('font-size');
                     if (logoFontSize !== isFontSize) {
                         $('#game-logo-text-id').css('font-size', '' + logoFontSize);
-                        $('#game-logo-text-id').css('margin-top', '' + 7 + 'px');
+                        $('#game-logo-text-id').css('top', '' + 7 + 'px');
                     }
                 }
+
+                if (gsr.gameSizeWidth < 340) {
+                    $('.startup-menu-img').css('margin-right', '1px');
+                    $('.startup-menu-img').css('height', '12px');
+                } else if (gsr.gameSizeWidth < 400) {
+                        $('.startup-menu-img').css('margin-right', '5px');
+                        $('.startup-menu-img').css('height', '16px');
+                } else if (gsr.gameSizeWidth < 500) {
+                    $('.startup-menu-img').css('margin-right', '20px');
+                    $('.startup-menu-img').css('height', '32px');
+                } else {
+                    $('.startup-menu-img').css('margin-right', '50px');
+                    $('.startup-menu-img').css('height', '64px');
+                }
+
 
                 var infoMidd = gsr.gameSizeWidth /2;
                 var infoHeight = $('#game-player-info-id').height();
