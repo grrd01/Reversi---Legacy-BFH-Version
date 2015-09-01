@@ -169,7 +169,8 @@
                 }
             }
 
-            $(window).resize(self.resize);
+            //$(window).resize(self.resize);
+            //wird vom app-main-controller aufgerufen
 
             self.updateCards = function() {
                 self.resize();

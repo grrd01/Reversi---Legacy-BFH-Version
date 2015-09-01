@@ -62,12 +62,11 @@
             console.log("angular.element($window).bind('resize', function () ....");
 
             self.appScreenService.resizeHandler();
+            self.appCardGameService.updateCards();
+
             //$scope.initializeWindowSize();
             return $scope.$apply();
         });
-
-        // und alles einmal beim start initialisieren.
-        self.appScreenService.resizeHandler();
 
         // und zum start-bildschirm
         self.appScreenService.switchToScreen('startup-screen-id');
@@ -76,6 +75,8 @@
 
         self.appScreenService.playersLeftTurn();
 
+        // und alles einmal beim start updaten.
+        self.appScreenService.resizeHandler();
         self.appCardGameService.updateCards();
 
         self.appCardGameService.doImageSwitch(3, 3, 2);
