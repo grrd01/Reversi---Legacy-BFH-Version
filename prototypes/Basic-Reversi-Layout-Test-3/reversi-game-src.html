@@ -1,0 +1,188 @@
+﻿<!DOCTYPE html>
+<html lang=en>
+<head>
+	<meta charset=utf-8>
+	<title>Reversi-Game</title>
+
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" href="css/vendor/normalize.css">
+    <link rel="stylesheet" href="css/vendor/bootstrap.min.css">
+
+    <link rel="stylesheet" href="css/reversi-game-src.css">
+
+</head>
+<body ng-app="ApplicationModule" ng-controller="ApplicationMainCtrl as main" ng-cloak>
+
+    <div class="central-rectangle" id="central-rectangle-id">
+
+        <div class="game-logo" id="game-logo-id">
+            <p class="game-logo-text" id="game-logo-text-id">Reversi</p>
+            <img class="header-img" id="header-img-info-id" src="./images/question-mark-8x.png" alt="?">
+            <img class="header-img" id="header-img-setup-id" src="./images/cog-8x.png" alt="*">
+            <img class="header-img" id="header-img-statistic-id" src="./images/statistic-8x.png" alt="g">
+        </div>
+
+
+        <!--
+            alle nachfolgenden div's ==> 'switch-area-screen' klassen wären besser über ng-include zu machen. Dieses funktioniert
+            aber leider nur über ein Server (funktioniert nicht wenn wenn lokal mit doppel-click auf html-file).
+        -->
+
+        <div class="switch-area-screen startup-screen" id="startup-screen-id">
+            <div class="vertical-startup-space-01">
+            </div>
+            <div class="container-game container">
+                <div class="row">
+                    <p>
+                        <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
+                            <h4 class="text-center">Was möchtest Du ?</h4>
+                        </div>
+                    </p>
+                    <p>
+                        <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
+                            <button type="button" ng-click="main.localTowPlayerGame()" class="btn btn-lg btn-default btn-block">Zweispieler Spiel</button>
+                        </div>
+                    </p>
+                    <p>
+                        <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
+                            <button type="button" ng-click="main.localPlayWithComputer()" class="btn btn-lg btn-default btn-block">Spiel gegen Computer</button>
+                        </div>
+                    </p>
+                    <p>
+                        <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
+                            <button type="button" ng-click="main.onlinePlay()" class="btn btn-lg btn-default btn-block">Spiel gegen Online-Gegener</button>
+                        </div>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <div class="switch-area-screen help-screen" id="help-screen-id">
+            <div class="vertical-help-space-01">
+            </div>
+            <div class="container-game container">
+
+                <div class="row">
+                    <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-help-margin-01">
+                        <table class="table table-bordered help-table-bordered">
+                            <tr>
+                                <td >
+                                    <img class="help-int-table-img" src="./images/question-mark-8x.png" alt="?" >
+                                </td>
+                                <td class="">Hilfe zum Spiel.</td>
+                            </tr>
+                            <tr>
+                                <td >
+                                    <img class="help-int-table-img" src="./images/cog-8x.png" alt="?" >
+                                </td>
+                                <td class="">Einstellungen inclusive Registration.</td>
+                            </tr>
+                            <tr>
+                                <td >
+                                    <img class="help-int-table-img" src="./images/statistic-8x.png" alt="?" >
+                                </td>
+                                <td class="">Statistiken wie Anzahl Spiele gewonnen.</td>
+                            </tr>
+                            <tr>
+                                <td >
+                                    <img class="help-int-table-img" src="./images/reversi-logo-text.png" alt="?">
+                                </td>
+                                <td class="">Zurück zum Start-Bildschirm..</td>
+                            </tr>
+                            <tr>
+                                <td >
+                                    <img class="help-int-table-img" src="./images/arrow-thick-right-8x.png" alt=">" >
+                                </td>
+                                <td class="">Spieler rechts ist am spielen.</td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <img class="help-int-table-img" src="./images/arrow-thick-left-8x.png" alt="<" >
+                                </td>
+                                <td class="">Spieler links ist am spielen.</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="switch-area-screen setup-screen" id="setup-screen-id">
+        </div>
+
+        <div class="switch-area-screen statistic-screen" id="statistic-screen-id">
+        </div>
+
+        <div class="switch-area-screen login-screen" id="login-screen-id">
+            <div class="vertical-startup-space-01">
+            </div>
+            <div class="container-game container">
+                <div class="row">
+                    <form class="form-horizontal">
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <h4>
+                                    Login:
+                                </h4>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail3" class="col-sm-offset-1 col-sm-10">Email</label>
+                            <div class="col-sm-offset-1 col-sm-10 col-xs-12">
+                                <input type="email" class="col-max form-control" id="inputEmail3" placeholder="Email">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="inputPassword3" class="col-sm-offset-1 col-sm-10">Password</label>
+                            <div class="col-sm-offset-1 col-sm-10 col-xs-12">
+                                <input type="password" class="col-max form-control" id="inputPassword3" placeholder="Password">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10 col-xs-12">
+                                <button type="submit" class="btn btn-default">Sign in</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="switch-area-screen game-screen" id="game-screen-id">
+            <div class="game-player-info" id="game-player-info-id">
+                <img class="img-player-info img-left-player-info" id="img-left-player-info-id" src="./images/emptyuser-90x120.png">
+                <img class="img-player-info img-right-player-info" id="img-right-player-info-id" src="./images/emptyuser-90x120.png">
+
+                <img class="img-player-stone" id="img-player-stone-left-id" src="./images/status-white-stone-128.png">
+                <img class="img-player-stone" id="img-player-stone-right-id" src="./images/status-black-stone-128.png">
+
+                <img class="img-player-status img-player-status-left" id="img-player-status-left-id" src="./images/arrow-thick-left-8x.png">
+                <img class="img-player-status img-player-status-right" id="img-player-status-right-id" src="./images/arrow-thick-right-8x.png">
+
+                <p class="text-player-info" id="text-player-info-left-id">User-left</p>
+                <p class="text-player-info" id="text-player-info-right-id">User-right</p>
+            </div>
+            <div class="game-player-stone-field" id="game-player-stone-field-id">
+            </div>
+            <div class="game-player-status" id="game-player-status-id">
+                <p id="game-player-status-p-id"></p>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- javascripts -->
+    <script src="js/vendor/jquery-2.1.4.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/angular.js"></script>
+    <script src="js/app-module.js"></script>
+    <script src="js/app-screen-service.js"></script>
+    <script src="js/app-game-service.js"></script>
+    <script src="js/app-card-game-service.js"></script>
+    <script src="js/app-main-controller.js"></script>
+
+</body>
+</html>

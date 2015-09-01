@@ -1,0 +1,207 @@
+/*!
+ *
+ *
+ *
+ *
+ */
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak], .ng-cloak, .x-ng-cloak {
+    display: none !important;
+}
+
+/*      Spielfeld CSS Formatierung, der Rest wir mit JavaScript gemacht!
+
+         --------------------- body ------------------------------
+        |            ---- central-rectangle -----------           |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXX Spielfeld mit inc. alle XXXXXX|          |
+        |           |XXX Informationen und Statusen XXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |           |XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX|          |
+        |            ----------------------------------           |
+         ---------------------------------------------------------
+*/
+
+
+html, body {
+    position: relative;
+    overflow-y:hidden;
+    overflow-x:hidden;
+    width : 100%;
+    height: 100%;
+    margin : 0;
+    padding: 0;
+    background-color: #6b7db1;
+}
+
+#central-rectangle-id {
+    position: absolute;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    /*background-color: #5cb85c;*/
+    background-color: #6b7db1;
+}
+
+#game-logo-id {
+    position: absolute;
+    width : 100%;
+    height: 62px;
+    border: 1px solid #555;
+}
+
+.game-logo-text {
+    text-align: left;
+    color: red;
+    font-size: 42px;
+    margin-left: 0px;
+    margin-top: 7px;
+}
+.header-img {
+    width: 58px;
+    height: 58px;
+    border: 1px solid #585858;
+    top: 1px;
+}
+#header-img-info-id {
+    position: absolute;
+    right: 2px;
+}
+#header-img-setup-id {
+    position: absolute;
+    right: 63px;
+}
+#header-img-statistic-id {
+    position: absolute;
+    right: 125px;
+}
+
+.switch-area-screen {
+    position: absolute;
+    width : 100%;
+}
+#startup-screen-id {
+    background-color: #ddd;
+}
+#help-screen-id {
+    background-color: #ddd;
+}
+#setup-screen-id {
+    background-color: #ddd;
+}
+#statistic-screen-id {
+    background-color: #ddd;
+}
+#login-screen-id {
+    background-color: #ddd;
+}
+#game-screen-id {
+    background-color: #6b7db1;
+}
+
+
+.vertical-startup-space-01 {
+    height: 10%;
+}
+
+.vertical-startup-margin-01 {
+    margin-top: 5%;
+}
+
+.vertical-help-space-01 {
+    height: 5px;
+}
+.vertical-help-margin-01 {
+    margin-top: 5%;    
+}
+
+.help-table-bordered th,
+.help-table-bordered td {
+    border: 1px solid #aaa !important;
+}
+
+.help-int-table-img {
+    float: left;
+    height: 30px;
+    border: 1px solid;
+}
+
+.game-player-info {
+    background-color: #ccc;
+}
+.game-player-stone-field {
+    /*background-color: #b7bcff;*/
+    position: static;
+}
+.game-player-status {
+    background-color: #ccc;
+}
+
+
+.img-player-info {
+    width: 57px;
+    height: 76px;
+    border-radius: 3px;
+    margin: 1px;
+    position: absolute;
+    top: 0px;
+}
+#img-left-player-info-id {
+    left: 0px;
+}
+#img-right-player-info-id {
+    right: 0px;
+}
+
+.img-player-stone {
+    width: 76px;
+    height: 76px;
+    border-radius: 3px;
+    margin: 1px;
+    position: absolute;
+    top: 0px;
+}
+#img-player-stone-left-id {
+}
+#img-player-stone-right-id {
+}
+
+.img-player-status {
+    width: 76px;
+    height: 76px;
+    border-radius: 3px;
+    margin: 1px;
+    position: absolute;
+    top: 0px;
+}
+#img-player-status-left-id {
+}
+#img-player-status-right-id {
+}
+
+#game-player-status-p-id {
+    font-size: 12px;
+}
+
+.text-player-info {
+    color: #666;
+    font-size: 20px;
+    position: absolute;
+}
+#text-player-info-left-id {
+}
+#text-player-info-right-id {
+}
