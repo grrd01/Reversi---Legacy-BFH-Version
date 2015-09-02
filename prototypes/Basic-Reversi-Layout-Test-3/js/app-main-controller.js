@@ -52,8 +52,8 @@
             self.appScreenService.switchToScreen('statistic-screen-id');
         });
         $('#header-img-home-id').click(function () {
-            console.log("$('#game-logo-text-id').click().");
-            self.appScreenService.switchToScreen('game-screen-id');
+            console.log("$('#header-img-home-id').click().");
+            self.appScreenService.switchToScreen('startup-screen-id');
         });
 
         // resize registrieren

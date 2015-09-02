@@ -193,7 +193,7 @@
                 $('#login-screen-id').hide();
                 $('#game-screen-id').hide();
 
-                if (isVisibleScreen) {
+                if (isVisibleScreen || onId === 'startup-screen-id') {
                     $('#startup-screen-id').show();
                 } else {
                     $('#' + onId).show();

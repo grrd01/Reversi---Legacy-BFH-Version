@@ -20,7 +20,7 @@
                 // weisses Feld
                 "./images/white-stone-128.png",
                 // schwarzes Feld
-                "./images/black-stone-128.png",
+                "./images/black-stone-r-128.png",
                 // rückseiten Feld
                 "./images/cardbackside-128.png",
                 // ok Feld
