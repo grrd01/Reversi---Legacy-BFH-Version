@@ -191,6 +191,7 @@
                 $('#setup-screen-id').hide();
                 $('#statistic-screen-id').hide();
                 $('#login-screen-id').hide();
+                $('#register-screen-id').hide();
                 $('#game-screen-id').hide();
 
                 if (isVisibleScreen || onId === 'startup-screen-id') {

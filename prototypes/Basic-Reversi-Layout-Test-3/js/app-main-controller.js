@@ -38,6 +38,18 @@
             //self.appScreenService.switchToScreen('game-screen-id');
         }
 
+        self.playerLogin = function () {
+            console.log("playerLogin().");
+        }
+        self.switchToPlayerRegisterDialog = function () {
+            console.log("switchToPlayerRegisterDialog().");
+            self.appScreenService.switchToScreen('register-screen-id');
+        }
+        self.playerRegister = function () {
+            console.log("playerRegister().");
+            self.appScreenService.switchToScreen('register-screen-id');
+        }
+
         // init
         $('#header-img-info-id').click(function () {
             console.log("$('#header-img-info-id').click().");

@@ -137,7 +137,6 @@
             <div class="container-game container">
                 <div class="row">
                     <form class="form-horizontal">
-
                         <div class="form-group">
                             <div class="col-sm-offset-1 col-sm-10">
                                 <h4>
@@ -159,12 +158,63 @@
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-1 col-sm-3 col-xs-5">
-                                <button type="submit" class="btn btn-default">Sign in</button>
+                                <button type="submit" ng-click="main.playerLogin()" class="btn btn-default">Sign in</button>
                             </div>
                             <div class="col-sm-3 col-xs-5">
-                                <button type="submit" class="btn btn-default">Register</button>
+                                <button type="submit" ng-click="main.switchToPlayerRegisterDialog()" class="btn btn-default">Register</button>
                             </div>
                         </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <div class="switch-area-screen register-screen" id="register-screen-id">
+            <div class="vertical-startup-space-01">
+            </div>
+            <div class="container-game container">
+                <div class="row">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-10">
+                                <h4>
+                                    Register:
+                                </h4>
+                            </div>
+                        </div>
+
+                        <!-- Sign Up Form -->
+                        <!-- Text input EMail -->
+                        <div class="form-group">
+                            <label class="col-sm-offset-1 col-sm-10" for="Email">Email:</label>
+                            <div class="col-sm-offset-1 col-sm-10 col-xs-12">
+                                 <input id="Email" name="Email" class="form-control" type="text" placeholder="JoeSixpack@sixpacksrus.com" class="input-large" required="">
+                            </div>
+                        </div>
+
+                        <!-- Password input-->
+                        <div class="form-group">
+                            <label class="col-sm-offset-1 col-sm-10" for="password">Password:</label>
+                            <div class="col-sm-offset-1 col-sm-10 col-xs-12">
+                                <input id="password" name="password" class="form-control" type="password" placeholder="********" class="input-large" required="">
+                                <em>1-8 Characters</em>
+                            </div>
+                        </div>
+
+                        <!-- Text input-->
+                        <div class="form-group">
+                            <label class="col-sm-offset-1 col-sm-10" for="reenterpassword">Re-Enter Password:</label>
+                            <div class="col-sm-offset-1 col-sm-10 col-xs-12">
+                                <input id="reenterpassword" class="form-control" name="reenterpassword" type="password" placeholder="********" class="input-large" required="">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-offset-1 col-sm-3 col-xs-5">
+                                <button type="submit" ng-click="main.playerRegister()" class="btn btn-default">Register</button>
+                            </div>
+                        </div>
+
                     </form>
                 </div>
             </div>
