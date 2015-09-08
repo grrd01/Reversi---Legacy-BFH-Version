@@ -1,40 +1,40 @@
-var gameBoard = function() {
+var gameLogic = function() {
     var board, columns= 8, rows= 8,
         gameStart = true,
         currentPlayer = 0,
 
         init = function(){
-            gameBoard.initEmptyBoard();
-            gameBoard.showBoard();
+            gameLogic.initEmptyBoard();
+            gameLogic.showBoard();
 
-            //gameBoard.changeObjectState(3,3,1);
-            gameBoard.setStartGame();
-            gameBoard.showBoard();
-            gameBoard.getFigures(1);
-            gameBoard.getPossibleMoves(1);
+            //gameLogic.changeObjectState(3,3,1);
+            gameLogic.setStartGame();
+            gameLogic.showBoard();
+            gameLogic.getFigures(1);
+            gameLogic.getPossibleMoves(1);
 
-            gameBoard.changeObjectState(4,2,1, true);
-            gameBoard.showBoard();
+            gameLogic.changeObjectState(4,2,1, true);
+            gameLogic.showBoard();
 
-            gameBoard.moveFromComputerPlayer(2);
-            gameBoard.showBoard();
+            gameLogic.moveFromComputerPlayer(2);
+            gameLogic.showBoard();
 
-            gameBoard.moveFromComputerPlayer(1);
-            gameBoard.showBoard();
+            gameLogic.moveFromComputerPlayer(1);
+            gameLogic.showBoard();
 
-            gameBoard.moveFromComputerPlayer(2);
-            gameBoard.showBoard();
+            gameLogic.moveFromComputerPlayer(2);
+            gameLogic.showBoard();
 
-            gameBoard.moveFromComputerPlayer(1);
-            gameBoard.showBoard();
+            gameLogic.moveFromComputerPlayer(1);
+            gameLogic.showBoard();
 
-            //gameBoard.changeObjectState(3, 2, 2, true);
-            //gameBoard.showBoard();
+            //gameLogic.changeObjectState(3, 2, 2, true);
+            //gameLogic.showBoard();
 
-            //gameBoard.updateStates(1, 4, 2);
-            //gameBoard.showBoard();
+            //gameLogic.updateStates(1, 4, 2);
+            //gameLogic.showBoard();
 
-            gameBoard.getPossibleMoves(2);
+            gameLogic.getPossibleMoves(2);
 
         },
 
@@ -354,14 +354,14 @@ var gameBoard = function() {
     };
 }();
 
-gameBoard.init();
-//gameBoard.initEmptyBoard();
-//gameBoard.showBoard();
+gameLogic.init();
+//gameLogic.initEmptyBoard();
+//gameLogic.showBoard();
 //
-////gameBoard.changeObjectState(3,3,1);
-//gameBoard.setStartGame();
-//gameBoard.showBoard();
-//gameBoard.getPossibleMoves();
+////gameLogic.changeObjectState(3,3,1);
+//gameLogic.setStartGame();
+//gameLogic.showBoard();
+//gameLogic.getPossibleMoves();
 
 //function PlayObject(state) {
 //    this.value = state;
