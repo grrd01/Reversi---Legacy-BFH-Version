@@ -1,15 +1,32 @@
 {
-    "name": "reversi",
-    "version": "0.1.0",
-    "description": "HTML5 Reversi Game",
-    "engines": {
-        "node": "0.12.7"
-    },
-    "scripts": {
-        "start": "./ReversiServer.js"
-    },
-    "dependencies": {
-        "socket.io": "1.3.6"
-    },
-    "author": "Gerard Tyedmers"
+  "name": "reversi",
+  "version": "1.0.0",
+  "description": "a HTML5 Reversi webapp created for the CAS at Berner Fachhochschule",
+  "keywords": [
+    "OpenShift",
+    "Node.js",
+    "Reversi",
+    "Webapp"
+  ],
+  "author": {
+    "name": "Nguyen Khoa Thien, Tyedmers Gérard, Jenzer Ulrich",
+    "email": "grrd@gmx.net",
+    "url": "https://github.com/grrd01/Reversi/"
+  },
+  "homepage": "https://github.com/grrd01/Reversi/",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/grrd01/Reversi"
+  },
+  "engines": {
+    "node": ">= 0.6.0",
+    "npm": ">= 1.0.0"
+  },
+  "dependencies": {
+    "socket.io": "1.3.6"
+  },
+  "devDependencies": {},
+  "bundleDependencies": [],
+  "private": true,
+  "main": "server.js"
 }

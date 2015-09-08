@@ -31,8 +31,8 @@
             // function to establish a connection to the server and to request an online game
             self.connect = function () {
                 if (!self.connection) {
-                    self.socket = io.connect('http://localhost:3000');
-                    //socket = io.connect('http://reversi.nodeserver.com:80');
+                    //self.socket = io.connect('http://localhost:3000');
+                    self.socket = io.connect('http://reversi-grrd.rhcloud.com:8000');
                     self.connection = true;
                 } else {
                     self.socket.reconnect();
