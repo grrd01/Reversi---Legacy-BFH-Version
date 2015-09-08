@@ -116,6 +116,9 @@ html, body {
 #register-screen-id {
     background-color: #ddd;
 }
+#wait-online-game-screen-id {
+    background-color: #ddd;
+}
 #game-screen-id {
     background-color: #6b7db1;
 }

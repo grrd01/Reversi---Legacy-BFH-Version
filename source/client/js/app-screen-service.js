@@ -205,6 +205,7 @@
                 $('#statistic-screen-id').hide();
                 $('#login-screen-id').hide();
                 $('#register-screen-id').hide();
+                $('#wait-online-game-screen-id').hide();
                 $('#game-screen-id').hide();
 
                 if (isVisibleScreen && (lastGameMode !== undefined && lastGameMode.length > 0)) {

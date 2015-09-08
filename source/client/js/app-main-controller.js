@@ -51,6 +51,9 @@
 
         self.playerLogin = function () {
             console.log("playerLogin().");
+
+            self.appScreenService.switchToScreen('wait-online-game-screen-id');
+
         }
         self.switchToPlayerRegisterDialog = function () {
             console.log("switchToPlayerRegisterDialog().");
