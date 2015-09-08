@@ -75,7 +75,6 @@
 
                 $('#game-player-status-p-id')[0].innerHTML = self.statusMessgaeText;
 
-
                 $timeout(self.timerHandler, 1000);
             }
 

@@ -93,6 +93,9 @@
         $('#header-img-home-id').click(function () {
             console.log("$('#header-img-home-id').click().");
             self.appScreenService.switchToScreen('startup-screen-id', self.appLastGameMode);
+            if (self.appOnlineService.onlineState !== "none") {
+                self.appOnlineService.online_quit();
+            }
             if (self.inSettingPage) { self.appSetupService.saveSettings(); self.inSettingPage = false; }
             self.appLastGameMode = "";
         });

@@ -33,7 +33,7 @@
                     //socket = io.connect('http://reversi.nodeserver.com:80');
                     self.connection = true;
                 } else {
-                    self.socket.socket.reconnect();
+                    self.socket.reconnect();
                 }
 
                 // event when you are successfully connected to the server
@@ -45,9 +45,10 @@
                 // event when the server tells you that you can start a online game
                 self.socket.on('startgame', function (data) {
                     self.onlineState = "startgame";
-                    alert("online game beginning");
+                    //alert("online game beginning");
+                    console.log("online game beginning");
                     self.user = data;
-                    if (self.user.id != laststart) {
+                    if (self.user.id != self.laststart) {
                         // send player metadata to opponent
                         self.socket.emit('usersend', {
                             to: self.user.opponent,
@@ -57,26 +58,29 @@
                         self.laststart = self.user.id;
                         if (self.user.role == 0) {
                             // player starts game
-                            alert("it's your turn");
+                            //alert("it's your turn");
+                            console.log("it's your turn");
                             // test
                             self.online_play(1, 2);
                             self.game_play(1, 2);
                             // test
                         } else {
                             // opponent starts game
-                            alert("waiting for opponent to  start the game");
+                            //alert("waiting for opponent to  start the game");
+                            console.log("waiting for opponent to  start the game");
                         }
                     }
                 });
 
                 // event when the server tells you, where your opponent played
                 self.socket.on('playget', function (data) {
-                    if (countround == data.round && lastround != data.round) {
-                        lastround = data.round;
+                    if (self.countround == data.round && self.lastround != data.round) {
+                        self.lastround = data.round;
                         self.game_play(data.row, data.col);
-                        alert("your online opponent played in row " + data.row);
+                        //alert("your online opponent played in row " + data.row);
+                        console.log("your online opponent played in row " + data.row);
                         // test
-                        self.online_quit();
+                        // uje self.online_quit();
                         // test
                     }
                 });
@@ -84,16 +88,18 @@
                 // event when the server sends you metadata of your opponent
                 self.socket.on('userget', function (data) {
                     if (self.user.role == 0) {
-                        alert("Player 2 has the name" + data.name);
+                        //alert("Player 2 has the name" + data.name);
+                        console.log("Player 2 has the name" + data.name);
                     } else {
-                        alert("Player 1 has the name" + data.name);
+                        //alert("Player 1 has the name" + data.name);
+                        console.log("Player 1 has the name" + data.name);
                     }
                 });
 
                 // event when your opponent has left the game
                 self.socket.on('quit', function () {
-                    if (self.user.id != lastquit) {
-                        self.lastquit = user.id;
+                    if (self.user.id != self.lastquit) {
+                        self.lastquit = self.user.id;
                         self.onlineState = "none";
                         alert("your opponent has left the game");
                     }
@@ -103,17 +109,18 @@
 
             // function to end an online game
             self.online_quit = function () {
-                socket.disconnect();
+                self.socket.disconnect();
             };
 
             // function to send a played move to your opponent
             self.online_play = function (zeilenr, spaltenr) {
-                socket.emit('playsend', {to: user.opponent, row: zeilenr, col: spaltenr, round: countround});
+                self.socket.emit('playsend', {to: self.user.opponent, row: zeilenr, col: spaltenr, round: self.countround});
             };
 
             self.game_play = function (zeilenr, spaltenr)
             {
-                alert("now playing in row " + zeilenr + " col " + spaltenr);
+                console.log("now playing in row " + zeilenr + " col " + spaltenr);
+                //alert("now playing in row " + zeilenr + " col " + spaltenr);
             }
         }
 
