@@ -6,7 +6,7 @@
     var app = angular.module('ApplicationModule');
 
     /* Controllers */
-    app.controller('ApplicationMainCtrl', ['$scope', '$rootScope', '$window', '$timeout', 'AppScreenService', 'AppGameService', 'AppCardGameService', 'AppStatisticService', 'AppSetupService', function ($scope, $rootScope, $window, $timeout, appScreenService, appGameService, appCardGameService, appStatisticService, appSetupService) {
+    app.controller('ApplicationMainCtrl', ['$scope', '$rootScope', '$window', '$timeout', 'AppScreenService', 'AppGameService', 'AppCardGameService', 'AppStatisticService', 'AppSetupService', 'AppOnlineService', function ($scope, $rootScope, $window, $timeout, appScreenService, appGameService, appCardGameService, appStatisticService, appSetupService, appOnlineService) {
 
         var self = this;
         self.inSettingPage = false;
@@ -16,9 +16,13 @@
         self.appCardGameService = appCardGameService;
         self.appStatisticService = appStatisticService;
         self.appSetupService = appSetupService;
+        self.appOnlineService = appOnlineService;
+
         self.appLastGameMode = "";
         self.userLeftInfoText = "Spieler links";
         self.userRightInfoText = "Spieler rechts";
+
+        self.onlineMessage = "";
 
         // functions
 
@@ -52,9 +56,13 @@
         self.playerLogin = function () {
             console.log("playerLogin().");
 
+            //self.appOnlineService.isConnected
+
+            self.onlineMessage = "Warten auf Server.";
             self.appScreenService.switchToScreen('wait-online-game-screen-id');
 
-            online.connect();
+            //online.connect();
+            self.appOnlineService.connect();
         }
         self.switchToPlayerRegisterDialog = function () {
             console.log("switchToPlayerRegisterDialog().");

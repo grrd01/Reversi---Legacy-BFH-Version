@@ -292,7 +292,8 @@
                     <form class="form-horizontal">
                         <div class="form-group">
                             <div class="col-sm-offset-1 col-sm-10">
-                                <h4>Warte auf Online Gegner.</h4>
+                                <h4 ng-show="main.appOnlineService.onlineState === 'none'">Warten auf Server.</h4>
+                                <h4 ng-show="main.appOnlineService.onlineState === 'connect'">Warten auf Spieler.</h4>
                             </div>
                         </div>
 
