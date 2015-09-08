@@ -46,22 +46,14 @@
         self.onlinePlay = function () {
             console.log("onlinePlay().");
             self.appScreenService.switchToScreen('login-screen-id');
-            //self.appUserService.checkLogin();
-            //self.appGameService.startGameWithComputer();
-            //self.appScreenService.switchToScreen('game-screen-id');
             self.appScreenService.resizeHandler();
             self.appLastGameMode = "OnlinePlay";
         }
 
         self.playerLogin = function () {
             console.log("playerLogin().");
-
-            //self.appOnlineService.isConnected
-
             self.onlineMessage = "Warten auf Server.";
             self.appScreenService.switchToScreen('wait-online-game-screen-id');
-
-            //online.connect();
             self.appOnlineService.connect();
         }
         self.switchToPlayerRegisterDialog = function () {
@@ -112,6 +104,15 @@
 
             //$scope.initializeWindowSize();
             return $scope.$apply();
+        });
+
+        //$rootScope.$broadcast('online-game-beginning');
+        $scope.$on('online-game-beginning', function(event, args) {
+            console.log("$scope.$on('online-game-beginning') evenbt .....");
+
+            //self.appUserService.checkLogin();
+            self.appGameService.startGameWithComputer();
+            self.appScreenService.switchToScreen('game-screen-id');
         });
 
         // und zum start-bildschirm

@@ -13,10 +13,12 @@
     var app = angular.module("ApplicationModule");
 
     // create the service
-    app.factory('AppOnlineService', ['$timeout', function ($timeout) {
+    app.factory('AppOnlineService', ['$rootScope', function ($rootScope) {
         var AppOnlineService = function () {
             var self = this;
             self.onlineState = "none";
+            self.onlineStartPlayer = false;
+            self.onlineStartOpponent = false;
             // variables for online-mode
             self.socket;
             self.user;
@@ -47,6 +49,7 @@
                     self.onlineState = "startgame";
                     //alert("online game beginning");
                     console.log("online game beginning");
+                    $rootScope.$broadcast('online-game-beginning');
                     self.user = data;
                     if (self.user.id != self.laststart) {
                         // send player metadata to opponent
@@ -59,6 +62,7 @@
                         if (self.user.role == 0) {
                             // player starts game
                             //alert("it's your turn");
+                            self.onlineStartPlayer = true;
                             console.log("it's your turn");
                             // test
                             self.online_play(1, 2);
@@ -67,6 +71,7 @@
                         } else {
                             // opponent starts game
                             //alert("waiting for opponent to  start the game");
+                            self.onlineStartOpponent = true;
                             console.log("waiting for opponent to  start the game");
                         }
                     }
@@ -101,6 +106,8 @@
                     if (self.user.id != self.lastquit) {
                         self.lastquit = self.user.id;
                         self.onlineState = "none";
+                        self.onlineStartPlayer = false;
+                        self.onlineStartOpponent = false;
                         alert("your opponent has left the game");
                     }
                 });
