@@ -363,6 +363,6 @@ gameBoard.init();
 //gameBoard.showBoard();
 //gameBoard.getPossibleMoves();
 
-function PlayObject(state) {
-    this.value = state;
-};
+//function PlayObject(state) {
+//    this.value = state;
+//};
