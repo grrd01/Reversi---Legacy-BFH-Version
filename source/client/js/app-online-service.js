@@ -17,7 +17,7 @@
     var countround = 0;
 
     // function to establish a connection to the server and to request an online game
-    function online_connect() {
+    var online_connect = function () {
         if(!connection) {
             socket = io.connect('http://localhost:3000');
             //socket = io.connect('http://reversi.nodeserver.com:80');
@@ -86,25 +86,27 @@
                 alert("your opponent has left the game");
             }
         });
-    }
+    };
 
 
     // function to end an online game
-    function online_quit() {
+    var online_quit = function () {
         socket.disconnect();
-    }
+    };
 
     // function to send a played move to your opponent
-    function online_play(zeilenr, spaltenr) {
+    var online_play = function (zeilenr, spaltenr) {
         socket.emit('playsend', {to: user.opponent, row: zeilenr, col: spaltenr, round: countround});
-    }
+    };
 
     function game_play(zeilenr, spaltenr) {
         alert("now playing in row " + zeilenr + " col " + spaltenr);
     }
 
-    // test
-    online_connect();
-    // test
+    return {
+        online_connect : online_connect,
+        online_quit : online_quit,
+        online_play : online_play
+    }
 
 }());
