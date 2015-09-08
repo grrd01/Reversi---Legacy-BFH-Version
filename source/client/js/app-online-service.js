@@ -5,7 +5,7 @@
 
 "use strict";
 
-(function() {
+var online = (function() {
 
     // variables for online-mode
     var socket;
@@ -104,9 +104,9 @@
     }
 
     return {
-        online_connect : online_connect,
-        online_quit : online_quit,
-        online_play : online_play
+        connect : online_connect,
+        quit : online_quit,
+        play : online_play
     }
 
 }());
