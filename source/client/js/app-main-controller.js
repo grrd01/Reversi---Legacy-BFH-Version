@@ -32,6 +32,7 @@
             self.appScreenService.switchToScreen('game-screen-id');
             self.appGameService.startTowPlayerGame();
             self.appCardGameService.updateCardLayout();
+            self.appScreenService.switchToLocalMode();
             self.appScreenService.resizeHandler();
             self.appLastGameMode = "LocalTowPlayer";
         }
@@ -40,12 +41,14 @@
             self.appScreenService.switchToScreen('game-screen-id');
             self.appGameService.startGameWithComputer();
             self.appCardGameService.updateCardLayout();
+            self.appScreenService.switchToComputerMode();
             self.appScreenService.resizeHandler();
             self.appLastGameMode = "LocalComputer";
         }
         self.onlinePlay = function () {
             console.log("onlinePlay().");
             self.appScreenService.switchToScreen('login-screen-id');
+            self.appScreenService.switchToOnlineMode();
             self.appScreenService.resizeHandler();
             self.appLastGameMode = "OnlinePlay";
         }

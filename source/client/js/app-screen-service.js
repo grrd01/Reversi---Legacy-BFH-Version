@@ -217,6 +217,21 @@
                 }
             }
 
+            self.switchToLocalMode = function() {
+                $('#img-right-player-info-local-id').show();
+                $('#img-right-player-info-computer-id').hide();
+                $('#img-right-player-info-online-id').hide();
+            }
+            self.switchToComputerMode = function() {
+                $('#img-right-player-info-local-id').hide();
+                $('#img-right-player-info-computer-id').show();
+                $('#img-right-player-info-online-id').hide();
+            }
+            self.switchToOnlineMode = function() {
+                $('#img-right-player-info-local-id').hide();
+                $('#img-right-player-info-computer-id').hide();
+                $('#img-right-player-info-online-id').show();
+            }
 
             self.imageBlinkingOn = false;
             self.imageBlinkingId = 0;

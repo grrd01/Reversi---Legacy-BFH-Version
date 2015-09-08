@@ -24,7 +24,6 @@
             <img class="header-img" id="header-img-statistic-id" src="./images/statistic-8x.png" alt="g">
         </div>
 
-
         <!--
             alle nachfolgenden div's ==> 'switch-area-screen' klassen wären besser über ng-include zu machen. Dieses funktioniert
             aber leider nur über ein Server (funktioniert nicht wenn wenn lokal mit doppel-click auf html-file).
@@ -304,7 +303,10 @@
         <div class="switch-area-screen game-screen" id="game-screen-id">
             <div class="game-player-info" id="game-player-info-id">
                 <img class="img-player-info img-left-player-info" id="img-left-player-info-id" src="./images/emptyuser-90x120.png">
-                <img class="img-player-info img-right-player-info" id="img-right-player-info-id" src="./images/emptyuser-90x120.png">
+
+                <img class="img-player-info img-right-player-info" id="img-right-player-info-local-id" src="./images/emptyuser-90x120.png">
+                <img class="img-player-info img-right-player-info" id="img-right-player-info-computer-id" src="./images/computer-8x.png">
+                <img class="img-player-info img-right-player-info" id="img-right-player-info-online-id" src="./images/network-8x.png">
 
                 <img class="img-player-stone" id="img-player-stone-left-id" src="./images/status-white-stone-128.png">
                 <img class="img-player-stone" id="img-player-stone-right-id" src="./images/status-black-stone-r-128.png">
@@ -332,6 +334,7 @@
     <script src="js/vendor/bootstrap.min.js"></script>
     <script src="js/vendor/angular.js"></script>
     <script src="js/vendor/socket.io.js"></script>
+    <script src="js/gameLogic.js"></script>
     <script src="js/app-module.js"></script>
     <script src="js/app-constant-service.js"></script>
     <script src="js/app-setup-service.js"></script>

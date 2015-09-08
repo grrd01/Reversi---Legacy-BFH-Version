@@ -178,7 +178,7 @@ html, body {
 #img-left-player-info-id {
     left: 0px;
 }
-#img-right-player-info-id {
+#img-right-player-info-local-id, #img-right-player-info-computer-id, #img-right-player-info-online-id {
     right: 0px;
 }
 
