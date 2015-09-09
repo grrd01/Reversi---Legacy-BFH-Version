@@ -37,6 +37,7 @@
             self.actualPlayerIsBlack = false;
             self.actualPlayer = self.STONE_WHITE;
             self.wrongStone = undefined;
+            self.gameOver = undefined;
 
             // externe Logic Library
             self.gameLogic = gameLogic;
@@ -195,9 +196,7 @@
             self.startInitGame = function() {
                 self.gameStartTime = new Date();
                 self.setActualPlayerToWhite();
-
                 self.initStoneState();
-
                 self.isGameRunning = true;
                 self.isComputerGameRunning = false;
                 self.isComputerThinkingTime = 0;
@@ -205,6 +204,8 @@
                 self.isOnlineGameRunning = false;
                 self.isOnlineComputerGameRunning = false;
                 self.statusMessgaeText = "";
+                self.wrongStone = undefined;
+                self.gameOver = undefined;
             }
 
             self.startTowPlayerGame = function () {
@@ -221,9 +222,32 @@
                 self.isOnlineGameRunning = true;
             }
 
+            self.isTheGameOver = function() {
+                var moves1 = self.gameLogic.getPossibleMoves(self.actualPlayer);
+                if (moves1.length > 0) {
+                    // aktueller spieler kann noch spielen
+                    self.gameOver = undefined;
+                } else {
+                    var otherPlayer = (self.actualPlayer === self.STONE_WHITE) ? self.STONE_BLACK : self.STONE_WHITE;
+                    if (self.gameOver === undefined) {
+                        self.gameOver = { actual: self.actualPlayer, other: otherPlayer };
+                    }
+                    var moves2 = self.gameLogic.getPossibleMoves(otherPlayer);
+                    if (moves3.length > 0) {
+                        // der andere spler kann noch spielen, so umschlten
+                        self.setActualPlayerToWhite();
+                        $rootScope.$broadcast('update-card-layout');
+                    } else {
+                        // sonst spiel beenden
+                        return true;
+                    }
+                }
+                return false;
+            }
+
             self.startComputerMove = function() {
                 console.log("self.startComputerMove()");
-                self.isComputerThinkingTime = 3;
+                self.isComputerThinkingTime = 4;
                 self.isComputerMove = true;
             }
 
@@ -256,6 +280,12 @@
                         $rootScope.$broadcast('update-card-layout');
                     }
 
+                    // prüfe ob spiel fertig ist
+                    if (self.isTheGameOver()) {
+                        $('#modal-title-text-h4-id')[0].innerHTML = "Der Gewinner ist:";
+                        $('#modal-body-text-p-id')[0].innerHTML = "Weiss";
+                        $("#modal-dialog").modal();
+                    }
                 } else {
                     self.statusMessgaeText = "ready";
                 }
@@ -264,6 +294,10 @@
 
                 $timeout(self.timerHandler, 333);
             }
+
+            $('#modal-dialog').on('hidden.bs.modal', function (e) {
+                console.log("modal dialog is done.");
+            })
 
             $timeout(self.timerHandler, 1000);
         }

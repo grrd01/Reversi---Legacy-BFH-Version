@@ -22,8 +22,6 @@
         self.userLeftInfoText = "Spieler links";
         self.userRightInfoText = "Spieler rechts";
 
-        self.onlineMessage = "";
-
         // functions
 
         self.localTowPlayerGame = function() {
@@ -55,7 +53,6 @@
 
         self.playerLogin = function () {
             console.log("playerLogin().");
-            self.onlineMessage = "Warten auf Server.";
             self.appScreenService.switchToScreen('wait-online-game-screen-id');
             self.appOnlineService.connect();
         }
