@@ -6,13 +6,13 @@
     var app = angular.module('ApplicationModule');
 
     /* Controllers */
-    app.controller('ApplicationMainCtrl', ['$scope', '$rootScope', '$window', '$timeout', 'AppScreenService', 'AppGameService', 'AppCardGameService', 'AppStatisticService', 'AppSetupService', 'AppOnlineService', function ($scope, $rootScope, $window, $timeout, appScreenService, appGameService, appCardGameService, appStatisticService, appSetupService, appOnlineService) {
+    app.controller('ApplicationMainCtrl', ['$scope', '$window', '$timeout', 'AppScreenService', 'AppGameStateService', 'AppCardGameService', 'AppStatisticService', 'AppSetupService', 'AppOnlineService', function ($scope, $window, $timeout, appScreenService, appGameStateService, appCardGameService, appStatisticService, appSetupService, appOnlineService) {
 
         var self = this;
         self.inSettingPage = false;
 
         self.appScreenService = appScreenService;
-        self.appGameService = appGameService;
+        self.appGameStateService = appGameStateService;
         self.appCardGameService = appCardGameService;
         self.appStatisticService = appStatisticService;
         self.appSetupService = appSetupService;
@@ -30,7 +30,7 @@
             console.log("localTowPlayerGame().");
             // direkt zum Spielbildschirm
             self.appScreenService.switchToScreen('game-screen-id');
-            self.appGameService.startTowPlayerGame();
+            self.appGameStateService.startTowPlayerGame();
             self.appCardGameService.updateCardLayout();
             self.appScreenService.switchToLocalMode();
             self.appScreenService.resizeHandler();
@@ -39,7 +39,7 @@
         self.localPlayWithComputer = function () {
             console.log("localPlayWithComputer().");
             self.appScreenService.switchToScreen('game-screen-id');
-            self.appGameService.startGameWithComputer();
+            self.appGameStateService.startGameWithComputer();
             self.appCardGameService.updateCardLayout();
             self.appScreenService.switchToComputerMode();
             self.appScreenService.resizeHandler();
@@ -109,12 +109,16 @@
             return $scope.$apply();
         });
 
-        //$rootScope.$broadcast('online-game-beginning');
+        $scope.$on('update-card-layout', function(event, args) {
+            console.log("$scope.$on('update-card-layout') evenbt .....");
+            self.appCardGameService.updateCardLayout();
+        });
+
         $scope.$on('online-game-beginning', function(event, args) {
             console.log("$scope.$on('online-game-beginning') evenbt .....");
 
             //self.appUserService.checkLogin();
-            self.appGameService.startGameWithComputer();
+            self.appGameService.appGameStateService.startGameWithComputer();
             self.appScreenService.switchToScreen('game-screen-id');
         });
 

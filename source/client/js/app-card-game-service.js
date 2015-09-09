@@ -8,11 +8,11 @@
     var app = angular.module("ApplicationModule");
 
     // create the service
-    app.factory('AppCardGameService', ['$timeout', 'AppConstantService', 'AppSetupService', 'AppGameEngineService', function ($timeout, appConstantService, appSetupService, appGameEngineService) {
+    app.factory('AppCardGameService', ['$timeout', 'AppConstantService', 'AppSetupService', 'AppGameStateService', function ($timeout, appConstantService, appSetupService, appGameStateService) {
         var AppCardGameService = function () {
             var self = this;
             self.appConstantService = appConstantService;
-            self.appGameEngineService = appGameEngineService;
+            self.appGameStateService = appGameStateService;
             self.appSetupService = appSetupService;
 
             // all resources
@@ -214,7 +214,8 @@
                     var yindex = Math.floor(idx / 8);
 
                     var stateNr = -1;
-                    var state = self.appGameEngineService.getStoneState(xindex,yindex);
+                    //var state = self.appGameEngineService.getStoneState(xindex,yindex);
+                    var state = self.appGameStateService.getStoneState(xindex,yindex);
                     switch(state) {
                         default: // == 0
                             stateNr = 0;
@@ -240,7 +241,7 @@
                     }
 
                     if (visActiveNr != stateNr) {
-                        if (stateNr == self.appGameEngineService.STONE_WHITE || stateNr == self.appGameEngineService.STONE_BLACK) {
+                        if (stateNr == self.appGameStateService.STONE_WHITE || stateNr == self.appGameStateService.STONE_BLACK) {
                             self.doAnimationTo(idx, stateNr);
                         } else if (stateNr == 4) {
                             if (self.appSetupService.showPosibleStones)
@@ -406,7 +407,7 @@
                     }
                 }
 
-                self.appGameEngineService.eventTrySetStone(index);
+                self.appGameStateService.eventTrySetStone(index);
                 self.updateCardLayout();
             });
         }

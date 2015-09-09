@@ -5,28 +5,28 @@ var gameLogic = function() {
 
         init = function(){
             gameLogic.initEmptyBoard();
-            gameLogic.showBoard();
+            // uje gameLogic.showBoard();
 
             //gameLogic.changeObjectState(3,3,1);
             gameLogic.setStartGame();
-            gameLogic.showBoard();
-            gameLogic.getFigures(1);
-            gameLogic.getPossibleMoves(1);
+            // uje gameLogic.showBoard();
+            // uje gameLogic.getFigures(1);
+            // uje gameLogic.getPossibleMoves(1);
 
-            gameLogic.changeObjectState(4,2,1, true);
-            gameLogic.showBoard();
+            // uje gameLogic.changeObjectState(4,2,1, true);
+            // uje gameLogic.showBoard();
 
-            gameLogic.moveFromComputerPlayer(2);
-            gameLogic.showBoard();
+            // uje gameLogic.moveFromComputerPlayer(2);
+            // uje gameLogic.showBoard();
 
-            gameLogic.moveFromComputerPlayer(1);
-            gameLogic.showBoard();
+            // uje gameLogic.moveFromComputerPlayer(1);
+            // uje gameLogic.showBoard();
 
-            gameLogic.moveFromComputerPlayer(2);
-            gameLogic.showBoard();
+            // uje gameLogic.moveFromComputerPlayer(2);
+            // uje gameLogic.showBoard();
 
-            gameLogic.moveFromComputerPlayer(1);
-            gameLogic.showBoard();
+            // uje gameLogic.moveFromComputerPlayer(1);
+            // uje gameLogic.showBoard();
 
             //gameLogic.changeObjectState(3, 2, 2, true);
             //gameLogic.showBoard();
@@ -34,8 +34,7 @@ var gameLogic = function() {
             //gameLogic.updateStates(1, 4, 2);
             //gameLogic.showBoard();
 
-            gameLogic.getPossibleMoves(2);
-
+            // uje gameLogic.getPossibleMoves(2);
         },
 
         initEmptyBoard = function() {
@@ -350,7 +349,8 @@ var gameLogic = function() {
         getPossibleMoves: getPossibleMoves,
         isPossibleMove: isPossibleMove,
         updateStates: updateStates,
-        moveFromComputerPlayer: moveFromComputerPlayer
+        moveFromComputerPlayer: moveFromComputerPlayer,
+        getBoard: function() { return board; }
     };
 }();
 
