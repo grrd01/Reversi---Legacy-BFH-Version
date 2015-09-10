@@ -92,14 +92,14 @@
                 var allBackImgs = $(".pair-flip-image-back");
                 allBackImgs.each(function (index, item) {
                     var classname = item.className;
-                    console.log("classname: " + classname);
+                    // uje console.log("classname: " + classname);
                 });
                 allBackImgs.css("visibility", "hidden");
 
                 var allFrontImgs = $(".pair-flip-image-front");
                 allFrontImgs.each(function (index, item) {
                     var classname = item.className;
-                    console.log("classname: " + classname);
+                    // uje console.log("classname: " + classname);
                 });
                 allFrontImgs.css("visibility", "visible");
             }
@@ -107,7 +107,7 @@
             self.switchOffAllBackImages();
 
             self.resize = function() {
-                console.log("resize() called.");
+                // uje console.log("resize() called.");
 
                 var stoneDy = $('#game-player-info-id').height(); // + $('#game-logo-id').height();
                 self.gameResources.areaGameWidth = $('#game-player-stone-field-id').width();
@@ -343,7 +343,7 @@
             }
 
             self.doImageSwitch = function(column, row, imageindex) {
-                console.log("doImageSwitch(...) called. column: " + column + ", row: " + row + ", imageindex; " + imageindex);
+                // uje console.log("doImageSwitch(...) called. column: " + column + ", row: " + row + ", imageindex; " + imageindex);
 
                 var index = (row * self.gameResources.stoneMaxCol) + column;
                 if (index >= self.gameResources.maxImageCount || imageindex < 0 || imageindex >= 6) {
@@ -395,7 +395,7 @@
             }
 
             $('.pair-flip-image').click(function (event) {
-                console.log("$('.pair-flip-image').click(...), class: " + this.className + ", id: " + this.id);
+                // uje console.log("$('.pair-flip-image').click(...), class: " + this.className + ", id: " + this.id);
 
                 var index = -1;
                 for (var i = 0; i < self.gameResources.maxImageCount; i++) {

@@ -169,7 +169,7 @@
             }
 
             self.resizeHandler = function() {
-                console.log("resize() called.");
+                // uje console.log("resize() called.");
 
                 var minMargin = 0; // minimum Rand in pixel;
                 var gsr = self.resizeGameEx(minMargin);
@@ -193,7 +193,7 @@
                 self.resizeGameField(gsr);
                 self.resizeHtmlElements(gsr);
 
-                console.log("resize() win: " + window.innerWidth + "*" + window.innerHeight + " game: " + (gsr.gameSizeWidth).toFixed(2) + "*" + (gsr.gameSizeHeight).toFixed(2));
+                // uje console.log("resize() win: " + window.innerWidth + "*" + window.innerHeight + " game: " + (gsr.gameSizeWidth).toFixed(2) + "*" + (gsr.gameSizeHeight).toFixed(2));
             };
 
             self.switchToScreen = function (onId, lastGameMode) {

@@ -12,6 +12,7 @@
         var AppGameStateService = function () {
             var self = this;
             self.appConstantService = appConstantService;
+            self.startWithBlack = false;
 
             /*
              steine status {0==leer,
@@ -44,12 +45,12 @@
 
             // Functionen
             self.initStoneState = function () {
-                console.log("self.initStoneState()");
+                // uje console.log("self.initStoneState()");
                 self.gameLogic.init();
             }
 
             self.setStoneState = function (xindex, yindex, state) {
-                console.log("self.setStoneState(xindex: " + xindex + ", yindex: " + yindex + ", state: " + state + ")");
+                // uje console.log("self.setStoneState(xindex: " + xindex + ", yindex: " + yindex + ", state: " + state + ")");
 
                 if (xindex < 0 || xindex >= self.appConstantService.GAME_MAX_COLUMNS) {
                     console.log("self.setStoneState(... xindex=" + xindex + " ...) out of range.");
@@ -70,7 +71,7 @@
             }
 
             self.getStoneState = function (xindex, yindex) {
-                console.log("self.getStoneState(xindex: " + xindex + ", yindex: " + yindex + ")");
+                // uje console.log("self.getStoneState(xindex: " + xindex + ", yindex: " + yindex + ")");
 
                 if (xindex < 0 || xindex >= self.appConstantService.GAME_MAX_COLUMNS) {
                     console.log("self.getStoneState(... xindex=" + xindex + " ...) out of range.");
@@ -145,7 +146,11 @@
                     return;
                 }
 
-                if (self.actualPlayerIsBlack && self.isComputerGameRunning) {
+                if (self.actualPlayerIsWithe && self.startWithBlack && self.isComputerGameRunning) {
+                    console.log("self.eventTrySetStone(" + eventIndex + "), the computer is in the game.");
+                    return;
+                }
+                if (self.actualPlayerIsBlack && !self.startWithBlack && self.isComputerGameRunning) {
                     console.log("self.eventTrySetStone(" + eventIndex + "), the computer is in the game.");
                     return;
                 }
@@ -153,7 +158,7 @@
                 var xindex = eventIndex % 8;
                 var yindex = Math.floor(eventIndex / 8);
 
-                console.log("eventTrySetStone=" +eventIndex + "), xindex: " + xindex + " yindex: " + yindex);
+                // uje console.log("eventTrySetStone=" +eventIndex + "), xindex: " + xindex + " yindex: " + yindex);
 
                 var actState = self.getStoneState(xindex,yindex);
                 if (actState == self.STONE_WHITE || actState == self.STONE_BLACK) {
@@ -166,7 +171,7 @@
                         self.setStoneState(xindex, yindex, self.STONE_WHITE);
                         self.setActualPlayerToBlack();
 
-                        if (self.isComputerGameRunning) {
+                        if (self.isComputerGameRunning && !self.startWithBlack) {
                             self.startComputerMove();
                         }
                     } else {
@@ -176,6 +181,10 @@
                     if (self.isBlackLayingPossible(xindex,yindex)) {
                         self.setStoneState(xindex, yindex, self.STONE_BLACK);
                         self.setActualPlayerToWhite();
+
+                        if (self.isComputerGameRunning && self.startWithBlack) {
+                            self.startComputerMove();
+                        }
                     } else {
                         self.setStoneState(xindex, yindex, self.STONE_PLACING_ERROR);
                     }
@@ -195,8 +204,13 @@
 
             self.startInitGame = function() {
                 self.gameStartTime = new Date();
-                self.setActualPlayerToWhite();
-                self.initStoneState();
+                if (self.startWithBlack) {
+                    self.setActualPlayerToBlack();
+                    self.initStoneState();
+                } else {
+                    self.setActualPlayerToWhite();
+                    self.initStoneState();
+                }
                 self.isGameRunning = true;
                 self.isComputerGameRunning = false;
                 self.isComputerThinkingTime = 0;
@@ -232,10 +246,14 @@
                     if (self.gameOver === undefined) {
                         self.gameOver = { actual: self.actualPlayer, other: otherPlayer };
                     }
-                    var moves2 = self.gameLogic.getPossibleMoves(otherPlayer);
+                    var moves3 = self.gameLogic.getPossibleMoves(otherPlayer);
                     if (moves3.length > 0) {
                         // der andere spler kann noch spielen, so umschlten
-                        self.setActualPlayerToWhite();
+                        if (otherPlayer === self.STONE_WHITE) {
+                            self.setActualPlayerToWhite();
+                        } else {
+                            self.setActualPlayerToBlack();
+                        }
                         $rootScope.$broadcast('update-card-layout');
                     } else {
                         // sonst spiel beenden
@@ -254,7 +272,7 @@
             self.timerHandler = function() {
                 if (self.isGameRunning) {
                     var newDate = new Date();
-                    var runTime = newDate - self.gameStartTime;
+                    var runTime = ((newDate.getTime() - self.gameStartTime.getTime()) / 1000).toFixed(0);
 
                     var gmtp = "2 local paly: ";
                     if (self.isComputerGameRunning)
@@ -266,7 +284,7 @@
 
                     self.statusMessgaeText = "";
 
-                    var msg = "" + (runTime / 333).toFixed(0);
+                    var msg = "" + runTime;
                     self.statusMessgaeText = gmtp + ", running: " + msg + " sec."
 
                     if (self.isComputerThinkingTime > 0) {
@@ -276,15 +294,26 @@
                     if (self.isComputerThinkingTime <= 0 && self.isComputerMove) {
                         self.isComputerMove = false;
                         self.gameLogic.moveFromComputerPlayer(self.STONE_BLACK);
-                        self.setActualPlayerToWhite();
+
+                        if (self.startWithBlack) {
+                            self.setActualPlayerToBlack();
+                        } else {
+                            self.setActualPlayerToWhite();
+                        }
                         $rootScope.$broadcast('update-card-layout');
                     }
 
                     // prüfe ob spiel fertig ist
                     if (self.isTheGameOver()) {
+                        var whiteStones = self.gameLogic.getFigures(self.STONE_WHITE);
+                        var blackStones = self.gameLogic.getFigures(self.STONE_BLACK);
+
                         $('#modal-title-text-h4-id')[0].innerHTML = "Der Gewinner ist:";
-                        $('#modal-body-text-p-id')[0].innerHTML = "Weiss";
+                        var msg = (whiteStones.length > blackStones.length) ? "Weiss" : "Black";
+                        msg += "  [Weiss=" + whiteStones.length + ", Black=" +blackStones.length + "]";
+                        $('#modal-body-text-p-id')[0].innerHTML = msg;
                         $("#modal-dialog").modal();
+                        self.isGameRunning = false;
                     }
                 } else {
                     self.statusMessgaeText = "ready";

@@ -47,6 +47,8 @@ var gameLogic = function() {
             //        console.log(board[i][j])
             //    }
             //}
+            Debugger;
+
             console.log(board);
             console.log("");
         },
@@ -99,8 +101,8 @@ var gameLogic = function() {
                     }
                 }
             }
-            console.log("possibleMoves: " + state);
-            console.log(possibleMoves);
+            // uje console.log("possibleMoves: " + state);
+            // uje console.log(possibleMoves);
             return possibleMoves;
         },
 
@@ -135,14 +137,14 @@ var gameLogic = function() {
             updateStateLeftBottom(state, indexX, indexY, updateFigures);
             updateStateBottom(state, indexX, indexY, updateFigures);
             updateStateRightBottom(state, indexX, indexY, updateFigures);
-            console.log("updateFigures: " + updateFigures);
+            // uje console.log("updateFigures: " + updateFigures);
             return updateFigures;
         },
 
         updateStateLeftTop = function (state, indexX, indexY, updateFigures) {
             if (isPossibleLeftTop(state, indexX, indexY, true)) {
                 if (board[indexX - 1][indexY - 1] != state) {
-                    console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
+                    // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX - 1, indexY - 1]);
                     changeObjectState(indexX - 1, indexY - 1, state);
                     updateStateLeftTop(state, indexX - 1, indexY - 1, updateFigures)
@@ -153,7 +155,7 @@ var gameLogic = function() {
         updateStateTop = function (state, indexX, indexY, updateFigures) {
             if (isPossibleTop(state, indexX, indexY, true)) {
                 if (board[indexX][indexY - 1] != state) {
-                    console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
+                    // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX, indexY - 1]);
                     changeObjectState(indexX, indexY - 1, state);
                     updateStateTop(state, indexX, indexY - 1, updateFigures)
@@ -164,7 +166,7 @@ var gameLogic = function() {
         updateStateRightTop = function (state, indexX, indexY, updateFigures) {
             if (isPossibleRightTop(state, indexX, indexY, true)) {
                 if (board[indexX + 1][indexY - 1] != state) {
-                    console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
+                    // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX + 1, indexY - 1]);
                     changeObjectState(indexX + 1, indexY - 1, state);
                     updateStateRightTop(state, indexX + 1, indexY - 1, updateFigures)
@@ -175,7 +177,7 @@ var gameLogic = function() {
         updateStateLeft = function (state, indexX, indexY, updateFigures) {
             if (isPossibleLeft(state, indexX, indexY, true)) {
                 if (board[indexX - 1][indexY] != state) {
-                    console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
+                    // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX - 1, indexY]);
                     changeObjectState(indexX - 1, indexY, state);
                     updateStateLeft(state, indexX - 1, indexY, updateFigures)
@@ -186,7 +188,7 @@ var gameLogic = function() {
         updateStateRight = function (state, indexX, indexY, updateFigures) {
             if (isPossibleRight(state, indexX, indexY, true)) {
                 if (board[indexX + 1][indexY] != state) {
-                    console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
+                    // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX + 1, indexY]);
                     changeObjectState(indexX + 1, indexY, state);
                     updateStateRight(state, indexX + 1, indexY, updateFigures)
@@ -197,7 +199,7 @@ var gameLogic = function() {
         updateStateLeftBottom = function (state, indexX, indexY, updateFigures) {
             if (isPossibleLeftBottom(state, indexX, indexY, true)) {
                 if (board[indexX - 1][indexY + 1] != state) {
-                    console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
+                    // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX - 1, indexY + 1]);
                     changeObjectState(indexX - 1, indexY + 1, state);
                     updateStateLeftBottom(state, indexX - 1, indexY + 1, updateFigures)
@@ -208,7 +210,7 @@ var gameLogic = function() {
         updateStateBottom = function (state, indexX, indexY, updateFigures) {
             if (isPossibleBottom(state, indexX, indexY, true)) {
                 if (board[indexX][indexY + 1] != state) {
-                    console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
+                    // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX, indexY + 1]);
                     changeObjectState(indexX, indexY + 1, state);
                     updateStateBottom(state, indexX, indexY + 1, updateFigures);
@@ -219,7 +221,7 @@ var gameLogic = function() {
         updateStateRightBottom = function (state, indexX, indexY, updateFigures) {
             if (isPossibleRightBottom(state, indexX, indexY, true)) {
                 if (board[indexX + 1][indexY + 1] != state) {
-                    console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
+                    // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX + 1, indexY + 1]);
                     changeObjectState(indexX + 1, indexY + 1, state);
                     updateStateRightBottom(state, indexX + 1, indexY + 1, updateFigures);
@@ -314,10 +316,10 @@ var gameLogic = function() {
         moveFromComputerPlayer = function(state) {
             var possibleMoves = getPossibleMoves(state);
             var randomIndex = Math.floor(Math.random() * 10 % (possibleMoves.length));
-            console.log("randomIndex: " + randomIndex);
-            console.log("moveFromComputerPlayer: " + possibleMoves[randomIndex]);
-            console.log("randomIndex][0]: " + possibleMoves[randomIndex][0]);
-            console.log("randomIndex][1]: " + possibleMoves[randomIndex][1]);
+            // uje console.log("randomIndex: " + randomIndex);
+            // uje console.log("moveFromComputerPlayer: " + possibleMoves[randomIndex]);
+            // uje console.log("randomIndex][0]: " + possibleMoves[randomIndex][0]);
+            // uje console.log("randomIndex][1]: " + possibleMoves[randomIndex][1]);
             changeObjectState(possibleMoves[randomIndex][0], possibleMoves[randomIndex][1], state ,true, false)
         },
 
@@ -332,11 +334,10 @@ var gameLogic = function() {
                 }
             }
 
-            console.log("getFigures:" + state);
-            console.log(filtered);
+            // uje console.log("getFigures:" + state);
+            // uje console.log(filtered);
             return filtered;
         }
-
         ;
 
     return {

@@ -25,7 +25,7 @@
         // functions
 
         self.localTowPlayerGame = function() {
-            console.log("localTowPlayerGame().");
+            // uje console.log("localTowPlayerGame().");
             // direkt zum Spielbildschirm
             self.appScreenService.switchToScreen('game-screen-id');
             self.appGameStateService.startTowPlayerGame();
