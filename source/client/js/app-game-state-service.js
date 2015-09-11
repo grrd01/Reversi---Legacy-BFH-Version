@@ -264,7 +264,7 @@
             }
 
             self.startComputerMove = function() {
-                console.log("self.startComputerMove()");
+                //console.log("self.startComputerMove()");
                 self.isComputerThinkingTime = 4;
                 self.isComputerMove = true;
             }
@@ -293,7 +293,12 @@
                     }
                     if (self.isComputerThinkingTime <= 0 && self.isComputerMove) {
                         self.isComputerMove = false;
-                        self.gameLogic.moveFromComputerPlayer(self.STONE_BLACK);
+
+                        var actCompState = (self.startWithBlack) ? self.STONE_WHITE : self.STONE_BLACK;
+                        var moves = self.gameLogic.getPossibleMoves(self.actualPlayer);
+
+                        console.log("self.gameLogic.moveFromComputerPlayer(" + actCompState + "), self.actualPlayer: " +self.actualPlayer +", moves.length: " + moves.length);
+                        self.gameLogic.moveFromComputerPlayer(actCompState);
 
                         if (self.startWithBlack) {
                             self.setActualPlayerToBlack();

@@ -225,3 +225,8 @@ html, body {
     font-size: 20px;
     position: absolute;
 }
+
+
+.modal-header-dialog {
+    background-color: #4282e8;
+}

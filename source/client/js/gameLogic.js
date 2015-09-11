@@ -315,6 +315,11 @@ var gameLogic = function() {
 
         moveFromComputerPlayer = function(state) {
             var possibleMoves = getPossibleMoves(state);
+
+            console.log("moveFromComputerPlayer(state=" + state +")");
+            console.log("possibleMoves.length: " + possibleMoves.length);
+            console.log("possibleMoves: " + possibleMoves);
+
             var randomIndex = Math.floor(Math.random() * 10 % (possibleMoves.length));
             // uje console.log("randomIndex: " + randomIndex);
             // uje console.log("moveFromComputerPlayer: " + possibleMoves[randomIndex]);
