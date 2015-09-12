@@ -13,10 +13,14 @@
             var self = this;
 
             self.showPosibleStones = false;
+            self.localUserImageWhite = "";
+            self.localUserImageBlack = "";
 
             self.saveSettings = function() {
                 if (typeof(Storage) !== "undefined" && typeof(localStorage) !== "undefined") {
                     localStorage.setItem("showPosibleStones", self.showPosibleStones);
+                    localStorage.setItem("localUserImageWhite", self.localUserImageWhite);
+                    localStorage.setItem("localUserImageBlack", self.localUserImageBlack);
                 } else {
                     // Kein Web Storage support.., so nichts machen
                 }
@@ -26,10 +30,15 @@
                 if (typeof(Storage) !== "undefined" && typeof(localStorage) !== "undefined") {
                     var showStones = localStorage.getItem("showPosibleStones");
                     self.showPosibleStones = JSON.parse(showStones) || false;
+                    var localImgWhite = localStorage.getItem("localUserImageWhite");
+                    self.localUserImageWhite = localImgWhite;
+                    var localImgBlack = localStorage.getItem("localUserImageBlack");
+                    self.localUserImageBlack = localImgBlack;
                 } else {
                     // Kein Web Storage support.., so nichts machen
                 }
             }
+
             self.readSettings();
         }
 

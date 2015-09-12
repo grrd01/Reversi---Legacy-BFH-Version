@@ -230,3 +230,25 @@ html, body {
 .modal-header-dialog {
     background-color: #4282e8;
 }
+
+div.upload {
+    background-color: #aaa;
+    margin: 1px;
+}
+div.upload input {
+    display: block !important;
+    opacity: 0 !important;
+    overflow: hidden !important;
+}
+
+div.upload label {
+    display: block;
+    /*line-height: 15px;*/
+    height: 18px;
+}
+
+#local-user-img-id, #local-user-img-id-2 {
+    width: 60px;
+    border-radius: 3px;
+    margin: 2px;
+}

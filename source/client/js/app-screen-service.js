@@ -8,11 +8,12 @@
     var app = angular.module("ApplicationModule");
 
     // create the service
-    app.factory('AppScreenService', ['$window', function ($window) {
+    app.factory('AppScreenService', ['$window', 'AppSetupService', function ($window, appSetupService) {
         var AppScreenService = function () {
             var self = this;
-            self.actualScreenId = "";
+            self.appSetupService = appSetupService;
 
+            self.actualScreenId = "";
 
             // Functionen
             self.resizeGameEx = function(minMargin) {
@@ -169,8 +170,6 @@
             }
 
             self.resizeHandler = function() {
-                // uje console.log("resize() called.");
-
                 var minMargin = 0; // minimum Rand in pixel;
                 var gsr = self.resizeGameEx(minMargin);
 
@@ -192,8 +191,6 @@
 
                 self.resizeGameField(gsr);
                 self.resizeHtmlElements(gsr);
-
-                // uje console.log("resize() win: " + window.innerWidth + "*" + window.innerHeight + " game: " + (gsr.gameSizeWidth).toFixed(2) + "*" + (gsr.gameSizeHeight).toFixed(2));
             };
 
             self.switchToScreen = function (onId, lastGameMode) {
@@ -215,18 +212,74 @@
                 } else {
                     $('#' + onId).show();
                 }
+
+                if (onId === 'setup-screen-id') {
+                    try {
+                        if (self.appSetupService.localUserImageWhite.length > 0) {
+                            var img = $('#local-user-img-id');
+                            var imgSrc = img.attr("src");
+
+                            if (imgSrc != self.appSetupService.localUserImageWhite) {
+                                img.attr("src", self.appSetupService.localUserImageWhite);
+                            }
+                        }
+                        if (self.appSetupService.localUserImageBlack.length > 0) {
+                            var img = $('#local-user-img-id-2');
+                            var imgSrc = img.attr("src");
+
+                            if (imgSrc != self.appSetupService.localUserImageBlack) {
+                                img.attr("src", self.appSetupService.localUserImageBlack);
+                            }
+                        }
+                    } catch (e) {
+                        console.log("exception in if (onId === 'setup-screen-id')  exception: " + e);
+                    }
+                }
+            }
+
+            self.updatePlayerImages = function() {
+                try {
+                    if (self.appSetupService.localUserImageWhite.length > 0) {
+                        var img = $('#img-left-player-info-id');
+                        var imgSrc = img.attr("src");
+
+                        if (imgSrc != self.appSetupService.localUserImageWhite) {
+                            img.attr("src", self.appSetupService.localUserImageWhite);
+                        }
+                    }
+                } catch (e) {
+                    console.log("exception in if (onId === 'setup-screen-id')  exception: " + e);
+                }
+                try {
+                    if (self.appSetupService.localUserImageWhite.length > 0) {
+                        var img = $('#img-right-player-info-local-id');
+                        var imgSrc = img.attr("src");
+
+                        if (imgSrc != self.appSetupService.localUserImageBlack) {
+                            img.attr("src", self.appSetupService.localUserImageBlack);
+                        }
+                    }
+                } catch (e) {
+                    console.log("exception in if (onId === 'setup-screen-id')  exception: " + e);
+                }
             }
 
             self.switchToLocalMode = function() {
                 $('#img-right-player-info-local-id').show();
                 $('#img-right-player-info-computer-id').hide();
                 $('#img-right-player-info-online-id').hide();
+
+                self.updatePlayerImages();
             }
+
             self.switchToComputerMode = function() {
                 $('#img-right-player-info-local-id').hide();
                 $('#img-right-player-info-computer-id').show();
                 $('#img-right-player-info-online-id').hide();
+
+                self.updatePlayerImages();
             }
+
             self.switchToOnlineMode = function() {
                 $('#img-right-player-info-local-id').hide();
                 $('#img-right-player-info-computer-id').hide();
@@ -268,36 +321,120 @@
                     self.imageBlinkingId = 0;
                 }
             }
+
             self.imageBlinkingStart = function() {
                 if (self.imageBlinkingId === 0) {
                     self.imageBlinkingId = setTimeout(self.imageBlinking, 1000); //Runs n millisecond
                 }
                 self.imageBlinkingOn = true;
             }
+
             self.imageBlinkingStop = function() {
                 self.imageBlinkingOn = false;
             }
 
             self.playersLeftTurnOn = false;
             self.playersRightTurnOn = false;
+
             self.playersRightTurn = function() {
                 self.playersLeftTurnOn = false;
                 self.playersRightTurnOn = true;
                 $('.img-player-status-left').hide();
                 $('.img-player-status-right').show();
             }
+
             self.playersLeftTurn = function() {
                 self.playersLeftTurnOn = true;
                 self.playersRightTurnOn = false;
                 $('.img-player-status-left').show();
                 $('.img-player-status-right').hide();
             }
+
             self.playersStop = function() {
                 self.playersLeftTurnOn = false;
                 self.playersRightTurnOn = false;
                 $('.img-player-status-left').hide();
                 $('.img-player-status-right').hide();
             }
+
+            self.fileInput = document.getElementById('getimage');
+            self.fileInput.addEventListener('change', handleFiles);
+
+            function handleFiles() {
+                self.fileDisplayArea = document.getElementById('file-display-area');
+                self.fileLocalUserImg = document.getElementById('local-user-img-id');
+                var filesToUpload = document.getElementById('getimage').files;
+                var file = filesToUpload[0];
+
+                // Create a file reader
+                var reader = new FileReader();
+                // Set the image once loaded into file reader
+                reader.onload = function(e) {
+                    self.resizeLoadedImage(self.fileLocalUserImg, e.target.result);
+                }
+                // Load files into file reader
+                reader.readAsDataURL(file);
+            }
+
+            self.fileInput2 = document.getElementById('getimage-2');
+            self.fileInput2.addEventListener('change', handleFiles2);
+
+            function handleFiles2() {
+                self.fileDisplayArea2 = document.getElementById('file-display-area-2');
+                self.fileLocalUserImg2 = document.getElementById('local-user-img-id-2');
+                var filesToUpload = document.getElementById('getimage-2').files;
+                var file = filesToUpload[0];
+
+                // Create a file reader
+                var reader = new FileReader();
+                // Set the image once loaded into file reader
+                reader.onload = function(e) {
+                    self.resizeLoadedImage(self.fileLocalUserImg2, e.target.result);
+                }
+                // Load files into file reader
+                reader.readAsDataURL(file);
+            }
+
+            self.resizeLoadedImage = function(flieLocImg, eTargetResult) {
+                try {
+                    flieLocImg.src = eTargetResult;
+                } catch (e) {
+                    console.log("exception in if (onId === 'setup-screen-id')  exception: " + e);
+                }
+
+                var canvas = document.createElement("canvas");
+                //var canvas = $("<canvas>", {"id":"testing"})[0];
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(flieLocImg, 0, 0);
+
+                var MAX_WIDTH = 90;
+                var MAX_HEIGHT = 120;
+                var width = flieLocImg.width;
+                var height = flieLocImg.height;
+
+                if (width > height) {
+                    if (width > MAX_WIDTH) {
+                        height *= MAX_WIDTH / width;
+                        width = MAX_WIDTH;
+                    }
+                } else {
+                    if (height > MAX_HEIGHT) {
+                        width *= MAX_HEIGHT / height;
+                        height = MAX_HEIGHT;
+                    }
+                }
+                canvas.width = width;
+                canvas.height = height;
+                var ctx = canvas.getContext("2d");
+                ctx.drawImage(flieLocImg, 0, 0, width, height);
+
+                var dataurl = canvas.toDataURL("image/png");
+                self.appSetupService.localUserImageBlack = dataurl;
+
+                flieLocImg.src = dataurl;
+                //flieLocImg.id = "picture";
+            }
+
         }
 
         // Service Objekt erstellen.
