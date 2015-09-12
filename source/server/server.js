@@ -36,7 +36,7 @@
         socket.on("register", function (data) {
             for(var i=0; i<usersRegistered.length; i++) {
                 if (data.name == usersRegistered[i].name) {
-                    io.to(user.id).emit("registerNameOccupied", data);
+                    io.to(user.id).emit("registerNameOccupied");
                     return;
                 }
             }
@@ -50,7 +50,7 @@
             // add new user to registered users
             usersRegistered.push(newUser);
             user.name = data.name;
-            io.to(user.id).emit("registerOk", data);
+            io.to(user.id).emit("registerOk");
         });
 
         // the player is logging in with username/password
@@ -59,14 +59,14 @@
                 if (data.name == usersRegistered[i].name) {
                     if (data.password == usersRegistered[i].password) {
                         user.name = data.name;
-                        io.to(user.id).emit("signInOk", data);
+                        io.to(user.id).emit("signInOk");
                     } else {
-                        io.to(user.id).emit("signInWrongPw", data);
+                        io.to(user.id).emit("signInWrongPw");
                     }
                     return;
                 }
             }
-            io.to(user.id).emit("signInUnknownUser", data);
+            io.to(user.id).emit("signInUnknownUser");
         });
 
         // request to start a game
@@ -74,7 +74,7 @@
             // add new user to array of all currently playing users
             usersPlaying.push(user);
             // try to start a game
-            startPlay(user);
+            startPlay();
         });
 
         // the player played a move
@@ -112,11 +112,10 @@
         });
 
         // the player asks for the ranking
-        socket.on("ranking", function (data) {
+        socket.on("ranking", function () {
             //create an array with the best 10 players plus the connected player (if connected)
             var ranking = [];
             var ranker;
-            var name = false;
             for(var i=0; i<usersRegistered.length; i++) {
                 if (user.name == usersRegistered[i].name || i < 10) {
                     ranker = {
@@ -144,7 +143,8 @@
                 }
             }
             usersRegistered.sort(function(a, b) {
-                var x = a.pointsWon < b.pointsWon? -1:1;
+                var x;
+                x = a.pointsWon < b.pointsWon ? -1 : 1;
                 return x;
             });
         });
@@ -162,11 +162,11 @@
     };
 
     // start a game if two players can be connected or tell the new player to wait for opponent
-    var startPlay = function(user) {
+    var startPlay = function() {
         for(var i=0; i<usersPlaying.length; i++) {
             if (i == usersPlaying.length-1) {
                 // no opponent available - tell the player he is connected and waiting for an opponent
-                io.to(usersPlaying[i].id).emit("wait", usersPlaying[i]);
+                io.to(usersPlaying[i].id).emit("wait");
             } else {
                 // opponent available
                 if (usersPlaying[i].opponent == null) {

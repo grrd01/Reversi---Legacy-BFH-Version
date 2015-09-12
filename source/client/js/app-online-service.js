@@ -42,7 +42,7 @@
                 });
 
                 // event when signin was successfull
-                self.socket.on('signInOk', function (data) {
+                self.socket.on('signInOk', function () {
                     console.info("you successfully signed in");
                     //test
                     self.startPlay();
@@ -50,7 +50,7 @@
                 });
 
                 // event when signin refused with wrong password
-                self.socket.on('signInWrongPw', function (data) {
+                self.socket.on('signInWrongPw', function () {
                     console.info("your password is not correct");
                     //test
                     self.signIn("wurst","brot");
@@ -58,7 +58,7 @@
                 });
 
                 // event when signin refused with unknown user name
-                self.socket.on('signInUnknownUser', function (data) {
+                self.socket.on('signInUnknownUser', function () {
                     console.info("this username is not known");
                     //test
                     self.signIn("hans","wurst");
@@ -66,7 +66,7 @@
                 });
 
                 // event when register was successfull
-                self.socket.on('registerOk', function (data) {
+                self.socket.on('registerOk', function () {
                     console.info("you successfully registered");
                     //test
                     self.startPlay();
@@ -74,7 +74,7 @@
                 });
 
                 // event when register refused because name is already used
-                self.socket.on('registerNameOccupied', function (data) {
+                self.socket.on('registerNameOccupied', function () {
                     console.info("this username is no more available");
                     //test
                     self.signIn("hans","brot");
@@ -82,7 +82,7 @@
                 });
 
                 // event when you have to wait for an opponent
-                self.socket.on('wait', function (data) {
+                self.socket.on('wait', function () {
                     console.info("waiting for opponent");
                     self.onlineState = "connect";
                 });
@@ -188,7 +188,7 @@
 
             // function to get ranking
             self.ranking = function () {
-                self.socket.emit('ranking', {name: name});
+                self.socket.emit('ranking');
             };
 
             // function to update ranking
@@ -196,7 +196,7 @@
                 self.socket.emit('rankingUpdate', {id: self.user.id, name: name, password: password, gamesWon: gamesWon, pointsWon: pointsWon});
             };
 
-        }
+        };
 
         // Service Objekt erstellen.
         var appOnlineService = new AppOnlineService();
