@@ -5,6 +5,7 @@
 	<title>Reversi-Game</title>
 
     <link rel="shortcut icon" href="favicon.ico"/>
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -278,12 +279,12 @@
                             </div>
                         </div>
 
-                        <!-- Sign Up Form -->
-                        <!-- Text input EMail -->
+                        <!-- Register Form -->
+                        <!-- Text input Name -->
                         <div class="form-group">
-                            <label class="col-sm-offset-1 col-sm-10" for="Email">Email:</label>
+                            <label class="col-sm-offset-1 col-sm-10" for="Name">Username:</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                 <input id="Email" name="Email" class="form-control" type="text" placeholder="JoeSixpack@sixpacksrus.com" class="input-large" required="">
+                                 <input id="Name" name="Name" class="form-control" type="text" placeholder="Name" class="input-large" required="" ng-model="main.appAuthenticationService.register.name">
                             </div>
                         </div>
 
@@ -291,16 +292,16 @@
                         <div class="form-group">
                             <label class="col-sm-offset-1 col-sm-10" for="password">Password:</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <input id="password" name="password" class="form-control" type="password" placeholder="********" class="input-large" required="">
+                                <input id="password" name="password" class="form-control" type="password" placeholder="********" class="input-large" required="" ng-model="main.appAuthenticationService.register.password">
                                 <em>1-8 Characters</em>
                             </div>
                         </div>
 
-                        <!-- Text input-->
+                        <!-- Reenterpassword input-->
                         <div class="form-group">
-                            <label class="col-sm-offset-1 col-sm-10" for="reenterpassword">Re-Enter Password:</label>
+                            <label class="col-sm-offset-1 col-sm-10" for="Reenterpassword">Re-Enter Password:</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <input id="reenterpassword" class="form-control" name="reenterpassword" type="password" placeholder="********" class="input-large" required="">
+                                <input id="Reenterpassword" class="form-control" name="Reenterpassword" type="password" placeholder="********" class="input-large" required="" ng-model="main.appAuthenticationService.register.password2">
                             </div>
                         </div>
 

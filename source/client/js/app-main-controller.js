@@ -6,7 +6,7 @@
     var app = angular.module('ApplicationModule');
 
     /* Controllers */
-    app.controller('ApplicationMainCtrl', ['$scope', '$window', '$timeout', 'AppScreenService', 'AppGameStateService', 'AppCardGameService', 'AppStatisticService', 'AppSetupService', 'AppOnlineService', function ($scope, $window, $timeout, appScreenService, appGameStateService, appCardGameService, appStatisticService, appSetupService, appOnlineService) {
+    app.controller('ApplicationMainCtrl', ['$scope', '$window', '$timeout', 'AppScreenService', 'AppGameStateService', 'AppCardGameService', 'AppStatisticService', 'AppSetupService', 'AppAuthenticationService', 'AppOnlineService', function ($scope, $window, $timeout, appScreenService, appGameStateService, appCardGameService, appStatisticService, appSetupService, appAuthenticationService, appOnlineService) {
 
         var self = this;
         self.inSettingPage = false;
@@ -16,6 +16,7 @@
         self.appCardGameService = appCardGameService;
         self.appStatisticService = appStatisticService;
         self.appSetupService = appSetupService;
+        self.appAuthenticationService = appAuthenticationService;
         self.appOnlineService = appOnlineService;
 
         self.appLastGameMode = "";
@@ -49,15 +50,17 @@
 
         self.playerLogin = function () {
             //console.log("playerLogin().");
+            self.appAuthenticationService.login();
             self.appScreenService.switchToScreen('wait-online-game-screen-id');
-            self.appOnlineService.connect();
+            //self.appOnlineService.connect();
         }
         self.switchToPlayerRegisterDialog = function () {
             //console.log("switchToPlayerRegisterDialog().");
             self.appScreenService.switchToScreen('register-screen-id');
         }
         self.playerRegister = function () {
-            //console.log("playerRegister().");
+            console.log("playerRegister().");
+            self.appAuthenticationService.register();
             self.appScreenService.switchToScreen('register-screen-id');
         }
 
@@ -108,75 +111,9 @@
         });
 
         $scope.$on('online-game-beginning', function(event, args) {
-            //console.log("$scope.$on('online-game-beginning') evenbt .....");
-
-            //self.appUserService.checkLogin();
-            self.appGameService.appGameStateService.startGameWithComputer();
+            self.appGameStateService.startOnlineGame();
             self.appScreenService.switchToScreen('game-screen-id');
         });
-
-        /*
-        self.fileInput = document.getElementById('getimage');
-        self.fileDisplayArea = document.getElementById('file-display-area');
-
-        self.fileInput.addEventListener('change', handleFiles);
-
-        function handleFiles() {
-            var filesToUpload = document.getElementById('getimage').files;
-            var file = filesToUpload[0];
-
-            // Create an image
-            var img = document.createElement("img");
-            // Create a file reader
-            var reader = new FileReader();
-            // Set the image once loaded into file reader
-            reader.onload = function(e)
-            {
-                img.src = e.target.result;
-
-                var canvas = document.createElement("canvas");
-                //var canvas = $("<canvas>", {"id":"testing"})[0];
-                var ctx = canvas.getContext("2d");
-                ctx.drawImage(img, 0, 0);
-
-                var MAX_WIDTH = 400;
-                var MAX_HEIGHT = 300;
-                var width = img.width;
-                var height = img.height;
-
-                if (width > height) {
-                    if (width > MAX_WIDTH) {
-                        height *= MAX_WIDTH / width;
-                        width = MAX_WIDTH;
-                    }
-                } else {
-                    if (height > MAX_HEIGHT) {
-                        width *= MAX_HEIGHT / height;
-                        height = MAX_HEIGHT;
-                    }
-                }
-                canvas.width = width;
-                canvas.height = height;
-                var ctx = canvas.getContext("2d");
-                ctx.drawImage(img, 0, 0, width, height);
-
-                var dataurl = canvas.toDataURL("image/png");
-
-                img.src = dataurl;
-                img.id = "picture";
-                self.fileDisplayArea.appendChild(img);
-            }
-            // Load files into file reader
-            reader.readAsDataURL(file);
-
-
-            // Post the data
-            //var fd = new FormData();
-            //fd.append("name", "some_filename.jpg");
-            //fd.append("image", dataurl);
-            //fd.append("info", "lah_de_dah");
-        }
-        */
 
         // und zum start-bildschirm
         self.appScreenService.switchToScreen('startup-screen-id');

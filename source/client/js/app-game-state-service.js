@@ -45,13 +45,10 @@
 
             // Functionen
             self.initStoneState = function () {
-                // uje console.log("self.initStoneState()");
                 self.gameLogic.init();
             }
 
             self.setStoneState = function (xindex, yindex, state) {
-                // uje console.log("self.setStoneState(xindex: " + xindex + ", yindex: " + yindex + ", state: " + state + ")");
-
                 if (xindex < 0 || xindex >= self.appConstantService.GAME_MAX_COLUMNS) {
                     console.log("self.setStoneState(... xindex=" + xindex + " ...) out of range.");
                     return;
@@ -71,8 +68,6 @@
             }
 
             self.getStoneState = function (xindex, yindex) {
-                // uje console.log("self.getStoneState(xindex: " + xindex + ", yindex: " + yindex + ")");
-
                 if (xindex < 0 || xindex >= self.appConstantService.GAME_MAX_COLUMNS) {
                     console.log("self.getStoneState(... xindex=" + xindex + " ...) out of range.");
                     return;
@@ -140,7 +135,6 @@
             // es wir versucht ein stein zu legen, erfolgreich aber nur wenn möglich
             // und nicht der Computer daran ist!
             self.eventTrySetStone = function(eventIndex) {
-
                 if (eventIndex < 0 || eventIndex >= (self.appConstantService.GAME_MAX_COLUMNS * self.appConstantService.GAME_MAX_ROWS)) {
                     console.log("self.eventTrySetStone(" + eventIndex + ") out of range.");
                     return;
@@ -157,9 +151,6 @@
 
                 var xindex = eventIndex % 8;
                 var yindex = Math.floor(eventIndex / 8);
-
-                // uje console.log("eventTrySetStone=" +eventIndex + "), xindex: " + xindex + " yindex: " + yindex);
-
                 var actState = self.getStoneState(xindex,yindex);
                 if (actState == self.STONE_WHITE || actState == self.STONE_BLACK) {
                     console.log("it is already a stone at the site.");
