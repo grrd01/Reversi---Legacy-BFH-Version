@@ -81,7 +81,11 @@ var gameLogic = function() {
                 updateStates(state, col, row);
             };
             if (isWithAutoPlayer) {
-                //updateStates(state, col, row);
+                if (state == 1) {
+                    moveFromComputerPlayer(2);
+                } else{
+                    moveFromComputerPlayer(1);
+                }
             };
         },
 
@@ -94,8 +98,8 @@ var gameLogic = function() {
 
         getPossibleMoves = function(state){
             var possibleMoves = [];
-            for (var i = 0; i < 8; i++) {
-                for (var j = 0; j < 8; j++) {
+            for (var i = 0; i < columns; i++) {
+                for (var j = 0; j < rows; j++) {
                     if (board[i][j] == 0 && isPossibleMove(state,i,j)) {
                         possibleMoves.push([i, j]);
                     }
@@ -232,19 +236,33 @@ var gameLogic = function() {
         isPossibleLeftTop = function (state, indexX, indexY, isFirst) {
             //out range
             if (indexX - 1 < 0 || indexY - 1 < 0) return false;
-            if (!isFirst && board[indexX-1][indexY - 1] == state) return true;
-            //no figure or same state
-            if (board[indexX - 1][indexY - 1] == 0 || board[indexX - 1][indexY - 1] == state) return false;
 
-            return isPossibleLeftTop(state, indexX - 1, indexY - 1,false);
+            var boardState = board[indexX-1][indexY - 1];
+            if (!isFirst && boardState == state){
+                return true;
+            } else if (!isFirst && boardState == 0) {
+                return false;
+            }
+            //no figure or same state
+            if (boardState == 0 || boardState == state) {
+                return false;
+            } else {
+                return isPossibleLeftTop(state, indexX - 1, indexY - 1,false);
+            }
         },
 
         isPossibleTop = function (state, indexX, indexY, isFirst) {
             //out range
             if (indexY - 1 < 0) return false;
-            if (!isFirst && board[indexX][indexY - 1] == state) return true;
+
+            var boardState = board[indexX][indexY - 1];
+            if (!isFirst && boardState == state){
+                return true;
+            } else if (!isFirst && boardState == 0) {
+                return false;
+            }
             //no figure or same state
-            if (isFirst && (board[indexX][indexY - 1] == 0 || board[indexX][indexY - 1] == state)) {
+            if (boardState == 0 || boardState == state) {
                 return false;
             } else {
                 return isPossibleTop(state, indexX, indexY - 1, false);
@@ -253,50 +271,88 @@ var gameLogic = function() {
 
         isPossibleRightTop = function (state, indexX, indexY, isFirst) {
             //out range
-            if (indexX + 1 >= 8 || indexY - 1 < 0) return false;
-            if (!isFirst && board[indexX+1][indexY - 1] == state) return true;
-            //no figure or same state
-            if (board[indexX + 1][indexY - 1] == 0 || board[indexX + 1][indexY - 1] == state) return false;
+            if (indexX + 1 >= columns || indexY - 1 < 0) return false;
 
-            return isPossibleRightTop(state, indexX + 1, indexY - 1, false);
+            var boardState = board[indexX+1][indexY - 1];
+            if (!isFirst && boardState == state){
+                return true;
+            } else if (!isFirst && boardState == 0) {
+                return false;
+            }
+            //no figure or same state
+            if (boardState == 0 || boardState == state) {
+                return false;
+            } else {
+                return isPossibleRightTop(state, indexX + 1, indexY - 1, false);
+            }
         },
 
         isPossibleLeft = function (state, indexX, indexY, isFirst) {
             //out range
             if (indexX - 1 < 0) return false;
-            if (!isFirst && board[indexX-1][indexY] == state) return true;
-            //no figure or same state
-            if (board[indexX - 1][indexY] == 0 || board[indexX - 1][indexY] == state) return false;
 
-            return isPossibleLeft(state, indexX - 1, indexY ,false);
+            var boardState = board[indexX-1][indexY];
+            if (!isFirst && boardState == state){
+                return true;
+            } else if (!isFirst && boardState == 0) {
+                return false;
+            }
+            //no figure or same state
+            if (boardState== 0 || boardState == state) {
+                return false;
+            } else {
+                return isPossibleLeft(state, indexX - 1, indexY ,false);
+            }
         },
 
         isPossibleRight = function (state, indexX, indexY, isFirst) {
             //out range
-            if (indexX + 1 >= 8) return false;
-            if (!isFirst && board[indexX+1][indexY] == state) return true;
-            //no figure or same state
-            if (board[indexX + 1][indexY] == 0 || board[indexX + 1][indexY] == state) return false;
+            if (indexX + 1 >= columns) return false;
 
-            return isPossibleRight(state, indexX + 1, indexY, false);
+            var boardState = board[indexX+1][indexY];
+            if (!isFirst && boardState == state){
+                return true;
+            } else if (!isFirst && boardState == 0) {
+                return false;
+            }
+            //no figure or same state
+            if (boardState == 0 || boardState == state) {
+                return false;
+            } else {
+                return isPossibleRight(state, indexX + 1, indexY, false);
+            }
         },
 
         isPossibleLeftBottom = function (state, indexX, indexY, isFirst) {
             //out range
-            if (indexX - 1 < 0 || indexY + 1 < 0) return false;
-            if (!isFirst && board[indexX-1][indexY + 1] == state) return true;
-            //no figure or same state
-            if (board[indexX - 1][indexY + 1] == 0 || board[indexX - 1][indexY + 1] == state) return false;
+            if (indexX - 1 < 0 || indexY + 1 >= rows) return false;
 
-            return isPossibleLeftBottom(state, indexX - 1, indexY + 1,false);
+            var boardState = board[indexX-1][indexY + 1];
+            if (!isFirst && boardState == state){
+                return true;
+            } else if (!isFirst && boardState == 0) {
+                return false;
+            }
+            //no figure or same state
+            if (boardState == 0 || boardState == state) {
+                return false;
+            } else {
+                return isPossibleLeftBottom(state, indexX - 1, indexY + 1,false);
+            }
         },
 
         isPossibleBottom = function (state, indexX, indexY, isFirst) {
             //out range
-            if (indexY + 1 >= 8) return false;
-            if (!isFirst && board[indexX][indexY + 1] == state) return true;
+            if (indexY + 1 >= rows) return false;
+
+            var boardState = board[indexX][indexY + 1];
+            if (!isFirst && boardState == state){
+                return true;
+            } else if (!isFirst && boardState == 0) {
+                return false;
+            }
             //no figure or same state
-            if (isFirst && (board[indexX][indexY + 1] == 0 || board[indexX][indexY + 1] == state)) {
+            if (boardState == 0 || boardState == state) {
                 return false;
             } else {
                 return isPossibleBottom(state, indexX, indexY + 1, false);
@@ -305,33 +361,47 @@ var gameLogic = function() {
 
         isPossibleRightBottom = function (state, indexX, indexY, isFirst) {
             //out range
-            if (indexX + 1 >= 8 || indexY + 1 >= 8) return false;
-            if (!isFirst && board[indexX+1][indexY + 1] == state) return true;
-            //no figure or same state
-            if (board[indexX + 1][indexY + 1] == 0 || board[indexX + 1][indexY + 1] == state) return false;
+            if (indexX + 1 >= columns || indexY + 1 >= rows) return false;
 
-            return isPossibleRightBottom(state, indexX + 1, indexY + 1, false);
+            var boardState = board[indexX+1][indexY + 1];
+            if (!isFirst && boardState == state){
+                return true;
+            } else if (!isFirst && boardState == 0) {
+                return false;
+            }
+            //no figure or same state
+            if (boardState == 0 || boardState == state) {
+                return false;
+            } else {
+                return isPossibleRightBottom(state, indexX + 1, indexY + 1, false);
+            }
         },
 
         moveFromComputerPlayer = function(state) {
             var possibleMoves = getPossibleMoves(state);
 
-            console.log("moveFromComputerPlayer(state=" + state +")");
-            console.log("possibleMoves.length: " + possibleMoves.length);
-            console.log("possibleMoves: " + possibleMoves);
+            if (possibleMoves.length == 0){
+                console.log("moveFromComputerPlayer(state=" + state +")");
+                console.log("possibleMoves.length: " + possibleMoves.length);
+                console.log("possibleMoves: " + possibleMoves);
 
-            var randomIndex = Math.floor(Math.random() * 10 % (possibleMoves.length));
-            // uje console.log("randomIndex: " + randomIndex);
-            // uje console.log("moveFromComputerPlayer: " + possibleMoves[randomIndex]);
-            // uje console.log("randomIndex][0]: " + possibleMoves[randomIndex][0]);
-            // uje console.log("randomIndex][1]: " + possibleMoves[randomIndex][1]);
-            changeObjectState(possibleMoves[randomIndex][0], possibleMoves[randomIndex][1], state ,true, false)
+                var randomIndex = Math.floor(Math.random() * 10 % (possibleMoves.length));
+                // uje console.log("randomIndex: " + randomIndex);
+                // uje console.log("moveFromComputerPlayer: " + possibleMoves[randomIndex]);
+                // uje console.log("randomIndex][0]: " + possibleMoves[randomIndex][0]);
+                // uje console.log("randomIndex][1]: " + possibleMoves[randomIndex][1]);
+                changeObjectState(possibleMoves[randomIndex][0], possibleMoves[randomIndex][1], state ,true, false)
+                return true;
+            }else{
+                return false;
+            }
+
         },
 
         getFigures = function (state) {
             var filtered = [];
-            for (var i = 0; i < 8; i++) {
-                for (var j = 0; j < 8; j++) {
+            for (var i = 0; i < columns; i++) {
+                for (var j = 0; j < rows; j++) {
                     if (board[i][j] == state) {
                         //var temp = [i,j];
                         filtered.push([i, j]);
