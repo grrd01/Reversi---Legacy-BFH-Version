@@ -241,15 +241,15 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputUserName" class="col-sm-offset-1 col-sm-10">Name</label>
+                            <label for="name" class="col-sm-offset-1 col-sm-10">Name</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <input type="text" class="col-max form-control" id="inputUserName" placeholder="Name">
+                                <input id="name" name="name" class="form-control" type="text" placeholder="Name" class="input-large" ng-model="main.appAuthenticationService.userData.name">
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="inputPassword" class="col-sm-offset-1 col-sm-10">Password</label>
+                            <label for="password" class="col-sm-offset-1 col-sm-10">Password</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <input type="password" class="col-max form-control" id="inputPassword" placeholder="Password">
+                                <input id="password" name="password" class="form-control" type="password" placeholder="Password" class="input-large" ng-model="main.appAuthenticationService.userData.password">
                             </div>
                         </div>
                         <div class="form-group">
@@ -270,8 +270,8 @@
             </div>
             <div class="container-game container">
                 <div class="row">
-                    <form class="form-horizontal">
-                        <div class="form-group">
+                    <form class="form-horizontal" name="registerForm">
+                        <div class="form-group" ng-class="{ 'has-error': userForm.email.$invalid }">
                             <div class="col-sm-offset-1 col-sm-10">
                                 <h4>
                                     Register:
@@ -281,10 +281,10 @@
 
                         <!-- Register Form -->
                         <!-- Text input Name -->
-                        <div class="form-group">
-                            <label class="col-sm-offset-1 col-sm-10" for="Name">Username:</label>
+                        <div class="form-group" >
+                            <label class="col-sm-offset-1 col-sm-10" for="name">Name:</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                 <input id="Name" name="Name" class="form-control" type="text" placeholder="Name" class="input-large" required="" ng-model="main.appAuthenticationService.register.name">
+                                 <input id="name" name="name" class="form-control" type="text" placeholder="Name" class="input-large" ng-model="main.appAuthenticationService.userData.name">
                             </div>
                         </div>
 
@@ -292,16 +292,15 @@
                         <div class="form-group">
                             <label class="col-sm-offset-1 col-sm-10" for="password">Password:</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <input id="password" name="password" class="form-control" type="password" placeholder="********" class="input-large" required="" ng-model="main.appAuthenticationService.register.password">
-                                <em>1-8 Characters</em>
+                                <input id="password" name="password" class="form-control" type="password" placeholder="Password" class="input-large" ng-model="main.appAuthenticationService.userData.password">
                             </div>
                         </div>
 
                         <!-- Reenterpassword input-->
                         <div class="form-group">
-                            <label class="col-sm-offset-1 col-sm-10" for="Reenterpassword">Re-Enter Password:</label>
+                            <label class="col-sm-offset-1 col-sm-10" for="reenterpassword">Re-Enter Password:</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <input id="Reenterpassword" class="form-control" name="Reenterpassword" type="password" placeholder="********" class="input-large" required="" ng-model="main.appAuthenticationService.register.password2">
+                                <input id="reenterpassword" class="form-control" name="reenterpassword" type="password" placeholder="Password" class="input-large" ng-model="main.appAuthenticationService.userData.password2">
                             </div>
                         </div>
 
@@ -335,7 +334,9 @@
 
         <div class="switch-area-screen game-screen" id="game-screen-id">
             <div class="game-player-info" id="game-player-info-id">
-                <img class="img-player-info img-left-player-info" id="img-left-player-info-id" src="./images/emptyuser-90x120.png">
+                <img class="img-player-info img-left-player-info" id="img-left-player-info-local-id" src="./images/emptyuser-90x120.png">
+                <img class="img-player-info img-left-player-info" id="img-left-player-info-computer-id" src="./images/computer-8x.png">
+                <img class="img-player-info img-left-player-info" id="img-left-player-info-online-id" src="./images/network-8x.png">
 
                 <img class="img-player-info img-right-player-info" id="img-right-player-info-local-id" src="./images/emptyuser-90x120.png">
                 <img class="img-player-info img-right-player-info" id="img-right-player-info-computer-id" src="./images/computer-8x.png">
@@ -383,6 +384,24 @@
             </div>
         </div>
 
+        <!-- Modal -->
+        <div class="modal fade bs-example-modal-sm" id="modal-error-dialog" role="dialog">
+            <div class="modal-dialog modal-sm">
+                <div class="modal-content">
+                    <div class="modal-header modal-error-header-dialog">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title" id="modal-error-title-text-h4-id">Modal Header</h4>
+                    </div>
+                    <div class="modal-body">
+                        <p id="modal-error-body-text-p-id">This is a small modal.</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <!-- javascripts -->
@@ -394,6 +413,7 @@
     <script src="js/app-module.js"></script>
     <script src="js/app-constant-service.js"></script>
     <script src="js/app-setup-service.js"></script>
+    <script src="js/app-authentication-service.js"></script>
     <script src="js/app-game-state-service.js"></script>
     <script src="js/app-screen-service.js"></script>
     <script src="js/app-card-game-service.js"></script>
