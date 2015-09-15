@@ -83,6 +83,7 @@
 
                 <div class="row">
                     <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-help-margin-01">
+                        <!--
                         <table class="table table-bordered help-table-bordered">
                             <tr>
                                 <td >
@@ -128,6 +129,7 @@
                                 <td class="">Spielsteine schwarz und weiss.</td>
                             </tr>                            
                         </table>
+                        -->
                     </div>
                 </div>
 
@@ -347,9 +349,6 @@
 
                 <img ng-show="main.appGameStateService.actualPlayerIsWhite" class="img-player-status" id="img-player-status-left-id" src="./images/arrow-thick-left-green-8x.png">
                 <img ng-show="main.appGameStateService.actualPlayerIsBlack" class="img-player-status" id="img-player-status-right-id" src="./images/arrow-thick-right-green-8x.png">
-
-                <img ng-show="main.appGameStateService.actualPlayerYou" class="img-player-status-center" id="img-player-status-center-you-id" src="./images/you-128.png">
-                <img ng-show="main.appGameStateService.actualPlayerOnline" class="img-player-status-center" id="img-player-status-center-online-id" src="./images/online-128.png">
 
                 <p class="text-player-info" id="text-player-info-left-id">{{main.userLeftInfoText}}</p>
                 <p class="text-player-info" id="text-player-info-right-id">{{main.userRightInfoText}}</p>

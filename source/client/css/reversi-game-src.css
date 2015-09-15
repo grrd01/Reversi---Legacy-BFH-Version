@@ -208,18 +208,6 @@ html, body {
 #img-player-status-right-id {
 }
 
-.img-player-status-center {
-    width: 76px;
-    border-radius: 3px;
-    margin: 1px;
-    position: absolute;
-    top: 0px;
-}
-#img-player-status-center-you-id {
-}
-#img-player-status-center-online-id {
-}
-
 .text-player-info {
     color: #666;
     font-size: 20px;
@@ -229,6 +217,9 @@ html, body {
 
 .modal-header-dialog {
     background-color: #4282e8;
+}
+.modal-error-header-dialog {
+    background-color: #e81e1a;
 }
 
 div.upload {
