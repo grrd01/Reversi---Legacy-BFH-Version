@@ -16,12 +16,11 @@
     app.factory('AppOnlineService', ['$rootScope', function ($rootScope) {
         var AppOnlineService = function () {
             var self = this;
+            self.userData = { name: "", password: "", password2: ""};
             self.onlineState = "none";
             self.onlineStartPlayer = false;
             self.onlineStartOpponent = false;
-            // variables for online-mode
             self.socket;
-            self.user;
             self.lastStart;
             self.lastQuit;
             self.lastRound = null;
@@ -31,54 +30,48 @@
             self.connect = function () {
                 //self.socket = io.connect('http://localhost:3000', {'forceNew': true});
                 self.socket = io.connect('http://reversi-grrd.rhcloud.com:8000', {'forceNew': true});
+                self.socket.heartbeatTimeout = 20000; // milli
 
                 // event when you are successfully connected to the server
                 self.socket.on('connected', function (data) {
                     self.user = data;
                     console.info("successfully connected to the server");
                     //test
-                    self.register("hans","wurst");
+                    //self.register("hans","wurst");
                     //test
                 });
 
                 // event when signin was successfull
                 self.socket.on('signInOk', function () {
                     console.info("you successfully signed in");
-                    //test
                     self.startPlay();
-                    //test
                 });
 
                 // event when signin refused with wrong password
                 self.socket.on('signInWrongPw', function () {
                     console.info("your password is not correct");
+                    $rootScope.$broadcast('signInWrongPw');
                     //test
-                    self.signIn("wurst","brot");
+                    //self.signIn("wurst","brot");
                     //test
                 });
 
                 // event when signin refused with unknown user name
                 self.socket.on('signInUnknownUser', function () {
                     console.info("this username is not known");
-                    //test
-                    self.signIn("hans","wurst");
-                    //test
+                    $rootScope.$broadcast('signInUnknownUser');
                 });
 
                 // event when register was successfull
                 self.socket.on('registerOk', function () {
                     console.info("you successfully registered");
-                    //test
-                    self.startPlay();
-                    //test
+                    self.signIn(self.userData.name, self.userData.password);
                 });
 
                 // event when register refused because name is already used
                 self.socket.on('registerNameOccupied', function () {
                     console.info("this username is no more available");
-                    //test
-                    self.signIn("hans","brot");
-                    //test
+                    self.signIn(self.userData.name, self.userData.password);
                 });
 
                 // event when you have to wait for an opponent
@@ -105,15 +98,14 @@
                         self.lastStart = self.user.id;
                         if (self.user.role == 0) {
                             // player starts game
-                            console.info("it's your turn");
                             self.onlineStartPlayer = true;
-                            //test
-                            self.play(1,2);
-                            //test
+                            console.info("it's your turn");
+                            $rootScope.$broadcast('onlineStartPlayer');
                         } else {
                             // opponent starts game
                             self.onlineStartOpponent = true;
                             console.info("waiting for opponent to  start the game");
+                            $rootScope.$broadcast('onlineStartOpponent');
                         }
                     }
                 });
@@ -124,9 +116,12 @@
                     if (self.countRound == data.round && self.lastRound != data.round) {
                         self.lastRound = data.round;
                         console.info("your online opponent played in row " + data.row);
+
+                        $rootScope.$broadcast('play', { col: data.col, row: data.row} );
+
                         //test
-                        self.rankingUpdate("hans","wurst",1,25);
-                        self.ranking();
+                        //self.rankingUpdate("hans","wurst",1,25);
+                        //self.ranking();
                         //test
                     }
                 });
@@ -162,11 +157,15 @@
 
             // function to sign in with a existing username password
             self.signIn = function (name, password) {
+                self.userData.name = name;
+                self.userData.password = password;
                 self.socket.emit('signIn', {name: name, password: password});
             };
 
             // function to register in with a new username password
             self.register = function (name, password) {
+                self.userData.name = name;
+                self.userData.password = password;
                 self.socket.emit('register', {name: name, password: password});
             };
 

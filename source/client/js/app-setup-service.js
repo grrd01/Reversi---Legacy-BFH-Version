@@ -15,6 +15,7 @@
             self.showPosibleStones = false;
             self.localUserImageWhite = "";
             self.localUserImageBlack = "";
+            self.inSettingPage = false;
 
             self.saveSettings = function() {
                 if (typeof(Storage) !== "undefined" && typeof(localStorage) !== "undefined") {

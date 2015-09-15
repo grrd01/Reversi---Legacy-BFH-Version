@@ -8,10 +8,11 @@
     var app = angular.module("ApplicationModule");
 
     // create the service
-    app.factory('AppGameStateService', ['$timeout', '$rootScope', 'AppConstantService', function ($timeout, $rootScope, appConstantService) {
+    app.factory('AppGameStateService', ['$timeout', '$rootScope', 'AppConstantService', 'AppOnlineService', function ($timeout, $rootScope, appConstantService, appOnlineService) {
         var AppGameStateService = function () {
             var self = this;
             self.appConstantService = appConstantService;
+            self.appOnlineService = appOnlineService;
             self.startWithBlack = false;
 
             /*
@@ -48,7 +49,14 @@
                 self.gameLogic.init();
             }
 
-            self.setStoneState = function (xindex, yindex, state) {
+            self.setStoneStateError = function (xindex, yindex) {
+                self.wrongStone = {x: xindex, y: yindex};
+            }
+
+            self.setStoneState = function (xindex, yindex, withoutCheck) {
+                if (withoutCheck === undefined)
+                    withoutCheck = false;
+
                 if (xindex < 0 || xindex >= self.appConstantService.GAME_MAX_COLUMNS) {
                     console.log("self.setStoneState(... xindex=" + xindex + " ...) out of range.");
                     return;
@@ -59,11 +67,11 @@
                 }
 
                 var siPossible = self.gameLogic.isPossibleMove(self.actualPlayer, xindex, yindex);
-                if (siPossible) {
+                if (siPossible || withoutCheck) {
                     self.gameLogic.changeObjectState(xindex, yindex, self.actualPlayer, true, false);
                     self.wrongStone = undefined;
                 } else {
-                    self.wrongStone = {x: xindex, y: yindex};
+                    self.setStoneStateError(xindex, yindex);
                 }
             }
 
@@ -134,7 +142,26 @@
 
             // es wir versucht ein stein zu legen, erfolgreich aber nur wenn möglich
             // und nicht der Computer daran ist!
-            self.eventTrySetStone = function(eventIndex) {
+            self.eventTrySetStone = function(eventIndex, fromOnlinePlayer) {
+                var xindex = eventIndex % 8;
+                var yindex = Math.floor(eventIndex / 8);
+
+                if (fromOnlinePlayer === undefined)
+                    fromOnlinePlayer = false;
+
+                if (self.isOnlineGameRunning && !fromOnlinePlayer) {
+                    if (self.appOnlineService.onlineStartPlayer && self.actualPlayerIsBlack) {
+                        console.log("self.eventTrySetStone(online && Withe).");
+                        self.setStoneStateError(xindex, yindex);
+                        return;
+                    }
+                    if (self.appOnlineService.onlineStartOpponent && self.actualPlayerIsWhite) {
+                        console.log("self.eventTrySetStone(online && Black).");
+                        self.setStoneStateError(xindex, yindex);
+                        return;
+                    }
+                }
+
                 if (eventIndex < 0 || eventIndex >= (self.appConstantService.GAME_MAX_COLUMNS * self.appConstantService.GAME_MAX_ROWS)) {
                     console.log("self.eventTrySetStone(" + eventIndex + ") out of range.");
                     return;
@@ -149,8 +176,6 @@
                     return;
                 }
 
-                var xindex = eventIndex % 8;
-                var yindex = Math.floor(eventIndex / 8);
                 var actState = self.getStoneState(xindex,yindex);
                 if (actState == self.STONE_WHITE || actState == self.STONE_BLACK) {
                     console.log("it is already a stone at the site.");
@@ -158,26 +183,30 @@
                 }
 
                 if (self.actualPlayerIsWhite) {
-                    if (self.isWhiteLayingPossible(xindex,yindex)) {
-                        self.setStoneState(xindex, yindex, self.STONE_WHITE);
+                    if (self.isWhiteLayingPossible(xindex,yindex) || fromOnlinePlayer) {
+                        self.setStoneState(xindex, yindex, fromOnlinePlayer);
+                        if (self.isOnlineGameRunning && !fromOnlinePlayer)
+                            self.appOnlineService.play(yindex, xindex);
                         self.setActualPlayerToBlack();
 
                         if (self.isComputerGameRunning && !self.startWithBlack) {
                             self.startComputerMove();
                         }
                     } else {
-                        self.setStoneState(xindex, yindex, self.STONE_PLACING_ERROR);
+                        self.setStoneStateError(xindex, yindex);
                     }
                 } else if (self.actualPlayerIsBlack) {
-                    if (self.isBlackLayingPossible(xindex,yindex)) {
-                        self.setStoneState(xindex, yindex, self.STONE_BLACK);
+                    if (self.isBlackLayingPossible(xindex,yindex) || fromOnlinePlayer) {
+                        self.setStoneState(xindex, yindex, fromOnlinePlayer);
+                        if (self.isOnlineGameRunning && !fromOnlinePlayer)
+                            self.appOnlineService.play(yindex, xindex);
                         self.setActualPlayerToWhite();
 
                         if (self.isComputerGameRunning && self.startWithBlack) {
                             self.startComputerMove();
                         }
                     } else {
-                        self.setStoneState(xindex, yindex, self.STONE_PLACING_ERROR);
+                        self.setStoneStateError(xindex, yindex);
                     }
                 }
             }
@@ -222,9 +251,18 @@
                 self.isComputerGameRunning = true;
             }
 
-            self.startOnlineGame = function () {
+            self.startOnlineGame = function (playerMode) {
                 self.startInitGame();
                 self.isOnlineGameRunning = true;
+
+                self.setActualPlayerToWhite();
+
+                if (playerMode === 'StartPlayer') {
+                } else /*if (playerMode === 'StartOpponent')*/ {
+                }
+
+                var tmp1 = self.appOnlineService.onlineStartPlayer;
+                var tmp2 = self.appOnlineService.onlineStartOpponent;
             }
 
             self.isTheGameOver = function() {

@@ -148,19 +148,6 @@
                 $('#img-player-status-left-id').css('left', '' + (playerImgWidth + stoneImgHeight + 3) + 'px');
                 $('#img-player-status-right-id').css('right', '' + (playerImgWidth + stoneImgHeight + 3) + 'px');
 
-                var playerStatusCenterHeight = (infoHeight / 3).toFixed(0);
-                var playerStatusCenterWidth = (playerStatusCenterHeight * 2.0).toFixed(0);
-                var playerStatusCenterLeft = infoMidd - (playerStatusCenterWidth / 2)
-                $('#img-player-status-center-you-id').css('left', '' + playerStatusCenterLeft + 'px');
-                $('#img-player-status-center-you-id').css('width', '' + playerStatusCenterWidth + 'px');
-                $('#img-player-status-center-online-id').css('left', '' + playerStatusCenterLeft + 'px');
-                $('#img-player-status-center-online-id').css('width', '' + playerStatusCenterWidth + 'px');
-
-                var playerStatusCenterTop = ((infoHeight -playerStatusCenterHeight) -3);
-                $('#img-player-status-center-you-id').css('top', '' + playerStatusCenterTop + 'px');
-                $('#img-player-status-center-online-id').css('top', '' + playerStatusCenterTop + 'px');
-
-
                 $('#text-player-info-left-id').css('left', '' + 3 + 'px');
                 $('#text-player-info-right-id').css('right', '' + 3 + 'px');
 
@@ -213,6 +200,11 @@
                     $('#' + onId).show();
                 }
 
+                if (self.appSetupService.inSettingPage) {
+                    self.appSetupService.saveSettings();
+                    self.appSetupService.inSettingPage = false;
+                }
+
                 if (onId === 'setup-screen-id') {
                     try {
                         if (self.appSetupService.localUserImageWhite.length > 0) {
@@ -234,13 +226,14 @@
                     } catch (e) {
                         console.log("exception in if (onId === 'setup-screen-id')  exception: " + e);
                     }
+                    self.appSetupService.inSettingPage = true;
                 }
             }
 
             self.updatePlayerImages = function() {
                 try {
                     if (self.appSetupService.localUserImageWhite.length > 0) {
-                        var img = $('#img-left-player-info-id');
+                        var img = $('#img-left-player-info-local-id');
                         var imgSrc = img.attr("src");
 
                         if (imgSrc != self.appSetupService.localUserImageWhite) {
@@ -265,6 +258,10 @@
             }
 
             self.switchToLocalMode = function() {
+                $('#img-left-player-info-local-id').show();
+                $('#img-left-player-info-computer-id').hide();
+                $('#img-left-player-info-online-id').hide();
+
                 $('#img-right-player-info-local-id').show();
                 $('#img-right-player-info-computer-id').hide();
                 $('#img-right-player-info-online-id').hide();
@@ -273,6 +270,10 @@
             }
 
             self.switchToComputerMode = function() {
+                $('#img-left-player-info-local-id').show();
+                $('#img-left-player-info-computer-id').hide();
+                $('#img-left-player-info-online-id').hide();
+
                 $('#img-right-player-info-local-id').hide();
                 $('#img-right-player-info-computer-id').show();
                 $('#img-right-player-info-online-id').hide();
@@ -280,10 +281,25 @@
                 self.updatePlayerImages();
             }
 
-            self.switchToOnlineMode = function() {
-                $('#img-right-player-info-local-id').hide();
-                $('#img-right-player-info-computer-id').hide();
-                $('#img-right-player-info-online-id').show();
+            self.switchToOnlineMode = function(playerMode) {
+                if (playerMode === 'StartPlayer') {
+                    $('#img-left-player-info-local-id').show();
+                    $('#img-left-player-info-computer-id').hide();
+                    $('#img-left-player-info-online-id').hide();
+
+                    $('#img-right-player-info-local-id').hide();
+                    $('#img-right-player-info-computer-id').hide();
+                    $('#img-right-player-info-online-id').show();
+                } else /*if (playerMode === 'StartOpponent')*/ {
+                    $('#img-left-player-info-local-id').hide();
+                    $('#img-left-player-info-computer-id').hide();
+                    $('#img-left-player-info-online-id').show();
+
+                    $('#img-right-player-info-local-id').show();
+                    $('#img-right-player-info-computer-id').hide();
+                    $('#img-right-player-info-online-id').hide();
+                }
+                self.updatePlayerImages();
             }
 
             self.imageBlinkingOn = false;
@@ -370,7 +386,7 @@
                 var reader = new FileReader();
                 // Set the image once loaded into file reader
                 reader.onload = function(e) {
-                    self.resizeLoadedImage(self.fileLocalUserImg, e.target.result);
+                    self.appSetupService.localUserImageWhite = self.resizeLoadedImage(self.fileLocalUserImg, e.target.result);
                 }
                 // Load files into file reader
                 reader.readAsDataURL(file);
@@ -389,7 +405,7 @@
                 var reader = new FileReader();
                 // Set the image once loaded into file reader
                 reader.onload = function(e) {
-                    self.resizeLoadedImage(self.fileLocalUserImg2, e.target.result);
+                    self.appSetupService.localUserImageBlack = self.resizeLoadedImage(self.fileLocalUserImg2, e.target.result);
                 }
                 // Load files into file reader
                 reader.readAsDataURL(file);
@@ -429,10 +445,12 @@
                 ctx.drawImage(flieLocImg, 0, 0, width, height);
 
                 var dataurl = canvas.toDataURL("image/png");
-                self.appSetupService.localUserImageBlack = dataurl;
+                var localUserImage = dataurl;
 
                 flieLocImg.src = dataurl;
                 //flieLocImg.id = "picture";
+
+                return localUserImage;
             }
 
         }
