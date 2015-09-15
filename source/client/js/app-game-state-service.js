@@ -8,10 +8,11 @@
     var app = angular.module("ApplicationModule");
 
     // create the service
-    app.factory('AppGameStateService', ['$timeout', '$rootScope', 'AppConstantService', 'AppOnlineService', function ($timeout, $rootScope, appConstantService, appOnlineService) {
+    app.factory('AppGameStateService', ['$timeout', '$rootScope', 'AppConstantService', 'AppAuthenticationService', 'AppOnlineService', function ($timeout, $rootScope, appConstantService, appAuthenticationService, appOnlineService) {
         var AppGameStateService = function () {
             var self = this;
             self.appConstantService = appConstantService;
+            self.appAuthenticationService = appAuthenticationService;
             self.appOnlineService = appOnlineService;
             self.startWithBlack = false;
 
@@ -303,11 +304,11 @@
                     var newDate = new Date();
                     var runTime = ((newDate.getTime() - self.gameStartTime.getTime()) / 1000).toFixed(0);
 
-                    var gmtp = "2 local paly: ";
+                    var gmtp = "local paly: ";
                     if (self.isComputerGameRunning)
                         gmtp = "local to computer: ";
                     else if (self.isOnlineGameRunning)
-                        gmtp = "2 online paly: ";
+                        gmtp = "online paly: ";
                     else if (self.isOnlineComputerGameRunning)
                         gmtp = "online to computer: ";
 
@@ -348,6 +349,30 @@
                         $('#modal-body-text-p-id')[0].innerHTML = msg;
                         $("#modal-dialog").modal();
                         self.isGameRunning = false;
+
+                        console.log("self.timerHandler() { self.isTheGameOver(): " + msg);
+
+                        if (self.isOnlineGameRunning) {
+                            if (self.appOnlineService.onlineStartPlayer) {
+                                console.log("self.eventTrySetStone(online && Withe).");
+
+                                var name = self.appAuthenticationService.userData.name;
+                                var password = self.appAuthenticationService.userData.password;
+                                var gamesWon = (whiteStones.length > blackStones.length) ? 1 : 0;
+                                self.appOnlineService.rankingUpdate(name, password, gamesWon, whiteStones.length);
+                                console.log("(self.appOnlineService.onlineStartPlayer) self.rankingUpdate(" + name + ", " + password + ", " + gamesWon + ", " + blackStones.length + ")");
+                            }
+                            if (self.appOnlineService.onlineStartOpponent) {
+                                var name = self.appAuthenticationService.userData.name;
+                                var password = self.appAuthenticationService.userData.password;
+                                var gamesWon = (blackStones.length > whiteStones.length) ? 1 : 0;
+                                self.appOnlineService.rankingUpdate(name, password, gamesWon, blackStones.length);
+                                console.log("(self.appOnlineService.onlineStartOpponent) self.rankingUpdate(" + name + ", " + password + ", " + gamesWon + ", " + blackStones.length + ")");
+                            }
+                            self.appOnlineService.stopPlay();
+                            $rootScope.$broadcast('stopPlay');
+                            console.log("(self.appOnlineService.onlineStartOpponent) stopPlay()");
+                        }
                     }
                 } else {
                     self.statusMessgaeText = "ready";

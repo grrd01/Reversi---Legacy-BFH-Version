@@ -232,7 +232,7 @@
 
             self.updatePlayerImages = function() {
                 try {
-                    if (self.appSetupService.localUserImageWhite.length > 0) {
+                    if (self.appSetupService.localUserImageWhite != null && self.appSetupService.localUserImageWhite.length > 0) {
                         var img = $('#img-left-player-info-local-id');
                         var imgSrc = img.attr("src");
 
@@ -244,7 +244,7 @@
                     console.log("exception in if (onId === 'setup-screen-id')  exception: " + e);
                 }
                 try {
-                    if (self.appSetupService.localUserImageWhite.length > 0) {
+                    if (self.appSetupService.localUserImageWhite != null && self.appSetupService.localUserImageWhite.length > 0) {
                         var img = $('#img-right-player-info-local-id');
                         var imgSrc = img.attr("src");
 

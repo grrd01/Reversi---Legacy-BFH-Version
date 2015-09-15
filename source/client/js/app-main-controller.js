@@ -81,9 +81,9 @@
         });
         $('#header-img-home-id').click(function () {
             self.appScreenService.switchToScreen('startup-screen-id', self.appLastGameMode);
-            if (self.appOnlineService.onlineState !== "none") {
-                self.appOnlineService.online_quit();
-            }
+            //if (self.appOnlineService.onlineState !== "none") {
+                self.appOnlineService.stopPlay();
+            //}
             self.appLastGameMode = "";
         });
 
@@ -134,6 +134,11 @@
             var eventIndex = (args.row * 8) +args.col;
             self.appGameStateService.eventTrySetStone(eventIndex, true);
             self.appCardGameService.updateCardLayout();
+        });
+
+        $scope.$on('stopPlay', function(event, args) {
+            console.log("$scope.$on('stopPlay');");
+            self.appScreenService.switchToScreen('startup-screen-id');
         });
 
         // und zum Start-Bildschirm

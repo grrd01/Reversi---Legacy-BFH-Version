@@ -142,7 +142,6 @@
                         self.onlineState = "none";
                         self.onlineStartPlayer = false;
                         self.onlineStartOpponent = false;
-                        alert("your opponent has left the game");
                     }
                 });
 
