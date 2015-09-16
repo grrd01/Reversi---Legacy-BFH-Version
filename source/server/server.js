@@ -72,6 +72,7 @@
         // request to start a game
         socket.on("startPlay", function () {
             // add new user to array of all currently playing users
+            user.opponent = null;
             usersPlaying.push(user);
             // try to start a game
             startPlay();
@@ -87,10 +88,11 @@
         socket.on("stopPlay", function () {
             // tell his opponene, that the player left and the game ended
             if (user.opponent != null) {
+                removeUser(user.opponent);
                 io.to(user.opponent).emit("stopPlay");
             }
             // remove user from array of all currently playing users
-            removeUser(user);
+            removeUser(user.id);
             user.opponent = null;
         });
 
@@ -98,11 +100,11 @@
         socket.on('disconnect', function () {
             // tell his opponene, that the player left and the game ended
             if (user.opponent != null) {
+                removeUser(user.opponent);
                 io.to(user.opponent).emit("stopPlay");
             }
             // remove user from array of all currently playingusers
-            removeUser(user);
-            user.opponent = null;
+            removeUser(user.id);
         });
 
         // the player sent metadata (name, image, ...)
@@ -152,9 +154,9 @@
     });
 
     // remove a user from the array of all currently playing users
-    var removeUser = function(user) {
+    var removeUser = function(id) {
         for(var i=0; i<usersPlaying.length; i++) {
-            if(user.id === usersPlaying[i].id) {
+            if(id === usersPlaying[i].id) {
                 usersPlaying.splice(i, 1);
                 return;
             }
