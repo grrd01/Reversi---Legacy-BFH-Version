@@ -183,6 +183,10 @@
             self.switchToScreen = function (onId, lastGameMode) {
                 var isVisibleScreen = !$('#' + onId).is(':hidden');
 
+                $('#header-img-info-id').css("background-color", '');
+                $('#header-img-setup-id').css("background-color", '');
+                $('#header-img-statistic-id').css("background-color", '');
+
                 $('#startup-screen-id').hide();
                 $('#help-screen-id').hide();
                 $('#setup-screen-id').hide();
@@ -191,6 +195,13 @@
                 $('#register-screen-id').hide();
                 $('#wait-online-game-screen-id').hide();
                 $('#game-screen-id').hide();
+
+                if (!isVisibleScreen && onId === 'help-screen-id')
+                    $('#header-img-info-id').css("background-color", '#555555');
+                if (!isVisibleScreen && onId === 'setup-screen-id')
+                    $('#header-img-setup-id').css("background-color", '#555555');
+                if (!isVisibleScreen && onId === 'statistic-screen-id')
+                    $('#header-img-statistic-id').css("background-color", '#555555');
 
                 if (isVisibleScreen && (lastGameMode !== undefined && lastGameMode.length > 0)) {
                     $('#game-screen-id').show();

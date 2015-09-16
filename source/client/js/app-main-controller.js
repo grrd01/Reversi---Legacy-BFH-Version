@@ -81,9 +81,9 @@
         });
         $('#header-img-home-id').click(function () {
             self.appScreenService.switchToScreen('startup-screen-id', self.appLastGameMode);
-            //if (self.appOnlineService.onlineState !== "none") {
+            if (self.appOnlineService.onlineState !== "none") {
                 self.appOnlineService.stopPlay();
-            //}
+            }
             self.appLastGameMode = "";
         });
 

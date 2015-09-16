@@ -28,8 +28,8 @@
 
             // function to establish a connection to the server and to request an online game
             self.connect = function () {
-                //self.socket = io.connect('http://localhost:3000', {'forceNew': true});
-                self.socket = io.connect('http://reversi-grrd.rhcloud.com:8000', {'forceNew': true});
+                self.socket = io.connect('http://localhost:3000', {'forceNew': true});
+                //self.socket = io.connect('http://reversi-grrd.rhcloud.com:8000', {'forceNew': true});
                 self.socket.heartbeatTimeout = 20000; // milli
 
                 // event when you are successfully connected to the server
