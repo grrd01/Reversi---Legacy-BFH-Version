@@ -1,6 +1,6 @@
 /*
  * Reversi
- * Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers Gérard, Jenzer Ulrich
+ * Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers GÃ©rard, Jenzer Ulrich
  */
 
 "use strict";
@@ -36,9 +36,6 @@
                 self.socket.on('connected', function (data) {
                     self.user = data;
                     console.info("successfully connected to the server");
-                    //test
-                    //self.register("hans","wurst");
-                    //test
                 });
 
                 // event when signin was successfull
@@ -51,9 +48,6 @@
                 self.socket.on('signInWrongPw', function () {
                     console.info("your password is not correct");
                     $rootScope.$broadcast('signInWrongPw');
-                    //test
-                    //self.signIn("wurst","brot");
-                    //test
                 });
 
                 // event when signin refused with unknown user name
@@ -65,7 +59,7 @@
                 // event when register was successfull
                 self.socket.on('registerOk', function () {
                     console.info("you successfully registered");
-                    self.signIn(self.userData.name, self.userData.password);
+                    self.startPlay();
                 });
 
                 // event when register refused because name is already used
@@ -142,6 +136,7 @@
                         self.onlineState = "none";
                         self.onlineStartPlayer = false;
                         self.onlineStartOpponent = false;
+                        console.info("your opponent has left the game");
                     }
                 });
 
@@ -199,7 +194,7 @@
         // Service Objekt erstellen.
         var appOnlineService = new AppOnlineService();
 
-        // und zurückgeben
+        // und zurÃ¼ckgeben
         return appOnlineService;
     }]);
 })();
