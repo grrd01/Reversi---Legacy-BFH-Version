@@ -165,6 +165,7 @@
 
             // function to request a new game
             self.startPlay = function () {
+                self.lastStart = null;
                 self.socket.emit('startPlay');
             };
 
