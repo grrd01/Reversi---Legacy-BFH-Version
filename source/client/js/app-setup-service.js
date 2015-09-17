@@ -25,7 +25,7 @@
                 } else {
                     // Kein Web Storage support.., so nichts machen
                 }
-            }
+            };
 
             self.readSettings = function() {
                 if (typeof(Storage) !== "undefined" && typeof(localStorage) !== "undefined") {
@@ -38,10 +38,10 @@
                 } else {
                     // Kein Web Storage support.., so nichts machen
                 }
-            }
+            };
 
             self.readSettings();
-        }
+        };
 
         // Service Objekt erstellen.
         var appSetupService = new AppSetupService();

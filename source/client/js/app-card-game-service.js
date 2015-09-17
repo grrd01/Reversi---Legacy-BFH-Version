@@ -108,14 +108,15 @@
 
             self.resize = function() {
                 // uje console.log("resize() called.");
-
+                var i;
+                var $game_player_stone_field_id = $('#game-player-stone-field-id');
                 var stoneDy = $('#game-player-info-id').height(); // + $('#game-logo-id').height();
-                self.gameResources.areaGameWidth = $('#game-player-stone-field-id').width();
-                self.gameResources.areaGameHeight = $('#game-player-stone-field-id').height();
+                self.gameResources.areaGameWidth = $game_player_stone_field_id.width();
+                self.gameResources.areaGameHeight = $game_player_stone_field_id.height();
                 var stoneWidth = ((self.gameResources.areaGameWidth - self.gameResources.stoneMargin) / self.gameResources.stoneMaxCol) - self.gameResources.stoneMargin;
                 var stoneHeight = ((self.gameResources.areaGameHeight - self.gameResources.stoneMargin) / self.gameResources.stoneMaxRow) - self.gameResources.stoneMargin;
 
-                for (var i = 0; i < self.gameResources.maxImageCount; i++) {
+                for (i = 0; i < self.gameResources.maxImageCount; i++) {
                     var px = self.gameResources.stoneMargin + ((i % self.gameResources.stoneMaxCol) * (stoneWidth + self.gameResources.stoneMargin));
                     var py = self.gameResources.stoneMargin + (Math.floor(i / self.gameResources.stoneMaxCol) * (stoneHeight + self.gameResources.stoneMargin));
                     self.gameResources.stoneX[i] = px;
@@ -125,7 +126,7 @@
                     self.gameResources.stoneHeight[i] = stoneHeight;
                 }
 
-                for (var i = 0; i < self.gameResources.maxImageCount; i++) {
+                for (i = 0; i < self.gameResources.maxImageCount; i++) {
                     //style = "position: absolute; left: 200px;"
                     var stoneId0 = $("#" + self.gameResources.stoneId0[i]);
                     var stoneId1 = $("#" + self.gameResources.stoneId1[i]);
@@ -389,9 +390,10 @@
 
                 var iw = self.gameResources.stoneWidth[index];
                 var ix = self.gameResources.stoneX[index];
-                $("#" + stoneIdVisible).css("left", "" + ix + "px");
-                $("#" + stoneIdVisible).css("width", "" + iw + "px");
-                $("#" + stoneIdVisible).css("visibility", "visible");
+                var $stoneIdVisible = $("#" + stoneIdVisible);
+                $stoneIdVisible.css("left", "" + ix + "px");
+                $stoneIdVisible.css("width", "" + iw + "px");
+                $stoneIdVisible.css("visibility", "visible");
             };
 
             $('.pair-flip-image').click(function (event) {

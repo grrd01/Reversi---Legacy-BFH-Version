@@ -35,7 +35,7 @@
                 }
                 // registrierung nicht erfolgreich!
                 return false;
-            }
+            };
 
             self.login = function() {
                 if (self.userData.name.length <= 0) {
@@ -49,11 +49,11 @@
                 }
                 // login nicht erfolgreich!
                 return false;
-            }
+            };
 
             self.logout = function() {
                 self.appOnlineService.register(name, password);
-            }
+            };
 
             self.showErrorMessage = function(message){
                 $('#modal-error-title-text-h4-id')[0].innerHTML = "Eingabe Fehler";
@@ -61,7 +61,7 @@
                 $("#modal-error-dialog").modal();
             }
 
-        }
+        };
 
         // Service Objekt erstellen.
         var appAuthenticationService = new AppAuthenticationService();

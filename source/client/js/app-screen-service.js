@@ -170,6 +170,7 @@
                 var gsr = self.resizeGameEx(minMargin);
                 var $game_logo_id = $('#game-logo-id');
                 var $central_rectangle_id = $('#central-rectangle-id');
+                var $switch_area_screen = $('.switch-area-screen');
 
                 // container breite setzen
                 $('.container-game').css('width', '' + (gsr.gameSizeWidth) + 'px');
@@ -184,8 +185,8 @@
 
                 var gameLogoHeight = $game_logo_id.height() + 3; //+border
                 var gameScreenHeight = gsr.gameSizeHeight - gameLogoHeight;
-                $('.switch-area-screen').css('height', '' + gameScreenHeight + 'px');
-                $('.switch-area-screen').css('top', '' + gameLogoHeight + 'px');
+                $switch_area_screen.css('height', '' + gameScreenHeight + 'px');
+                $switch_area_screen.css('top', '' + gameLogoHeight + 'px');
 
                 self.resizeGameField(gsr);
                 self.resizeHtmlElements(gsr);
@@ -193,8 +194,10 @@
 
             self.switchToScreen = function (onId, lastGameMode) {
                 var isVisibleScreen = !$('#' + onId).is(':hidden');
+                var $header_img_info_id = $('#header-img-info-id');
+                var $game_screen_id = $('#game-screen-id');
 
-                $('#header-img-info-id').css("background-color", '');
+                $header_img_info_id.css("background-color", '');
                 $('#header-img-setup-id').css("background-color", '');
                 $('#header-img-statistic-id').css("background-color", '');
 
@@ -205,10 +208,10 @@
                 $('#login-screen-id').hide();
                 $('#register-screen-id').hide();
                 $('#wait-online-game-screen-id').hide();
-                $('#game-screen-id').hide();
+                $game_screen_id.hide();
 
                 if (!isVisibleScreen && onId === 'help-screen-id')
-                    $('#header-img-info-id').css("background-color", '#DDDDDD');
+                    $header_img_info_id.css("background-color", '#DDDDDD');
                 if (!isVisibleScreen && onId === 'setup-screen-id')
                     $('#header-img-setup-id').css("background-color", '#DDDDDD');
                 if (!isVisibleScreen && onId === 'statistic-screen-id')
@@ -217,7 +220,7 @@
                 if (isVisibleScreen && (lastGameMode !== undefined && lastGameMode.length > 0)) {
                     $('#header-img-home-id').show();
                     $('#game-logo-text-id').show();
-                    $('#game-screen-id').show();
+                    $game_screen_id.show();
                 } else if (isVisibleScreen || onId === 'startup-screen-id') {
                     $('#header-img-home-id').hide();
                     $('#game-logo-text-id').hide();
