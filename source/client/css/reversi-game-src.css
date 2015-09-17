@@ -63,6 +63,11 @@ html, body {
     border: 1px solid #555;
 }
 
+#game-logo-img {
+    width:50%;
+    vertical-align: text-top;
+}
+
 .game-logo-text {
     position: absolute;
     text-align: left;
