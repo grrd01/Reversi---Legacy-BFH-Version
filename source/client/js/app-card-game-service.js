@@ -22,15 +22,15 @@
                 // leeres Feld
                 "./images/emptycard-128.png",
                 // weisser Stein Feld
-                "./images/white-stone-128.png",
+                "./images/white_stone.svg",
                 // schwarzer Stein Feld
-                "./images/black-stone-r-128.png",
+                "./images/black_stone.svg",
                 // fragezeiche für unbekannten status auf dem Feld
                 "./images/question-128.png",
                 // ok Feld
                 "./images/stone-ok-l-128.png",
                 // nicht erlauptes Feld
-                "./images/stone-wrong-l-128.png",
+                "./images/stone-wrong-l-128.png"
             ];
 
             self.gameResources.stoneDivContainerId = [];
@@ -66,7 +66,7 @@
                 self.gameResources.stoneId5.push("stone-5-" + xnr + ynr);
 
                 var html = "";
-                html += "<div id='" + self.gameResources.stoneDivContainerId[i] + "'>\n"
+                html += "<div id='" + self.gameResources.stoneDivContainerId[i] + "'>\n";
                 html += "  <img id='" + self.gameResources.stoneId0[i] + "'";
                 html += " class='pair-flip-image pair-flip-image-front' src='" + self.gameResources.stones[0] + "' />\n";
                 html += "  <img id='" + self.gameResources.stoneId1[i] + "'";
@@ -102,20 +102,21 @@
                     // uje console.log("classname: " + classname);
                 });
                 allFrontImgs.css("visibility", "visible");
-            }
+            };
 
             self.switchOffAllBackImages();
 
             self.resize = function() {
                 // uje console.log("resize() called.");
-
+                var i;
+                var $game_player_stone_field_id = $('#game-player-stone-field-id');
                 var stoneDy = $('#game-player-info-id').height(); // + $('#game-logo-id').height();
-                self.gameResources.areaGameWidth = $('#game-player-stone-field-id').width();
-                self.gameResources.areaGameHeight = $('#game-player-stone-field-id').height();
+                self.gameResources.areaGameWidth = $game_player_stone_field_id.width();
+                self.gameResources.areaGameHeight = $game_player_stone_field_id.height();
                 var stoneWidth = ((self.gameResources.areaGameWidth - self.gameResources.stoneMargin) / self.gameResources.stoneMaxCol) - self.gameResources.stoneMargin;
                 var stoneHeight = ((self.gameResources.areaGameHeight - self.gameResources.stoneMargin) / self.gameResources.stoneMaxRow) - self.gameResources.stoneMargin;
 
-                for (var i = 0; i < self.gameResources.maxImageCount; i++) {
+                for (i = 0; i < self.gameResources.maxImageCount; i++) {
                     var px = self.gameResources.stoneMargin + ((i % self.gameResources.stoneMaxCol) * (stoneWidth + self.gameResources.stoneMargin));
                     var py = self.gameResources.stoneMargin + (Math.floor(i / self.gameResources.stoneMaxCol) * (stoneHeight + self.gameResources.stoneMargin));
                     self.gameResources.stoneX[i] = px;
@@ -125,7 +126,7 @@
                     self.gameResources.stoneHeight[i] = stoneHeight;
                 }
 
-                for (var i = 0; i < self.gameResources.maxImageCount; i++) {
+                for (i = 0; i < self.gameResources.maxImageCount; i++) {
                     //style = "position: absolute; left: 200px;"
                     var stoneId0 = $("#" + self.gameResources.stoneId0[i]);
                     var stoneId1 = $("#" + self.gameResources.stoneId1[i]);
@@ -170,13 +171,13 @@
                     stoneId4.css({height: self.gameResources.stoneHeight[i], width: self.gameResources.stoneWidth[i]});
                     stoneId5.css({height: self.gameResources.stoneHeight[i], width: self.gameResources.stoneWidth[i]});
                 }
-            }
+            };
 
             //wird vom app-main-controller aufgerufen ==> $(window).resize(self.resize);
             self.resizeCardLayout = function() {
                 self.resize();
                 //self.updateCardLayout();
-            }
+            };
 
             self.updateCardLayout = function() {
                 var maxStone = self.appConstantService.GAME_MAX_COLUMNS * self.appConstantService.GAME_MAX_ROWS;
@@ -251,7 +252,7 @@
                         }
                     }
                 }
-            }
+            };
 
             self.doAnimation = function(toIndex, stoneIndex, stoneId0, stoneId1, stoneId2, stoneId3, stoneId4, stoneId5) {
                 var imgVis0 = $(".pair-flip-image#" + stoneId0).css("visibility");
@@ -328,7 +329,7 @@
                                 });
                         }
                     });
-            }
+            };
 
             self.doAnimationTo = function(clickEeventIndex, imgIndex) {
 
@@ -340,7 +341,7 @@
                 var stoneId5 = self.gameResources.stoneId5[clickEeventIndex];
 
                 self.doAnimation(imgIndex, clickEeventIndex, stoneId0, stoneId1, stoneId2, stoneId3, stoneId4, stoneId5);
-            }
+            };
 
             self.doImageSwitch = function(column, row, imageindex) {
                 // uje console.log("doImageSwitch(...) called. column: " + column + ", row: " + row + ", imageindex; " + imageindex);
@@ -389,10 +390,11 @@
 
                 var iw = self.gameResources.stoneWidth[index];
                 var ix = self.gameResources.stoneX[index];
-                $("#" + stoneIdVisible).css("left", "" + ix + "px");
-                $("#" + stoneIdVisible).css("width", "" + iw + "px");
-                $("#" + stoneIdVisible).css("visibility", "visible");
-            }
+                var $stoneIdVisible = $("#" + stoneIdVisible);
+                $stoneIdVisible.css("left", "" + ix + "px");
+                $stoneIdVisible.css("width", "" + iw + "px");
+                $stoneIdVisible.css("visibility", "visible");
+            };
 
             $('.pair-flip-image').click(function (event) {
                 // uje console.log("$('.pair-flip-image').click(...), class: " + this.className + ", id: " + this.id);
@@ -410,7 +412,7 @@
                 self.appGameStateService.eventTrySetStone(index);
                 self.updateCardLayout();
             });
-        }
+        };
 
         // Service Objekt erstellen.
         var appCardGameService = new AppCardGameService();

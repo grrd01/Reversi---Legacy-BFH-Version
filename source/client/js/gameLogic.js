@@ -79,14 +79,14 @@ var gameLogic = function() {
             board[col][row] = state;
             if (isWithUpdate) {
                 updateStates(state, col, row);
-            };
+            }
             if (isWithAutoPlayer) {
                 if (state == 1) {
                     moveFromComputerPlayer(2);
                 } else{
                     moveFromComputerPlayer(1);
                 }
-            };
+            }
         },
 
         setStartGame = function(){
@@ -390,7 +390,7 @@ var gameLogic = function() {
                 // uje console.log("moveFromComputerPlayer: " + possibleMoves[randomIndex]);
                 // uje console.log("randomIndex][0]: " + possibleMoves[randomIndex][0]);
                 // uje console.log("randomIndex][1]: " + possibleMoves[randomIndex][1]);
-                changeObjectState(possibleMoves[randomIndex][0], possibleMoves[randomIndex][1], state ,true, false)
+                changeObjectState(possibleMoves[randomIndex][0], possibleMoves[randomIndex][1], state ,true, false);
                 return true;
             }else{
                 return false;

@@ -23,8 +23,6 @@
             self.socket;
             self.lastStart;
             self.lastQuit;
-            self.isGameOver = false;
-            self.playStarted = false;
             self.lastRound = null;
             self.countRound = 0;
 
@@ -112,7 +110,13 @@
                     if (self.countRound == data.round && self.lastRound != data.round) {
                         self.lastRound = data.round;
                         console.info("your online opponent played in row " + data.row);
+
                         $rootScope.$broadcast('play', { col: data.col, row: data.row} );
+
+                        //test
+                        //self.rankingUpdate("hans","wurst",1,25);
+                        //self.ranking();
+                        //test
                     }
                 });
 
@@ -133,14 +137,15 @@
                         self.onlineStartPlayer = false;
                         self.onlineStartOpponent = false;
                         console.info("your opponent has left the game");
-                        $rootScope.$broadcast('stopPlay');
                     }
                 });
 
                 // event when you receive the current ranking from the server
                 self.socket.on('ranking', function (data) {
                     console.info("received current ranking" + data[0].name + data[0].pointsWon);
+                    //test
                     self.stopPlay();
+                    //test
                 });
             };
 
@@ -160,11 +165,8 @@
 
             // function to request a new game
             self.startPlay = function () {
-                self.isGameOver = false;
                 self.lastStart = null;
                 self.socket.emit('startPlay');
-                self.playStarted = true;
-                console.log("startPlay(), self.playStarted==" + self.playStarted);
             };
 
             // function to send a played move to your opponent
@@ -173,18 +175,9 @@
                 self.socket.emit('play', {to: self.user.opponent, row: row, col: col, round: self.countRound});
             };
 
-            self.gameOver = function() {
-                self.isGameOver = true;
-                console.log("self.gameOver(), self.isGameOver==" + self.isGameOver);
-            }
-
             // function to end an online game, the connection will remain open
             self.stopPlay = function () {
-                console.log("stopPlay(), self.playStarted==" + self.playStarted);
-                if (self.playStarted) {
-                    self.socket.emit('stopPlay');
-                }
-                self.playStarted = false;
+                self.socket.emit('stopPlay');
             };
 
             // function to get ranking

@@ -23,7 +23,7 @@
             self.getHighscores = function() {
                 return self.highscores;
             }
-        }
+        };
 
         // Service Objekt erstellen.
         var appStatisticService = new AppStatisticService();

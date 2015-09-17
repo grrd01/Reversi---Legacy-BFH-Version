@@ -15,7 +15,7 @@
             self.GAME_MAX_COLUMNS = 8;
             self.GAME_MAX_ROWS = 8;
 
-        }
+        };
 
         // Service Objekt erstellen.
         var appConstantService = new AppConstantService();

@@ -31,7 +31,7 @@
             self.appScreenService.switchToLocalMode();
             self.appScreenService.resizeHandler();
             self.appLastGameMode = "LocalTowPlayer";
-        }
+        };
         self.localPlayWithComputer = function () {
             self.appScreenService.switchToScreen('game-screen-id');
             self.appGameStateService.startGameWithComputer();
@@ -39,7 +39,7 @@
             self.appScreenService.switchToComputerMode();
             self.appScreenService.resizeHandler();
             self.appLastGameMode = "LocalComputer";
-        }
+        };
         self.onlinePlay = function () {
             self.appScreenService.switchToScreen('login-screen-id');
             self.appScreenService.resizeHandler();
@@ -48,17 +48,17 @@
             if (self.appOnlineService.socket === undefined) {
                 self.appOnlineService.connect();
             }
-        }
+        };
 
         self.playerLogin = function () {
             var valid = self.appAuthenticationService.login();
             if (valid) {
                 self.appScreenService.switchToScreen('wait-online-game-screen-id');
             }
-        }
+        };
         self.switchToPlayerRegisterDialog = function () {
             self.appScreenService.switchToScreen('register-screen-id');
-        }
+        };
         self.playerRegister = function () {
             var valid = self.appAuthenticationService.register();
             if (valid) {
@@ -67,7 +67,7 @@
                 self.appScreenService.resizeHandler();
                 self.appLastGameMode = "LocalTowPlayer";
             }
-        }
+        };
 
         // init
         $('#header-img-info-id').click(function () {

@@ -21,7 +21,7 @@
 
         <div class="game-logo" id="game-logo-id">
             <img class="header-img" id="header-img-home-id" src="./images/home-8x.png" alt="H">
-            <p class="game-logo-text" id="game-logo-text-id">Reversi</p>
+            <p class="game-logo-text" id="game-logo-text-id"><img id="game-logo-img" src="images/logo.png"></p>
             <img class="header-img" id="header-img-info-id" src="./images/question-mark-8x.png" alt="?">
             <img class="header-img" id="header-img-setup-id" src="./images/cog-8x.png" alt="*">
             <img class="header-img" id="header-img-statistic-id" src="./images/statistic-8x.png" alt="g">
@@ -38,6 +38,7 @@
             <div class="container-game container">
                 <div class="row">
                     <p>
+                        <img class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01"  src="images/logo.png" >
                         <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
                             <h4 class="text-center">Was möchtest Du ?</h4>
                         </div>
@@ -310,8 +311,8 @@
                 <img class="img-player-info img-right-player-info" id="img-right-player-info-computer-id" src="./images/computer-8x.png">
                 <img class="img-player-info img-right-player-info" id="img-right-player-info-online-id" src="./images/network-8x.png">
 
-                <img class="img-player-stone" id="img-player-stone-left-id" src="./images/status-white-stone-128.png">
-                <img class="img-player-stone" id="img-player-stone-right-id" src="./images/status-black-stone-r-128.png">
+                <img class="img-player-stone" id="img-player-stone-left-id" src="./images/white_stone.svg">
+                <img class="img-player-stone" id="img-player-stone-right-id" src="./images/black_stone.svg">
 
                 <img ng-show="main.appGameStateService.actualPlayerIsWhite" class="img-player-status" id="img-player-status-left-id" src="./images/arrow-thick-left-green-8x.png">
                 <img ng-show="main.appGameStateService.actualPlayerIsBlack" class="img-player-status" id="img-player-status-right-id" src="./images/arrow-thick-right-green-8x.png">
