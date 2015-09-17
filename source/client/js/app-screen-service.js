@@ -313,6 +313,19 @@
                 self.updatePlayerImages();
             }
 
+            self.updatePlayState = function(actualWhiteTurn, actualBlackTurn) {
+                console.log("self.updatePlayState(" + actualWhiteTurn +"," + actualBlackTurn +")");
+
+                $('#img-player-status-left-id').css("background-color", '');
+                $('#img-player-status-right-id').css("background-color", '');
+
+                if (actualWhiteTurn)
+                    $('#img-player-status-left-id').css("background-color", '#f55');
+
+                if (actualBlackTurn)
+                    $('#img-player-status-right-id').css("background-color", '#f55');
+            }
+
             self.imageBlinkingOn = false;
             self.imageBlinkingId = 0;
             self.imageBlinking = function() {
@@ -362,27 +375,6 @@
 
             self.playersLeftTurnOn = false;
             self.playersRightTurnOn = false;
-
-            self.playersRightTurn = function() {
-                self.playersLeftTurnOn = false;
-                self.playersRightTurnOn = true;
-                $('.img-player-status-left').hide();
-                $('.img-player-status-right').show();
-            }
-
-            self.playersLeftTurn = function() {
-                self.playersLeftTurnOn = true;
-                self.playersRightTurnOn = false;
-                $('.img-player-status-left').show();
-                $('.img-player-status-right').hide();
-            }
-
-            self.playersStop = function() {
-                self.playersLeftTurnOn = false;
-                self.playersRightTurnOn = false;
-                $('.img-player-status-left').hide();
-                $('.img-player-status-right').hide();
-            }
 
             self.fileInput = document.getElementById('getimage');
             self.fileInput.addEventListener('change', handleFiles);

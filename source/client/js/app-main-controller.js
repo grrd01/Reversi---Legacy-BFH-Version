@@ -106,12 +106,14 @@
         });
 
         $scope.$on('signInUnknownUser', function(event, args) {
-            self.appScreenService.switchToScreen('register-screen-id');
+            //self.appScreenService.switchToScreen('register-screen-id');
+            self.appScreenService.switchToScreen('login-screen-id');
+            self.appAuthenticationService.showColoredMessage("Eingabe Fehler", "Unbekannter Name.", '#e81e1a');
         });
 
         $scope.$on('signInWrongPw', function(event, args) {
             self.appScreenService.switchToScreen('login-screen-id');
-            self.appAuthenticationService.showErrorMessage("Falsches Password");
+            self.appAuthenticationService.showColoredMessage("Eingabe Fehler", "Falsches Password.", '#e81e1a');
         });
 
 
@@ -138,6 +140,10 @@
 
         $scope.$on('stopPlay', function(event, args) {
             console.log("$scope.$on('stopPlay');");
+
+            if (!self.appOnlineService.isGameOver) {
+                self.appAuthenticationService.showColoredMessage("Spielabbruch", "Gegner hat Spiel beendet.", '#e81e1a');
+            }
             self.appScreenService.switchToScreen('startup-screen-id');
         });
 

@@ -39,9 +39,7 @@
 
             self.login = function() {
                 if (self.userData.name.length <= 0) {
-                    $('#modal-error-title-text-h4-id')[0].innerHTML = "Eingabe Fehler";
-                    $('#modal-error-body-text-p-id')[0].innerHTML = "Kein Name eingegeben.";
-                    $("#modal-error-dialog").modal();
+                    self.showColoredMessage("Eingabe Fehler", "Kein Name eingegeben.", '#e81e1a');
                 } else {
                     self.appOnlineService.signIn(self.userData.name, self.userData.password);
                     // login erfolgreich!
@@ -55,10 +53,11 @@
                 self.appOnlineService.register(name, password);
             }
 
-            self.showErrorMessage = function(message){
-                $('#modal-error-title-text-h4-id')[0].innerHTML = "Eingabe Fehler";
-                $('#modal-error-body-text-p-id')[0].innerHTML = message;
-                $("#modal-error-dialog").modal();
+            self.showColoredMessage = function(title, message, backgroundColor){
+                $('#modal-colored-title-text-h4-id')[0].innerHTML = title;
+                $('#modal-colored-title-text-h4-id').css("background-color", backgroundColor);
+                $('#modal-colored-body-text-p-id')[0].innerHTML = message;
+                $("#modal-colored-dialog").modal();
             }
 
         }

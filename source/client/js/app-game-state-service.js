@@ -355,7 +355,6 @@
                         if (self.isOnlineGameRunning) {
                             if (self.appOnlineService.onlineStartPlayer) {
                                 console.log("self.eventTrySetStone(online && Withe).");
-
                                 var name = self.appAuthenticationService.userData.name;
                                 var password = self.appAuthenticationService.userData.password;
                                 var gamesWon = (whiteStones.length > blackStones.length) ? 1 : 0;
@@ -369,9 +368,10 @@
                                 self.appOnlineService.rankingUpdate(name, password, gamesWon, blackStones.length);
                                 console.log("(self.appOnlineService.onlineStartOpponent) self.rankingUpdate(" + name + ", " + password + ", " + gamesWon + ", " + blackStones.length + ")");
                             }
+                            self.appOnlineService.gameOver();
                             self.appOnlineService.stopPlay();
                             $rootScope.$broadcast('stopPlay');
-                            console.log("(self.appOnlineService.onlineStartOpponent) stopPlay()");
+                            console.log("(self.appOnlineService.gameOver()");
                         }
                     }
                 } else {
