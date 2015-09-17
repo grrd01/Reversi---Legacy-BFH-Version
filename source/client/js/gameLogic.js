@@ -1,8 +1,5 @@
 var gameLogic = function() {
     var board, columns= 8, rows= 8,
-        gameStart = true,
-        currentPlayer = 0,
-
         init = function(){
             gameLogic.initEmptyBoard();
             // uje gameLogic.showBoard();
@@ -111,8 +108,6 @@ var gameLogic = function() {
         },
 
         isPossibleMove = function(state, indexX, indexY){
-            var possibleMoves = [];
-
 
             if (isPossibleLeftTop(state, indexX, indexY, true) ||
                 isPossibleTop(state, indexX, indexY, true) ||
@@ -131,103 +126,119 @@ var gameLogic = function() {
             }
         },
 
-        updateStates = function (state, indexX, indexY) {
+        updateStates = function (state, indexX, indexY, isVirtualChangeState) {
             var updateFigures = [];
-            updateStateLeftTop(state, indexX, indexY, updateFigures);
-            updateStateTop(state, indexX, indexY, updateFigures);
-            updateStateRightTop(state, indexX, indexY, updateFigures);
-            updateStateLeft(state, indexX, indexY, updateFigures);
-            updateStateRight(state, indexX, indexY, updateFigures);
-            updateStateLeftBottom(state, indexX, indexY, updateFigures);
-            updateStateBottom(state, indexX, indexY, updateFigures);
-            updateStateRightBottom(state, indexX, indexY, updateFigures);
+            updateStateLeftTop(state, indexX, indexY, updateFigures, isVirtualChangeState);
+            updateStateTop(state, indexX, indexY, updateFigures, isVirtualChangeState);
+            updateStateRightTop(state, indexX, indexY, updateFigures, isVirtualChangeState);
+            updateStateLeft(state, indexX, indexY, updateFigures, isVirtualChangeState);
+            updateStateRight(state, indexX, indexY, updateFigures, isVirtualChangeState);
+            updateStateLeftBottom(state, indexX, indexY, updateFigures, isVirtualChangeState);
+            updateStateBottom(state, indexX, indexY, updateFigures, isVirtualChangeState);
+            updateStateRightBottom(state, indexX, indexY, updateFigures, isVirtualChangeState);
             // uje console.log("updateFigures: " + updateFigures);
             return updateFigures;
         },
 
-        updateStateLeftTop = function (state, indexX, indexY, updateFigures) {
+        updateStateLeftTop = function (state, indexX, indexY, updateFigures, isVirtualChangeState) {
             if (isPossibleLeftTop(state, indexX, indexY, true)) {
                 if (board[indexX - 1][indexY - 1] != state) {
                     // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX - 1, indexY - 1]);
-                    changeObjectState(indexX - 1, indexY - 1, state);
+                    if (!isVirtualChangeState) {
+                        changeObjectState(indexX - 1, indexY - 1, state);
+                    }
                     updateStateLeftTop(state, indexX - 1, indexY - 1, updateFigures)
                 }
             }
         },
 
-        updateStateTop = function (state, indexX, indexY, updateFigures) {
+        updateStateTop = function (state, indexX, indexY, updateFigures, isVirtualChangeState) {
             if (isPossibleTop(state, indexX, indexY, true)) {
                 if (board[indexX][indexY - 1] != state) {
                     // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX, indexY - 1]);
-                    changeObjectState(indexX, indexY - 1, state);
+                    if (!isVirtualChangeState){
+                        changeObjectState(indexX, indexY - 1, state);
+                    }
                     updateStateTop(state, indexX, indexY - 1, updateFigures)
                 }
             }
         },
 
-        updateStateRightTop = function (state, indexX, indexY, updateFigures) {
+        updateStateRightTop = function (state, indexX, indexY, updateFigures, isVirtualChangeState) {
             if (isPossibleRightTop(state, indexX, indexY, true)) {
                 if (board[indexX + 1][indexY - 1] != state) {
                     // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX + 1, indexY - 1]);
-                    changeObjectState(indexX + 1, indexY - 1, state);
+                    if (!isVirtualChangeState){
+                        changeObjectState(indexX + 1, indexY - 1, state);
+                    }
                     updateStateRightTop(state, indexX + 1, indexY - 1, updateFigures)
                 }
             }
         },
 
-        updateStateLeft = function (state, indexX, indexY, updateFigures) {
+        updateStateLeft = function (state, indexX, indexY, updateFigures, isVirtualChangeState) {
             if (isPossibleLeft(state, indexX, indexY, true)) {
                 if (board[indexX - 1][indexY] != state) {
                     // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX - 1, indexY]);
-                    changeObjectState(indexX - 1, indexY, state);
+                    if (!isVirtualChangeState){
+                        changeObjectState(indexX - 1, indexY, state);
+                    }
                     updateStateLeft(state, indexX - 1, indexY, updateFigures)
                 }
             }
         },
 
-        updateStateRight = function (state, indexX, indexY, updateFigures) {
+        updateStateRight = function (state, indexX, indexY, updateFigures, isVirtualChangeState) {
             if (isPossibleRight(state, indexX, indexY, true)) {
                 if (board[indexX + 1][indexY] != state) {
                     // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX + 1, indexY]);
-                    changeObjectState(indexX + 1, indexY, state);
+                    if (!isVirtualChangeState){
+                        changeObjectState(indexX + 1, indexY, state);
+                    }
                     updateStateRight(state, indexX + 1, indexY, updateFigures)
                 }
             }
         },
 
-        updateStateLeftBottom = function (state, indexX, indexY, updateFigures) {
+        updateStateLeftBottom = function (state, indexX, indexY, updateFigures, isVirtualChangeState) {
             if (isPossibleLeftBottom(state, indexX, indexY, true)) {
                 if (board[indexX - 1][indexY + 1] != state) {
                     // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX - 1, indexY + 1]);
-                    changeObjectState(indexX - 1, indexY + 1, state);
+                    if (!isVirtualChangeState){
+                        changeObjectState(indexX - 1, indexY + 1, state);
+                    }
                     updateStateLeftBottom(state, indexX - 1, indexY + 1, updateFigures)
                 }
             }
         },
 
-        updateStateBottom = function (state, indexX, indexY, updateFigures) {
+        updateStateBottom = function (state, indexX, indexY, updateFigures, isVirtualChangeState) {
             if (isPossibleBottom(state, indexX, indexY, true)) {
                 if (board[indexX][indexY + 1] != state) {
                     // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX, indexY + 1]);
-                    changeObjectState(indexX, indexY + 1, state);
+                    if (!isVirtualChangeState){
+                        changeObjectState(indexX, indexY + 1, state);
+                    }
                     updateStateBottom(state, indexX, indexY + 1, updateFigures);
                 }
             }
         },
 
-        updateStateRightBottom = function (state, indexX, indexY, updateFigures) {
+        updateStateRightBottom = function (state, indexX, indexY, updateFigures, isVirtualChangeState) {
             if (isPossibleRightBottom(state, indexX, indexY, true)) {
                 if (board[indexX + 1][indexY + 1] != state) {
                     // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX + 1, indexY + 1]);
-                    changeObjectState(indexX + 1, indexY + 1, state);
+                    if (!isVirtualChangeState){
+                        changeObjectState(indexX + 1, indexY + 1, state);
+                    }
                     updateStateRightBottom(state, indexX + 1, indexY + 1, updateFigures);
                 }
             }
@@ -380,10 +391,14 @@ var gameLogic = function() {
         moveFromComputerPlayer = function(state) {
             var possibleMoves = getPossibleMoves(state);
 
-            if (possibleMoves.length == 0){
+            //console.log("isGameOver: " + isGameOver());
+
+            if (possibleMoves.length > 0){
                 console.log("moveFromComputerPlayer(state=" + state +")");
                 console.log("possibleMoves.length: " + possibleMoves.length);
                 console.log("possibleMoves: " + possibleMoves);
+
+                //var corners =[[0,0],[0,columns-1],[rows-1,0],[columns-1, rows-1]];
 
                 var randomIndex = Math.floor(Math.random() * 10 % (possibleMoves.length));
                 // uje console.log("randomIndex: " + randomIndex);
@@ -396,6 +411,14 @@ var gameLogic = function() {
                 return false;
             }
 
+        },
+
+        isGameOver = function(){
+            if (getPossibleMoves(1).length == 0 && getPossibleMoves(2).length == 0){
+                return true;
+            } else {
+                return false;
+            }
         },
 
         getFigures = function (state) {
@@ -426,6 +449,7 @@ var gameLogic = function() {
         isPossibleMove: isPossibleMove,
         updateStates: updateStates,
         moveFromComputerPlayer: moveFromComputerPlayer,
+        isGameOver: isGameOver,
         getBoard: function() { return board; }
     };
 }();
