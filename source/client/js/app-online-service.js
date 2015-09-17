@@ -20,9 +20,9 @@
             self.onlineState = "none";
             self.onlineStartPlayer = false;
             self.onlineStartOpponent = false;
-            self.socket;
-            self.lastStart;
-            self.lastQuit;
+            self.socket = null;
+            self.lastStart = null;
+            self.lastQuit = null;
             self.lastRound = null;
             self.countRound = 0;
 

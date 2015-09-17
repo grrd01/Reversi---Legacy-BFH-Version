@@ -31,7 +31,7 @@
                     height: window.innerHeight - (2 * minMargin)
                 };
 
-                var newWidth, newHeight, newX, newY;
+                var newWidth, newHeight;
 
                 // Determine game size
                 if (gameSize.height / gameSize.width > viewport.height / viewport.width) {
@@ -60,7 +60,7 @@
                 gsr.gameY = ((viewport.height - newHeight) / 2) + minMargin;
 
                 return gsr;
-            }
+            };
 
             self.resizeGameField = function(gsr) {
                 var left = 0;
@@ -71,24 +71,33 @@
                 var infoTop = logoHeight;
                 var stoneTop = infoTop + infoHeight;
                 var statusTop = stoneTop + stoneHeight;
+                var $game_player_info_id = $('#game-player-info-id');
+                var $game_player_stone_field_id = $('#game-player-stone-field-id');
+                var $game_player_status_id = $('#game-player-status-id');
 
-                $('#game-player-info-id').css('width', '' + gsr.gameSizeWidth + 'px');
-                $('#game-player-info-id').css('height', '' + infoHeight + 'px');
-                $('#game-player-info-id').css('left', '' + left + 'px');
-                $('#game-player-info-id').css('top', '' + infoTop + 'px');
+                $game_player_info_id.css('width', '' + gsr.gameSizeWidth + 'px');
+                $game_player_info_id.css('height', '' + infoHeight + 'px');
+                $game_player_info_id.css('left', '' + left + 'px');
+                $game_player_info_id.css('top', '' + infoTop + 'px');
 
-                $('#game-player-stone-field-id').css('width', '' + gsr.gameSizeWidth + 'px');
-                $('#game-player-stone-field-id').css('height', '' + stoneHeight + 'px');
-                $('#game-player-stone-field-id').css('left', '' + left + 'px');
-                $('#game-player-stone-field-id').css('top', '' + stoneTop + 'px');
+                $game_player_stone_field_id.css('width', '' + gsr.gameSizeWidth + 'px');
+                $game_player_stone_field_id.css('height', '' + stoneHeight + 'px');
+                $game_player_stone_field_id.css('left', '' + left + 'px');
+                $game_player_stone_field_id.css('top', '' + stoneTop + 'px');
 
-                $('#game-player-status-id').css('width', '' + gsr.gameSizeWidth + 'px');
-                $('#game-player-status-id').css('height', '' + statusHeight + 'px');
-                $('#game-player-status-id').css('left', '' + left + 'px');
-                $('#game-player-status-id').css('top', '' + statusTop + 'px');
-            }
+                $game_player_status_id.css('width', '' + gsr.gameSizeWidth + 'px');
+                $game_player_status_id.css('height', '' + statusHeight + 'px');
+                $game_player_status_id.css('left', '' + left + 'px');
+                $game_player_status_id.css('top', '' + statusTop + 'px');
+            };
 
             self.resizeHtmlElements = function(gsr) {
+                var $startup_menu_img = $('.startup-menu-img');
+                var $game_logo_text_id = $('#game-logo-text-id');
+                var $img_player_info = $('.img-player-info');
+                var $img_player_stone = $('.img-player-stone');
+                var $img_player_status = $('.img-player-status');
+                var $text_player_info = $('.text-player-info');
                 var logoFontSize = '42px';
                 var logoFontTop = '7px';
                 if (gsr.gameSizeWidth < 290) {
@@ -107,21 +116,21 @@
                     logoFontSize = '28px';
                     logoFontTop = '16px';
                 }
-                $('#game-logo-text-id').css('font-size', logoFontSize);
-                $('#game-logo-text-id').css('top', logoFontTop);
+                $game_logo_text_id.css('font-size', logoFontSize);
+                $game_logo_text_id.css('top', logoFontTop);
 
                 if (gsr.gameSizeWidth < 340) {
-                    $('.startup-menu-img').css('margin-right', '1px');
-                    $('.startup-menu-img').css('height', '12px');
+                    $startup_menu_img.css('margin-right', '1px');
+                    $startup_menu_img.css('height', '12px');
                 } else if (gsr.gameSizeWidth < 400) {
-                        $('.startup-menu-img').css('margin-right', '5px');
-                        $('.startup-menu-img').css('height', '16px');
+                    $startup_menu_img.css('margin-right', '5px');
+                    $startup_menu_img.css('height', '16px');
                 } else if (gsr.gameSizeWidth < 500) {
-                    $('.startup-menu-img').css('margin-right', '20px');
-                    $('.startup-menu-img').css('height', '32px');
+                    $startup_menu_img.css('margin-right', '20px');
+                    $startup_menu_img.css('height', '32px');
                 } else {
-                    $('.startup-menu-img').css('margin-right', '50px');
-                    $('.startup-menu-img').css('height', '64px');
+                    $startup_menu_img.css('margin-right', '50px');
+                    $startup_menu_img.css('height', '64px');
                 }
 
 
@@ -133,14 +142,14 @@
                 var statusImgHeight = playerImgHeight;
                 var playerImgWidth = playerImgHeight * 0.75;
 
-                $('.img-player-info').css('width', '' + playerImgWidth + 'px');
-                $('.img-player-info').css('height', '' + playerImgHeight + 'px');
+                $img_player_info.css('width', '' + playerImgWidth + 'px');
+                $img_player_info.css('height', '' + playerImgHeight + 'px');
 
-                $('.img-player-stone').css('width', '' + stoneImgHeight + 'px');
-                $('.img-player-stone').css('height', '' + stoneImgHeight + 'px');
+                $img_player_stone.css('width', '' + stoneImgHeight + 'px');
+                $img_player_stone.css('height', '' + stoneImgHeight + 'px');
 
-                $('.img-player-status').css('width', '' + statusImgHeight + 'px');
-                $('.img-player-status').css('height', '' + statusImgHeight + 'px');
+                $img_player_status.css('width', '' + statusImgHeight + 'px');
+                $img_player_status.css('height', '' + statusImgHeight + 'px');
 
                 $('#img-player-stone-left-id').css('left', '' + (playerImgWidth + 3) + 'px');
                 $('#img-player-stone-right-id').css('right', '' + (playerImgWidth + 3) + 'px');
@@ -152,26 +161,28 @@
                 $('#text-player-info-right-id').css('right', '' + 3 + 'px');
 
                 var textPlayerinfoY = infoHeight + 2 - (fontSize * 1.4);
-                $('.text-player-info').css('top', '' + textPlayerinfoY + 'px');
-                $('.text-player-info').css('font-size', '' + fontSize + 'px');
-            }
+                $text_player_info.css('top', '' + textPlayerinfoY + 'px');
+                $text_player_info.css('font-size', '' + fontSize + 'px');
+            };
 
             self.resizeHandler = function() {
                 var minMargin = 0; // minimum Rand in pixel;
                 var gsr = self.resizeGameEx(minMargin);
+                var $game_logo_id = $('#game-logo-id');
+                var $central_rectangle_id = $('#central-rectangle-id');
 
                 // container breite setzen
                 $('.container-game').css('width', '' + (gsr.gameSizeWidth) + 'px');
 
-                $('#game-logo-id').css('width', '' + (gsr.gameSizeWidth - 3) + 'px');
-                $('#game-logo-id').css('height', '' + 62 + 'px');
+                $game_logo_id.css('width', '' + (gsr.gameSizeWidth - 3) + 'px');
+                $game_logo_id.css('height', '' + 62 + 'px');
 
-                $('#central-rectangle-id').css('width', '' + gsr.gameSizeWidth + 'px');
-                $('#central-rectangle-id').css('height', '' + gsr.gameSizeHeight + 'px');
-                $('#central-rectangle-id').css('left', '' + gsr.gameX + 'px');
-                $('#central-rectangle-id').css('top', '' + gsr.gameY + 'px');
+                $central_rectangle_id.css('width', '' + gsr.gameSizeWidth + 'px');
+                $central_rectangle_id.css('height', '' + gsr.gameSizeHeight + 'px');
+                $central_rectangle_id.css('left', '' + gsr.gameX + 'px');
+                $central_rectangle_id.css('top', '' + gsr.gameY + 'px');
 
-                var gameLogoHeight = $('#game-logo-id').height() + 3; //+border
+                var gameLogoHeight = $game_logo_id.height() + 3; //+border
                 var gameScreenHeight = gsr.gameSizeHeight - gameLogoHeight;
                 $('.switch-area-screen').css('height', '' + gameScreenHeight + 'px');
                 $('.switch-area-screen').css('top', '' + gameLogoHeight + 'px');
@@ -223,18 +234,20 @@
                 }
 
                 if (onId === 'setup-screen-id') {
+                    var img;
+                    var imgSrc;
                     try {
                         if (self.appSetupService.localUserImageWhite.length > 0) {
-                            var img = $('#local-user-img-id');
-                            var imgSrc = img.attr("src");
+                            img = $('#local-user-img-id');
+                            imgSrc = img.attr("src");
 
                             if (imgSrc != self.appSetupService.localUserImageWhite) {
                                 img.attr("src", self.appSetupService.localUserImageWhite);
                             }
                         }
                         if (self.appSetupService.localUserImageBlack.length > 0) {
-                            var img = $('#local-user-img-id-2');
-                            var imgSrc = img.attr("src");
+                            img = $('#local-user-img-id-2');
+                            imgSrc = img.attr("src");
 
                             if (imgSrc != self.appSetupService.localUserImageBlack) {
                                 img.attr("src", self.appSetupService.localUserImageBlack);
@@ -245,13 +258,15 @@
                     }
                     self.appSetupService.inSettingPage = true;
                 }
-            }
+            };
 
             self.updatePlayerImages = function() {
+                var img;
+                var imgSrc;
                 try {
                     if (self.appSetupService.localUserImageWhite != null && self.appSetupService.localUserImageWhite.length > 0) {
-                        var img = $('#img-left-player-info-local-id');
-                        var imgSrc = img.attr("src");
+                        img = $('#img-left-player-info-local-id');
+                        imgSrc = img.attr("src");
 
                         if (imgSrc != self.appSetupService.localUserImageWhite) {
                             img.attr("src", self.appSetupService.localUserImageWhite);
@@ -262,8 +277,8 @@
                 }
                 try {
                     if (self.appSetupService.localUserImageWhite != null && self.appSetupService.localUserImageWhite.length > 0) {
-                        var img = $('#img-right-player-info-local-id');
-                        var imgSrc = img.attr("src");
+                        img = $('#img-right-player-info-local-id');
+                        imgSrc = img.attr("src");
 
                         if (imgSrc != self.appSetupService.localUserImageBlack) {
                             img.attr("src", self.appSetupService.localUserImageBlack);
@@ -272,7 +287,7 @@
                 } catch (e) {
                     console.log("exception in if (onId === 'setup-screen-id')  exception: " + e);
                 }
-            }
+            };
 
             self.switchToLocalMode = function() {
                 $('#img-left-player-info-local-id').show();
@@ -284,7 +299,7 @@
                 $('#img-right-player-info-online-id').hide();
 
                 self.updatePlayerImages();
-            }
+            };
 
             self.switchToComputerMode = function() {
                 $('#img-left-player-info-local-id').show();
@@ -296,7 +311,7 @@
                 $('#img-right-player-info-online-id').hide();
 
                 self.updatePlayerImages();
-            }
+            };
 
             self.switchToOnlineMode = function(playerMode) {
                 if (playerMode === 'StartPlayer') {
@@ -317,7 +332,7 @@
                     $('#img-right-player-info-online-id').hide();
                 }
                 self.updatePlayerImages();
-            }
+            };
 
             self.imageBlinkingOn = false;
             self.imageBlinkingId = 0;
@@ -353,18 +368,18 @@
                 } else {
                     self.imageBlinkingId = 0;
                 }
-            }
+            };
 
             self.imageBlinkingStart = function() {
                 if (self.imageBlinkingId === 0) {
                     self.imageBlinkingId = setTimeout(self.imageBlinking, 1000); //Runs n millisecond
                 }
                 self.imageBlinkingOn = true;
-            }
+            };
 
             self.imageBlinkingStop = function() {
                 self.imageBlinkingOn = false;
-            }
+            };
 
             self.playersLeftTurnOn = false;
             self.playersRightTurnOn = false;
@@ -374,21 +389,21 @@
                 self.playersRightTurnOn = true;
                 $('.img-player-status-left').hide();
                 $('.img-player-status-right').show();
-            }
+            };
 
             self.playersLeftTurn = function() {
                 self.playersLeftTurnOn = true;
                 self.playersRightTurnOn = false;
                 $('.img-player-status-left').show();
                 $('.img-player-status-right').hide();
-            }
+            };
 
             self.playersStop = function() {
                 self.playersLeftTurnOn = false;
                 self.playersRightTurnOn = false;
                 $('.img-player-status-left').hide();
                 $('.img-player-status-right').hide();
-            }
+            };
 
             self.fileInput = document.getElementById('getimage');
             self.fileInput.addEventListener('change', handleFiles);
@@ -404,7 +419,7 @@
                 // Set the image once loaded into file reader
                 reader.onload = function(e) {
                     self.appSetupService.localUserImageWhite = self.resizeLoadedImage(self.fileLocalUserImg, e.target.result);
-                }
+                };
                 // Load files into file reader
                 reader.readAsDataURL(file);
             }
@@ -423,7 +438,7 @@
                 // Set the image once loaded into file reader
                 reader.onload = function(e) {
                     self.appSetupService.localUserImageBlack = self.resizeLoadedImage(self.fileLocalUserImg2, e.target.result);
-                }
+                };
                 // Load files into file reader
                 reader.readAsDataURL(file);
             }
@@ -458,7 +473,6 @@
                 }
                 canvas.width = width;
                 canvas.height = height;
-                var ctx = canvas.getContext("2d");
                 ctx.drawImage(flieLocImg, 0, 0, width, height);
 
                 var dataurl = canvas.toDataURL("image/png");
@@ -470,7 +484,7 @@
                 return localUserImage;
             }
 
-        }
+        };
 
         // Service Objekt erstellen.
         var appScreenService = new AppScreenService();
