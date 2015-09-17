@@ -197,17 +197,23 @@
                 $('#game-screen-id').hide();
 
                 if (!isVisibleScreen && onId === 'help-screen-id')
-                    $('#header-img-info-id').css("background-color", '#555555');
+                    $('#header-img-info-id').css("background-color", '#DDDDDD');
                 if (!isVisibleScreen && onId === 'setup-screen-id')
-                    $('#header-img-setup-id').css("background-color", '#555555');
+                    $('#header-img-setup-id').css("background-color", '#DDDDDD');
                 if (!isVisibleScreen && onId === 'statistic-screen-id')
-                    $('#header-img-statistic-id').css("background-color", '#555555');
+                    $('#header-img-statistic-id').css("background-color", '#DDDDDD');
 
                 if (isVisibleScreen && (lastGameMode !== undefined && lastGameMode.length > 0)) {
+                    $('#header-img-home-id').show();
+                    $('#game-logo-text-id').show();
                     $('#game-screen-id').show();
                 } else if (isVisibleScreen || onId === 'startup-screen-id') {
+                    $('#header-img-home-id').hide();
+                    $('#game-logo-text-id').hide();
                     $('#startup-screen-id').show();
                 } else {
+                    $('#header-img-home-id').show();
+                    $('#game-logo-text-id').show();
                     $('#' + onId).show();
                 }
 

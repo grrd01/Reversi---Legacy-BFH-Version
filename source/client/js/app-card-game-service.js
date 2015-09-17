@@ -22,9 +22,9 @@
                 // leeres Feld
                 "./images/emptycard-128.png",
                 // weisser Stein Feld
-                "./images/white-stone-128.png",
+                "./images/white_stone.svg",
                 // schwarzer Stein Feld
-                "./images/black-stone-r-128.png",
+                "./images/black_stone.svg",
                 // fragezeiche für unbekannten status auf dem Feld
                 "./images/question-128.png",
                 // ok Feld
