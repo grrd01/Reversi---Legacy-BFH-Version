@@ -197,11 +197,11 @@
                 $('#game-screen-id').hide();
 
                 if (!isVisibleScreen && onId === 'help-screen-id')
-                    $('#header-img-info-id').css("background-color", '#555555');
+                    $('#header-img-info-id').css("background-color", '#DDDDDD');
                 if (!isVisibleScreen && onId === 'setup-screen-id')
-                    $('#header-img-setup-id').css("background-color", '#555555');
+                    $('#header-img-setup-id').css("background-color", '#DDDDDD');
                 if (!isVisibleScreen && onId === 'statistic-screen-id')
-                    $('#header-img-statistic-id').css("background-color", '#555555');
+                    $('#header-img-statistic-id').css("background-color", '#DDDDDD');
 
                 if (isVisibleScreen && (lastGameMode !== undefined && lastGameMode.length > 0)) {
                     $('#game-screen-id').show();
