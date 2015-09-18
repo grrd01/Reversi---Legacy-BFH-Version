@@ -122,6 +122,7 @@
             self.appGameStateService.startOnlineGame('StartPlayer');
             self.appScreenService.switchToOnlineMode('StartPlayer');
             self.appScreenService.resizeHandler();
+            self.appCardGameService.updateCardLayout();
         });
 
         $scope.$on('onlineStartOpponent', function(event, args) {
@@ -129,6 +130,7 @@
             self.appGameStateService.startOnlineGame('StartOpponent');
             self.appScreenService.switchToOnlineMode('StartOpponent');
             self.appScreenService.resizeHandler();
+            self.appCardGameService.updateCardLayout();
         });
 
         $scope.$on('play', function(event, args) {
