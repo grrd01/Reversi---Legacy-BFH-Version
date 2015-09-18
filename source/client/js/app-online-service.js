@@ -112,11 +112,6 @@
                         console.info("your online opponent played in row " + data.row);
 
                         $rootScope.$broadcast('play', { col: data.col, row: data.row} );
-
-                        //test
-                        //self.rankingUpdate("hans","wurst",1,25);
-                        //self.ranking();
-                        //test
                     }
                 });
 
@@ -137,6 +132,7 @@
                         self.onlineStartPlayer = false;
                         self.onlineStartOpponent = false;
                         console.info("your opponent has left the game");
+                        $rootScope.$broadcast('stopPlay');
                     }
                 });
 

@@ -141,7 +141,7 @@
         $scope.$on('stopPlay', function(event, args) {
             console.log("$scope.$on('stopPlay');");
 
-            if (!self.appOnlineService.isGameOver) {
+            if (!self.appGameStateService.gameLogic.isGameOver()) {
                 self.appAuthenticationService.showColoredMessage("Spielabbruch", "Gegner hat Spiel beendet.", '#e81e1a');
             }
             self.appScreenService.switchToScreen('startup-screen-id');
