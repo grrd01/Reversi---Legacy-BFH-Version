@@ -1,3 +1,8 @@
+/*
+ * Reversi
+ * Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers Gérard, Jenzer Ulrich
+ */
+
 "use strict";
 
 // App CardGame Service (zeichnen des Spielfeld)
