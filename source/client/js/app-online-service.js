@@ -36,6 +36,7 @@
                 self.socket.on('connected', function (data) {
                     self.user = data;
                     console.info("successfully connected to the server");
+                    $rootScope.$broadcast('connected');
                 });
 
                 // event when signin was successfull
@@ -139,8 +140,10 @@
                 // event when you receive the current ranking from the server
                 self.socket.on('ranking', function (data) {
                     console.info("received current ranking" + data[0].name + data[0].pointsWon);
+
+                    $rootScope.$broadcast('ranking', data);
                     //test
-                    self.stopPlay();
+                    //self.stopPlay();
                     //test
                 });
             };

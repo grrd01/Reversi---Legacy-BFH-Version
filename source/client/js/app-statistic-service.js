@@ -16,17 +16,17 @@
     app.factory('AppStatisticService', [function () {
         var AppStatisticService = function () {
             var self = this;
+            self.inStatisticPage = false;
 
             //self.highscores = [];
             self.highscores = [
-                /* spieler name        , anzahl spiel gespielt, maximal Punkt im besten Spiel */
-                { name: "player 1 name", gamecount: 12, maxpoints: 21, entered: "2013-08-15" },
-                { name: "player 2 name", gamecount: 21, maxpoints: 17, entered: "2013-08-05" },
-                { name: "player 3 name", gamecount: 7, maxpoints: 11, entered: "2013-08-02" }
+                /* Test Daten */
+                { gamesPlayed: 3, gamesWon: 3, name: "1", pointsWon: 55, rank: 5 },
+                { gamesPlayed: 7, gamesWon: 2, name: "ABCDEFGHJ-22-22", pointsWon: 43, rank: 4 },
             ];
 
-            self.getHighscores = function() {
-                return self.highscores;
+            self.setHighscores = function (highscores) {
+                self.highscores = highscores;
             }
         };
 

@@ -11,12 +11,12 @@
     var app = angular.module("ApplicationModule");
 
     // create the service
-    app.factory('AppScreenService', ['$window', 'AppSetupService', function ($window, appSetupService) {
+    app.factory('AppScreenService', ['$window', 'AppSetupService', 'AppStatisticService', 'AppOnlineService', function ($window, appSetupService, appStatisticService, appOnlineService) {
         var AppScreenService = function () {
             var self = this;
             self.appSetupService = appSetupService;
-
-            self.actualScreenId = "";
+            self.appStatisticService = appStatisticService;
+            self.appOnlineService = appOnlineService;
 
             // Functionen
             self.resizeGameEx = function(minMargin) {
@@ -203,8 +203,18 @@
                     $('#header-img-info-id').css("background-color", '#DDDDDD');
                 if (!isVisibleScreen && onId === 'setup-screen-id')
                     $('#header-img-setup-id').css("background-color", '#DDDDDD');
-                if (!isVisibleScreen && onId === 'statistic-screen-id')
+                if (!isVisibleScreen && onId === 'statistic-screen-id') {
                     $('#header-img-statistic-id').css("background-color", '#DDDDDD');
+
+                    self.appStatisticService.inStatisticPage = true;
+                    if (self.appOnlineService.socket === undefined) {
+                        self.appOnlineService.connect();
+                    } else {
+                        self.appOnlineService.ranking();
+                    }
+                } else {
+                    self.appStatisticService.inStatisticPage = false;
+                }
 
                 if (isVisibleScreen && (lastGameMode !== undefined && lastGameMode.length > 0)) {
                     $('#game-screen-id').show();

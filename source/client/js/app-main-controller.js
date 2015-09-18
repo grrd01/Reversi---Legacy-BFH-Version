@@ -14,7 +14,6 @@
     app.controller('ApplicationMainCtrl', ['$scope', '$window', '$timeout', 'AppScreenService', 'AppGameStateService', 'AppCardGameService', 'AppStatisticService', 'AppSetupService', 'AppAuthenticationService', 'AppOnlineService', function ($scope, $window, $timeout, appScreenService, appGameStateService, appCardGameService, appStatisticService, appSetupService, appAuthenticationService, appOnlineService) {
 
         var self = this;
-
         self.appScreenService = appScreenService;
         self.appGameStateService = appGameStateService;
         self.appCardGameService = appCardGameService;
@@ -152,6 +151,18 @@
                 self.appAuthenticationService.showColoredMessage("Spielabbruch", "Gegner hat Spiel beendet.", '#e81e1a');
             }
             self.appScreenService.switchToScreen('startup-screen-id');
+        });
+
+        $scope.$on('connected', function (event, args) {
+            console.log("$scope.$on('connected');");
+            if (self.appStatisticService.inStatisticPage) {
+                self.appOnlineService.ranking();
+            }
+        });
+
+        $scope.$on('ranking', function (event, args) {
+            console.log("$scope.$on('ranking', ....);");
+            self.appStatisticService.setHighscores(args);
         });
 
         // und zum Start-Bildschirm

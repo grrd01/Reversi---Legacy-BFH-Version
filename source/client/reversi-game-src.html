@@ -180,18 +180,22 @@
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
+                                            <th>Rang</th>
                                             <th>Name</th>
-                                            <th>Spiele</th>
+                                            <th>Gewonnen</th>
                                             <th>Punkt</th>
-                                            <th>Datum</th>
+                                            <th>Spiele</th>
+                                            <!-- <th>Datum</th> -->
                                         </tr>
                                     </thead>
-
+                                    
                                     <tr ng-repeat="r in main.appStatisticService.highscores">
+                                        <td>{{ r.rank }}</td>
                                         <td>{{ r.name }}</td>
-                                        <td>{{ r.gamecount }}</td>
-                                        <td>{{ r.maxpoints }}</td>
-                                        <td>{{ r.entered | date:'dd.MM.yyyy' }}</td>
+                                        <td>{{ r.gamesWon }}</td>
+                                        <td>{{ r.pointsWon }}</td>
+                                        <td>{{ r.gamesPlayed }}</td>
+                                        <!-- <td>{{ r.entered | date:'dd.MM.yyyy' }}</td> -->
                                     </tr>
                                 </table>
                             </div>
