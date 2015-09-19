@@ -22,17 +22,11 @@
 
             self.register = function() {
                 if (self.userData.name.length <= 0) {
-                    $('#modal-error-title-text-h4-id')[0].innerHTML = "Eingabe Fehler";
-                    $('#modal-error-body-text-p-id')[0].innerHTML = "Kein Name eingegeben.";
-                    $("#modal-error-dialog").modal();
+                    self.showColoredMessage("Eingabe Fehler", "Kein Name eingegeben.", '#e81e1a');
                 } else if (self.userData.password.length <= 0) {
-                    $('#modal-error-title-text-h4-id')[0].innerHTML = "Eingabe Fehler";
-                    $('#modal-error-body-text-p-id')[0].innerHTML = "Keine Password Eingabe.";
-                    $("#modal-error-dialog").modal();
+                    self.showColoredMessage("Eingabe Fehler", "Keine Password Eingabe.", '#e81e1a');
                 } else if (self.userData.password != self.userData.password2) {
-                    $('#modal-error-title-text-h4-id')[0].innerHTML = "Eingabe Fehler";
-                    $('#modal-error-body-text-p-id')[0].innerHTML = "Beide Passwörter nicht gleich.";
-                    $("#modal-error-dialog").modal();
+                    self.showColoredMessage("Eingabe Fehler", "Beide Passwörter nicht gleich.", '#e81e1a');
                 } else {
                     self.appOnlineService.register(self.userData.name, self.userData.password);
                     // registrierung erfolgreich!
