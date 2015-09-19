@@ -1,4 +1,4 @@
-﻿﻿<!DOCTYPE html>
+﻿<!DOCTYPE html>
 
     <!--
     * Reversi
@@ -48,7 +48,6 @@
                         <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
                             <h4 class="text-center">Was möchtest Du ?</h4>
                         </div>
-                    </p>
                     <p>
                         <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
                             <button type="button" ng-click="main.localTowPlayerGame()" class="btn btn-lg btn-default btn-block">Zweispieler Spiel
@@ -57,7 +56,6 @@
                                 </span>
                             </button>
                         </div>
-                    </p>
                     <p>
                         <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
                             <button type="button" ng-click="main.localPlayWithComputer()" class="btn btn-lg btn-default btn-block">Spiel mit Computer
@@ -66,7 +64,6 @@
                                 </span>
                             </button>
                         </div>
-                    </p>
                     <p>
                         <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
                             <button type="button" ng-click="main.onlinePlay()" class="btn btn-lg btn-default btn-block">Spiel Online-Gegener
@@ -78,7 +75,6 @@
                                 </span>
                             </button>
                         </div>
-                    </p>
                 </div>
             </div>
         </div>
@@ -142,7 +138,7 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-offset-1 col-sm-offset-1 col-sm-offset-1 col-sm-10"  id="file-display-area">
-                                    <img id="local-user-img-id">
+                                    <img id="local-user-img-id" src="">
                                 </div>
                             </div>
 
@@ -199,7 +195,6 @@
                                     </tr>
                                 </table>
                             </div>
-                        </p>
                     </div>
 
                 </div>
@@ -222,13 +217,13 @@
                         <div class="form-group">
                             <label for="name" class="col-sm-offset-1 col-sm-10">Name</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <input id="name" name="name" class="form-control" type="text" placeholder="Name" class="input-large" ng-model="main.appAuthenticationService.userData.name">
+                                <input id="name" name="name" class="form-control input-large" type="text" placeholder="Name" ng-model="main.appAuthenticationService.userData.name">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="password" class="col-sm-offset-1 col-sm-10">Password</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <input id="password" name="password" class="form-control" type="password" placeholder="Password" class="input-large" ng-model="main.appAuthenticationService.userData.password">
+                                <input id="password" name="password" class="form-control input-large" type="password" placeholder="Password" ng-model="main.appAuthenticationService.userData.password">
                             </div>
                         </div>
                         <div class="form-group">
@@ -263,7 +258,7 @@
                         <div class="form-group" >
                             <label class="col-sm-offset-1 col-sm-10" for="name">Name:</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                 <input id="name" name="name" class="form-control" type="text" placeholder="Name" class="input-large" ng-model="main.appAuthenticationService.userData.name">
+                                 <input id="regname" name="name" class="form-control input-large" type="text" placeholder="Name" ng-model="main.appAuthenticationService.userData.name">
                             </div>
                         </div>
 
@@ -271,7 +266,7 @@
                         <div class="form-group">
                             <label class="col-sm-offset-1 col-sm-10" for="password">Password:</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <input id="password" name="password" class="form-control" type="password" placeholder="Password" class="input-large" ng-model="main.appAuthenticationService.userData.password">
+                                <input id="regpassword" name="password" class="form-control input-large" type="password" placeholder="Password" ng-model="main.appAuthenticationService.userData.password">
                             </div>
                         </div>
 
@@ -279,7 +274,7 @@
                         <div class="form-group">
                             <label class="col-sm-offset-1 col-sm-10" for="reenterpassword">Re-Enter Password:</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <input id="reenterpassword" class="form-control" name="reenterpassword" type="password" placeholder="Password" class="input-large" ng-model="main.appAuthenticationService.userData.password2">
+                                <input id="reenterpassword" class="form-control input-large" name="reenterpassword" type="password" placeholder="Password" ng-model="main.appAuthenticationService.userData.password2">
                             </div>
                         </div>
 
