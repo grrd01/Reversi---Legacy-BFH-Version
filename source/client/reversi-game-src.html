@@ -87,7 +87,7 @@
                 <div class="row">
                     <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-help-margin-01">
                         <h4><b>Spielanleitung:</b></h4>
-                        <p>
+                        <p id="help-text-id">
                             Reversi ist ein Brettspiel für zwei Spieler. Ziel des Spieles ist es, zum
                             Schluss die meisten der Steine zu besitzen.
                             Die Spieler setzen abwechselnd einen Stein auf ein leeres Feld; es muss dabei immer
@@ -245,7 +245,7 @@
             <div class="container-game container">
                 <div class="row">
                     <form class="form-horizontal" name="registerForm">
-                        <div class="form-group" ng-class="{ 'has-error': userForm.email.$invalid }">
+                        <div class="form-group">
                             <div class="col-sm-offset-1 col-sm-10">
                                 <h4>
                                     Register:

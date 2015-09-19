@@ -159,6 +159,31 @@
                 $('.text-player-info').css('font-size', '' + fontSize + 'px');
             }
 
+            self.resizeHelpText = function(gsr) {
+                var helpHeight = $('#help-screen-id').height();
+                var fontSize = helpHeight * 0.20;
+
+                if (gsr.gameSizeWidth < 250) {
+                    fontSize = '8px';
+                } else if (gsr.gameSizeWidth < 290) {
+                    fontSize = '9px';
+                } else if (gsr.gameSizeWidth < 310) {
+                    fontSize = '10px';
+                } else if (gsr.gameSizeWidth < 340) {
+                    fontSize = '11px';
+                } else if (gsr.gameSizeWidth < 380) {
+                    fontSize = '12px';
+                } else if (gsr.gameSizeWidth < 430) {
+                    fontSize = '14px';
+                } else if (gsr.gameSizeWidth < 500) {
+                    fontSize = '16px';
+                } else {
+                    fontSize = '18px';
+                }
+                var oldFontSize = $('#help-text-id').css('font-size');
+                $('#help-text-id').css('font-size', fontSize);
+            }
+
             self.resizeHandler = function() {
                 var minMargin = 0; // minimum Rand in pixel;
                 var gsr = self.resizeGameEx(minMargin);
@@ -181,6 +206,7 @@
 
                 self.resizeGameField(gsr);
                 self.resizeHtmlElements(gsr);
+                self.resizeHelpText(gsr);
             };
 
             self.switchToScreen = function (onId, lastGameMode) {
