@@ -18,6 +18,8 @@
             self.appStatisticService = appStatisticService;
             self.appOnlineService = appOnlineService;
 
+            self.lastScreenSwitch = "";
+
             // Functionen
             self.resizeGameEx = function(minMargin) {
                 // game size and all we have to see
@@ -278,6 +280,8 @@
                     }
                     self.appSetupService.inSettingPage = true;
                 }
+
+                self.lastScreenSwitch = onId;
             }
 
             self.updatePlayerImages = function() {

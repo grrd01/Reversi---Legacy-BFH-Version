@@ -247,3 +247,9 @@ div.upload label {
     border-radius: 3px;
     margin: 2px;
 }
+
+.go-back-button {
+    position: absolute;
+    bottom: 5px;
+    right: 20px;
+}

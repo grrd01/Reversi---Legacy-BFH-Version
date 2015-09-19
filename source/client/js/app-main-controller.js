@@ -60,9 +60,11 @@
                 self.appScreenService.switchToScreen('wait-online-game-screen-id');
             }
         };
+
         self.switchToPlayerRegisterDialog = function () {
             self.appScreenService.switchToScreen('register-screen-id');
         };
+
         self.playerRegister = function () {
             var valid = self.appAuthenticationService.register();
             if (valid) {
@@ -70,6 +72,20 @@
                 self.appCardGameService.updateCardLayout();
                 self.appScreenService.resizeHandler();
                 self.appLastGameMode = "LocalTowPlayer";
+            }
+        };
+
+        self.goBack = function ($event) {
+            switch(self.appScreenService.lastScreenSwitch) {
+                case 'statistic-screen-id':
+                    self.appScreenService.switchToScreen('statistic-screen-id', self.appLastGameMode);
+                    break;
+                case "setup-screen-id":
+                    self.appScreenService.switchToScreen('setup-screen-id', self.appLastGameMode);
+                    break;
+                case "help-screen-id":
+                    self.appScreenService.switchToScreen('help-screen-id', self.appLastGameMode);
+                    break;
             }
         };
 
