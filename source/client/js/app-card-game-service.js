@@ -1,11 +1,14 @@
 /*
  * Reversi
  * Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers Gérard, Jenzer Ulrich
+ *
+ * Das Zeichnen des Spielfeldes und dessen Animationen. Es werden dabei alle Icons wie
+ * weisser Stein, schwarzer Stein, leeres Feld, mögliches Feld und verbotenes Feld, beim
+ * Start geladen und das was gerade angezeigt werden soll, über CSS sichtbar geamcht.
+ * (Angular Service)
  */
 
 "use strict";
-
-// App CardGame Service (zeichnen des Spielfeld)
 
 (function() {
 

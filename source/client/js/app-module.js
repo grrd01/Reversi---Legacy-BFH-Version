@@ -1,6 +1,9 @@
 /*
  * Reversi
  * Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers Gérard, Jenzer Ulrich
+ *
+ * Angular Modul.
+ * (Angular Module)
  */
 
 'use strict';

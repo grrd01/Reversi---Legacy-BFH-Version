@@ -1,11 +1,12 @@
 /*
  * Reversi
  * Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers Gérard, Jenzer Ulrich
+ *
+ * Anzeige der Statistiken (Rangliste).
+ * (Angular Service)
  */
 
 'use strict';
-
-// App Statistic Service
 
 (function() {
 

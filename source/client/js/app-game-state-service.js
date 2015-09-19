@@ -1,11 +1,12 @@
 /*
  * Reversi
  * Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers Gérard, Jenzer Ulrich
+ *
+ * Der Zustand der Applikation, benutzt die gameLogik Library.
+ * (Angular Service)
  */
 
 "use strict";
-
-// App Game-State Service
 
 (function() {
 

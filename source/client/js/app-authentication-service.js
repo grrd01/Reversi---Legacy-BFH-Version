@@ -1,11 +1,12 @@
 /*
  * Reversi
  * Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers Gérard, Jenzer Ulrich
+ *
+ * Login und Registrierung Funktionen.
+ * (Angular Service)
  */
 
 'use strict';
-
-// App Authentication  Service
 
 (function() {
 

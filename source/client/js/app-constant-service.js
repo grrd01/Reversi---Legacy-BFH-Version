@@ -1,11 +1,12 @@
 /*
  * Reversi
  * Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers Gérard, Jenzer Ulrich
+ *
+ * Konstanten der Applikation.
+ * (Angular Service)
  */
 
 'use strict';
-
-// App Constant Service
 
 (function () {
 

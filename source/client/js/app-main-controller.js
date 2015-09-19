@@ -1,6 +1,9 @@
 /*
  * Reversi
  * Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers Gérard, Jenzer Ulrich
+ *
+ * Einziger Angular Controller. Dieser benutzt die Services direkt oder indirekt.
+ * (Angular Controller)
  */
 
 'use strict';
