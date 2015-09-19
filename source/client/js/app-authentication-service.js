@@ -49,7 +49,7 @@
             };
 
             self.logout = function() {
-                self.appOnlineService.register(name, password);
+                //self.appOnlineService.register(name, password);
             };
 
             self.showColoredMessage = function(title, message, backgroundColor){
