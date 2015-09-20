@@ -301,7 +301,7 @@
                     console.log("exception in if (onId === 'setup-screen-id')  exception: " + e);
                 }
                 try {
-                    if (self.appSetupService.localUserImageWhite != null && self.appSetupService.localUserImageWhite.length > 0) {
+                    if (self.appSetupService.localUserImageBlack != null && self.appSetupService.localUserImageBlack.length > 0) {
                         var img = $('#img-right-player-info-local-id');
                         var imgSrc = img.attr("src");
 
@@ -344,45 +344,43 @@
                     $('#img-left-player-info-computer-id').hide();
                     $('#img-left-player-info-online-id').hide();
 
-                    $('#img-right-player-info-local-id').hide();
+                    $('#img-right-player-info-local-id').show();
                     $('#img-right-player-info-computer-id').hide();
-                    $('#img-right-player-info-online-id').show();
+                    $('#img-right-player-info-online-id').hide();
                 } else /*if (playerMode === 'StartOpponent')*/ {
-                    $('#img-left-player-info-local-id').hide();
+                    $('#img-left-player-info-local-id').show();
                     $('#img-left-player-info-computer-id').hide();
-                    $('#img-left-player-info-online-id').show();
+                    $('#img-left-player-info-online-id').hide();
 
                     $('#img-right-player-info-local-id').show();
                     $('#img-right-player-info-computer-id').hide();
                     $('#img-right-player-info-online-id').hide();
                 }
-                self.updatePlayerImages();
+                //self.updatePlayerImages();
+            }
+
+            self.setOnlinePlayerImage = function(pic) {
+                var img = $('#img-left-player-info-local-id');
+                var imgSrc = img.attr("src");
+
+                if (pic != null && imgSrc != pic) {
+                    img.attr("src", pic);
+                }
+            }
+
+            self.setOnlineOpponentImage = function(pic) {
+                var img = $('#img-right-player-info-local-id');
+                var imgSrc = img.attr("src");
+
+                if (imgSrc != pic) {
+                    img.attr("src", pic);
+                }
             }
 
             self.imageBlinkingOn = false;
             self.imageBlinkingId = 0;
             self.imageBlinking = function() {
                 if (self.playersLeftTurnOn) {
-                    //$('.img-player-status-left').fadeOut(100).fadeIn(100);
-                    /*
-                    $('.img-player-status-left').animate({ left: "+=5px", width: "-=5px" },
-                        {
-                            queue: true,
-                            duration: 300,
-                            start: function () { },
-                            progress: function(animation, progress) { },
-                            complete: function() {
-                                $('.img-player-status-left').animate({ left: "-=5px", width: "+=5px" },
-                                    {
-                                        queue: true,
-                                        duration: 300,
-                                        start: function () { },
-                                        progress: function(animation, progress) { },
-                                        complete: function() {}
-                                    });
-                            }
-                        });
-                        */
                 }
                 if (self.playersRightTurnOn) {
                     $('.img-player-status-right').fadeOut(100).fadeIn(100);

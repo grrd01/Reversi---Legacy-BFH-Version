@@ -191,13 +191,21 @@
 
                 self.userRightInfoText = args.data.name;
                 self.userLeftInfoText = self.appAuthenticationService.userData.name;
-                //"img-left-player-info-local-id"
+
+                //self.appScreenService.setOnlinePlayerImage(args.data.pic);
+                //self.appScreenService.setOnlineOpponentImage(self.appSetupService.localUserImageWhite);
+                self.appScreenService.setOnlinePlayerImage(self.appSetupService.localUserImageWhite);
+                self.appScreenService.setOnlineOpponentImage(args.data.pic);
             } else /* if (self.appOnlineService.onlineStartOpponent) */ {
                 console.log("$scope.$on('userData', .....), self.appOnlineService.onlineStartOpponent: " + self.appOnlineService.onlineStartOpponent);
 
                 self.userLeftInfoText = args.data.name;
                 self.userRightInfoText = self.appAuthenticationService.userData.name;
-                //"img-right-player-info-online-id"
+
+                //self.appScreenService.setOnlinePlayerImage(self.appSetupService.localUserImageBlack);
+                //self.appScreenService.setOnlineOpponentImage(args.data.pic);
+                self.appScreenService.setOnlinePlayerImage(args.data.pic);
+                self.appScreenService.setOnlineOpponentImage(self.appSetupService.localUserImageWhite);
             }
         });
 
