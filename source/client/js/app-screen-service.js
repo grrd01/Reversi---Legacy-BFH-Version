@@ -441,7 +441,11 @@
                 var reader = new FileReader();
                 // Set the image once loaded into file reader
                 reader.onload = function(e) {
-                    self.appSetupService.localUserImageWhite = self.resizeLoadedImage(self.fileLocalUserImg, e.target.result);
+                    self.fileLocalUserImg.onload = function() {
+                        self.fileLocalUserImg.onload = null;
+                        self.appSetupService.localUserImageWhite = self.resizeLoadedImage(self.fileLocalUserImg);
+                    };
+                    self.fileLocalUserImg.src = e.target.result;
                 }
                 // Load files into file reader
                 reader.readAsDataURL(file);
@@ -460,21 +464,18 @@
                 var reader = new FileReader();
                 // Set the image once loaded into file reader
                 reader.onload = function(e) {
-                    self.appSetupService.localUserImageBlack = self.resizeLoadedImage(self.fileLocalUserImg2, e.target.result);
+                    self.fileLocalUserImg2.onload = function() {
+                        self.fileLocalUserImg2.onload = null;
+                        self.appSetupService.localUserImageBlack = self.resizeLoadedImage(self.fileLocalUserImg2);
+                    };
+                    self.fileLocalUserImg2.src = e.target.result;
                 }
                 // Load files into file reader
                 reader.readAsDataURL(file);
             }
 
-            self.resizeLoadedImage = function(flieLocImg, eTargetResult) {
-                try {
-                    flieLocImg.src = eTargetResult;
-                } catch (e) {
-                    console.log("exception in if (onId === 'setup-screen-id')  exception: " + e);
-                }
-
+            self.resizeLoadedImage = function(flieLocImg) {
                 var canvas = document.createElement("canvas");
-                //var canvas = $("<canvas>", {"id":"testing"})[0];
                 var ctx = canvas.getContext("2d");
                 ctx.drawImage(flieLocImg, 0, 0);
 
@@ -498,12 +499,9 @@
                 canvas.height = height;
                 var ctx = canvas.getContext("2d");
                 ctx.drawImage(flieLocImg, 0, 0, width, height);
+                var localUserImage = canvas.toDataURL("image/png");
 
-                var dataurl = canvas.toDataURL("image/png");
-                var localUserImage = dataurl;
-
-                flieLocImg.src = dataurl;
-                //flieLocImg.id = "picture";
+                flieLocImg.src = localUserImage;
 
                 return localUserImage;
             }
