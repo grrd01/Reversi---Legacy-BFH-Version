@@ -26,8 +26,8 @@
         self.appOnlineService = appOnlineService;
 
         self.appLastGameMode = "";
-        self.userLeftInfoText = "Spieler links";
-        self.userRightInfoText = "Spieler rechts";
+        self.userLeftInfoText = "";
+        self.userRightInfoText = "";
 
         // functions
 
@@ -38,6 +38,8 @@
             self.appScreenService.switchToLocalMode();
             self.appScreenService.resizeHandler();
             self.appLastGameMode = "LocalTowPlayer";
+            self.userLeftInfoText = "Spieler lokal 1";
+            self.userRightInfoText = "Spieler lokal 2";
         };
         self.localPlayWithComputer = function () {
             self.appScreenService.switchToScreen('game-screen-id');
@@ -46,6 +48,8 @@
             self.appScreenService.switchToComputerMode();
             self.appScreenService.resizeHandler();
             self.appLastGameMode = "LocalComputer";
+            self.userLeftInfoText = "Spieler";
+            self.userRightInfoText = "Computer";
         };
         self.onlinePlay = function () {
             self.appScreenService.switchToScreen('login-screen-id');
@@ -176,6 +180,24 @@
             console.log("$scope.$on('connected');");
             if (self.appStatisticService.inStatisticPage) {
                 self.appOnlineService.ranking();
+            }
+        });
+
+        $scope.$on('userData', function (event, args) {
+            console.log("$scope.$on('userData', .....);");
+
+            if (self.appOnlineService.onlineStartPlayer) {
+                console.log("$scope.$on('userData', .....), self.appOnlineService.onlineStartPlayer: " + self.appOnlineService.onlineStartPlayer);
+
+                self.userRightInfoText = args.data.name;
+                self.userLeftInfoText = self.appAuthenticationService.userData.name;
+                //"img-left-player-info-local-id"
+            } else /* if (self.appOnlineService.onlineStartOpponent) */ {
+                console.log("$scope.$on('userData', .....), self.appOnlineService.onlineStartOpponent: " + self.appOnlineService.onlineStartOpponent);
+
+                self.userLeftInfoText = args.data.name;
+                self.userRightInfoText = self.appAuthenticationService.userData.name;
+                //"img-right-player-info-online-id"
             }
         });
 

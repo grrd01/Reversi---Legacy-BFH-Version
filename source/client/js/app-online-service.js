@@ -13,9 +13,11 @@
     var app = angular.module("ApplicationModule");
 
     // create the service
-    app.factory('AppOnlineService', ['$rootScope', function ($rootScope) {
+    app.factory('AppOnlineService', ['$rootScope', 'AppSetupService', function ($rootScope, appSetupService) {
         var AppOnlineService = function () {
             var self = this;
+            self.appSetupService = appSetupService;
+
             self.userData = { name: "", password: "", password2: ""};
             self.onlineState = "none";
             self.onlineStartPlayer = false;
@@ -87,8 +89,8 @@
                         // send player metadata to opponent
                         self.socket.emit('userData', {
                             to: self.user.opponent,
-                            name: "your_name",
-                            pic: null
+                            name: self.user.name,
+                            pic: self.appSetupService.localUserImageWhite
                         });
                         self.lastStart = self.user.id;
                         if (self.user.role == 0) {
@@ -119,10 +121,11 @@
                 // event when the server sends you metadata of your opponent
                 self.socket.on('userData', function (data) {
                     if (self.user.role == 0) {
-                        console.info("Player 2 has the name" + data.name);
+                        console.info("userDataPlayer 2 has the name" + data.name);
                     } else {
                         console.info("Player 1 has the name" + data.name);
                     }
+                    $rootScope.$broadcast('userData', { data: data, user: self.user} );
                 });
 
                 // event when your opponent has left the game
