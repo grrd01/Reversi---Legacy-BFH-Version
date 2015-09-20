@@ -400,17 +400,29 @@ var gameLogic = function() {
 
                 //var corners =[[0,0],[0,columns-1],[rows-1,0],[columns-1, rows-1]];
 
-                var randomIndex = Math.floor(Math.random() * 10 % (possibleMoves.length));
+                //var randomIndex = Math.floor(Math.random() * 10 % (possibleMoves.length));
+                var randomIndex = getMoveByComputer(possibleMoves);
+
                 // uje console.log("randomIndex: " + randomIndex);
                 // uje console.log("moveFromComputerPlayer: " + possibleMoves[randomIndex]);
-                // uje console.log("randomIndex][0]: " + possibleMoves[randomIndex][0]);
-                // uje console.log("randomIndex][1]: " + possibleMoves[randomIndex][1]);
+                console.log("Computermove:");
+                console.log("randomIndex][0]: " + possibleMoves[randomIndex][0]);
+                console.log("randomIndex][1]: " + possibleMoves[randomIndex][1]);
                 changeObjectState(possibleMoves[randomIndex][0], possibleMoves[randomIndex][1], state ,true, false);
                 return true;
             }else{
                 return false;
             }
 
+        },
+
+        getMoveByComputer = function(possibleMoves){
+            if (typeof possibleMoves != 'undefined' &&  possibleMoves.length > 0){
+                var randomIndex = Math.floor(Math.random() * 10 % (possibleMoves.length));
+                return randomIndex;
+            }else {
+                return -1;
+            }
         },
 
         isGameOver = function(){
@@ -449,6 +461,7 @@ var gameLogic = function() {
         isPossibleMove: isPossibleMove,
         updateStates: updateStates,
         moveFromComputerPlayer: moveFromComputerPlayer,
+        getMoveByComputer: getMoveByComputer,
         isGameOver: isGameOver,
         getBoard: function() { return board; }
     };
