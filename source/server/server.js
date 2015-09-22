@@ -145,7 +145,7 @@
             }
             usersRegistered.sort(function(a, b) {
                 var x;
-                x = a.pointsWon < b.pointsWon ? -1 : 1;
+                x = a.pointsWon > b.pointsWon ? -1 : 1;
                 return x;
             });
         });
