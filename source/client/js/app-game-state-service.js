@@ -54,11 +54,11 @@
             // Functionen
             self.initStoneState = function () {
                 self.gameLogic.init();
-            }
+            };
 
             self.setStoneStateError = function (xindex, yindex) {
                 self.wrongStone = {x: xindex, y: yindex};
-            }
+            };
 
             self.setStoneState = function (xindex, yindex, withoutCheck) {
                 if (withoutCheck === undefined)
@@ -80,7 +80,7 @@
                 } else {
                     self.setStoneStateError(xindex, yindex);
                 }
-            }
+            };
 
             self.getStoneState = function (xindex, yindex) {
                 if (xindex < 0 || xindex >= self.appConstantService.GAME_MAX_COLUMNS) {
@@ -116,7 +116,7 @@
                 }
 
                 return state;
-            }
+            };
 
 
             self.isWhiteLayingPossible = function (xindex, yindex) {
@@ -131,7 +131,7 @@
                     }
                 }
                 return result;
-            }
+            };
 
             self.isBlackLayingPossible = function (xindex, yindex) {
                 var result = false;
@@ -145,7 +145,7 @@
                     }
                 }
                 return result;
-            }
+            };
 
             // es wir versucht ein stein zu legen, erfolgreich aber nur wenn möglich
             // und nicht der Computer daran ist!
@@ -174,7 +174,7 @@
                     return;
                 }
 
-                if (self.actualPlayerIsWithe && self.startWithBlack && self.isComputerGameRunning) {
+                if (self.actualPlayerIsWhite && self.startWithBlack && self.isComputerGameRunning) {
                     console.log("self.eventTrySetStone(" + eventIndex + "), the computer is in the game.");
                     return;
                 }
@@ -216,18 +216,18 @@
                         self.setStoneStateError(xindex, yindex);
                     }
                 }
-            }
+            };
 
             self.setActualPlayerToWhite = function() {
                 self.actualPlayer = self.STONE_WHITE;
                 self.actualPlayerIsWhite = true;
                 self.actualPlayerIsBlack = false;
-            }
+            };
             self.setActualPlayerToBlack = function() {
                 self.actualPlayer = self.STONE_BLACK;
                 self.actualPlayerIsWhite = false;
                 self.actualPlayerIsBlack = true;
-            }
+            };
 
             self.startInitGame = function() {
                 self.gameStartTime = new Date();
@@ -247,16 +247,16 @@
                 self.statusMessgaeText = "";
                 self.wrongStone = undefined;
                 self.gameOver = undefined;
-            }
+            };
 
             self.startTowPlayerGame = function () {
                 self.startInitGame();
-            }
+            };
 
             self.startGameWithComputer = function() {
                 self.startInitGame();
                 self.isComputerGameRunning = true;
-            }
+            };
 
             self.startOnlineGame = function (playerMode) {
                 self.startInitGame();
@@ -270,7 +270,7 @@
 
                 var tmp1 = self.appOnlineService.onlineStartPlayer;
                 var tmp2 = self.appOnlineService.onlineStartOpponent;
-            }
+            };
 
             self.isTheGameOver = function() {
                 var moves1 = self.gameLogic.getPossibleMoves(self.actualPlayer);
@@ -297,15 +297,16 @@
                     }
                 }
                 return false;
-            }
+            };
 
             self.startComputerMove = function() {
                 //console.log("self.startComputerMove()");
                 self.isComputerThinkingTime = 4;
                 self.isComputerMove = true;
-            }
+            };
 
             self.timerHandler = function() {
+                var msg, name, password, gamesWon;
                 if (self.isGameRunning) {
                     var newDate = new Date();
                     var runTime = ((newDate.getTime() - self.gameStartTime.getTime()) / 1000).toFixed(0);
@@ -320,8 +321,8 @@
 
                     self.statusMessgaeText = "";
 
-                    var msg = "" + runTime;
-                    self.statusMessgaeText = gmtp + ", running: " + msg + " sec."
+                    msg = "" + runTime;
+                    self.statusMessgaeText = gmtp + ", running: " + msg + " sec.";
 
                     if (self.isComputerThinkingTime > 0) {
                         self.statusMessgaeText = "the computer is thinking.";
@@ -350,7 +351,7 @@
                         var blackStones = self.gameLogic.getFigures(self.STONE_BLACK);
 
                         $('#modal-title-text-h4-id')[0].innerHTML = "Der Gewinner ist:";
-                        var msg = (whiteStones.length > blackStones.length) ? "Weiss" : "Black";
+                        msg = (whiteStones.length > blackStones.length) ? "Weiss" : "Black";
                         msg += "  [Weiss=" + whiteStones.length + ", Black=" +blackStones.length + "]";
                         $('#modal-body-text-p-id')[0].innerHTML = msg;
                         $("#modal-dialog").modal();
@@ -362,16 +363,16 @@
                             if (self.appOnlineService.onlineStartPlayer) {
                                 console.log("self.eventTrySetStone(online && Withe).");
 
-                                var name = self.appAuthenticationService.userData.name;
-                                var password = self.appAuthenticationService.userData.password;
-                                var gamesWon = (whiteStones.length > blackStones.length) ? 1 : 0;
+                                name = self.appAuthenticationService.userData.name;
+                                password = self.appAuthenticationService.userData.password;
+                                gamesWon = (whiteStones.length > blackStones.length) ? 1 : 0;
                                 self.appOnlineService.rankingUpdate(name, password, gamesWon, whiteStones.length);
                                 console.log("(self.appOnlineService.onlineStartPlayer) self.rankingUpdate(" + name + ", " + password + ", " + gamesWon + ", " + blackStones.length + ")");
                             }
                             if (self.appOnlineService.onlineStartOpponent) {
-                                var name = self.appAuthenticationService.userData.name;
-                                var password = self.appAuthenticationService.userData.password;
-                                var gamesWon = (blackStones.length > whiteStones.length) ? 1 : 0;
+                                name = self.appAuthenticationService.userData.name;
+                                password = self.appAuthenticationService.userData.password;
+                                gamesWon = (blackStones.length > whiteStones.length) ? 1 : 0;
                                 self.appOnlineService.rankingUpdate(name, password, gamesWon, blackStones.length);
                                 console.log("(self.appOnlineService.onlineStartOpponent) self.rankingUpdate(" + name + ", " + password + ", " + gamesWon + ", " + blackStones.length + ")");
                             }
@@ -387,14 +388,14 @@
                 $('#game-player-status-p-id')[0].innerHTML = self.statusMessgaeText;
 
                 $timeout(self.timerHandler, 333);
-            }
+            };
 
             $('#modal-dialog').on('hidden.bs.modal', function (e) {
                 console.log("modal dialog is done.");
-            })
+            });
 
             $timeout(self.timerHandler, 1000);
-        }
+        };
 
         // Service Objekt erstellen.
         var appGameStateService = new AppGameStateService();
