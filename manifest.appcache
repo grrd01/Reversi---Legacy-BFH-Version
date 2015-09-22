@@ -1,0 +1,39 @@
+CACHE MANIFEST
+# reversi v0.1.0
+# Time: Tue Sep 22 2015 17:59:10 GMT+0200 (Mitteleuropäische Sommerzeit)
+
+CACHE:
+reversi-game-src.html
+js/reversi.min.js
+css/reversi.css
+images/arrow-thick-left-green-8x.png
+images/arrow-thick-right-green-8x.png
+images/black-stone-r-128.png
+images/black_stone.svg
+images/cog-8x.png
+images/computer-8x.png
+images/empty.svg
+images/emptycard-128.png
+images/emptyuser-90x120.png
+images/home-8x.png
+images/logo.png
+images/network-8x.png
+images/online-128.png
+images/people-8x.png
+images/question-128.png
+images/question-mark-8x.png
+images/statistic-8x.png
+images/status-black-stone-r-128.png
+images/status-white-stone-128.png
+images/stone-ok-l-128.png
+images/stone-wrong-l-128.png
+images/white-stone-128.png
+images/white_stone.svg
+
+NETWORK:
+*
+
+SETTINGS:
+prefer-online
+
+# hash: d220fc98627a33f5cc2420646de595e3a5d07f72fbf2a3b608fe8e84f2f1c833
