@@ -1,10 +1,10 @@
 /*
  * Reversi
- * Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers Gérard, Jenzer Ulrich
+ * Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers GÃ©rard, Jenzer Ulrich
  *
  * Das Zeichnen des Spielfeldes und dessen Animationen. Es werden dabei alle Icons wie
- * weisser Stein, schwarzer Stein, leeres Feld, mögliches Feld und verbotenes Feld, beim
- * Start geladen und das was gerade angezeigt werden soll, über CSS sichtbar geamcht.
+ * weisser Stein, schwarzer Stein, leeres Feld, mÃ¶gliches Feld und verbotenes Feld, beim
+ * Start geladen und das was gerade angezeigt werden soll, Ã¼ber CSS sichtbar geamcht.
  * (Angular Service)
  */
 
@@ -28,17 +28,17 @@
 
             self.gameResources.stones = [
                 // leeres Feld
-                "./images/emptycard-128.png",
+                "./images/empty.svg",
                 // weisser Stein Feld
                 "./images/white_stone.svg",
                 // schwarzer Stein Feld
                 "./images/black_stone.svg",
-                // fragezeiche für unbekannten status auf dem Feld
+                // fragezeiche fÃ¼r unbekannten status auf dem Feld
                 "./images/question-128.png",
                 // ok Feld
-                "./images/stone-ok-l-128.png",
+                "./images/ok.svg",
                 // nicht erlauptes Feld
-                "./images/stone-wrong-l-128.png"
+                "./images/wrong.svg"
             ];
 
             self.gameResources.stoneDivContainerId = [];
@@ -425,7 +425,7 @@
         // Service Objekt erstellen.
         var appCardGameService = new AppCardGameService();
 
-        // und zurückgeben
+        // und zurÃ¼ckgeben
         return appCardGameService;
     }]);
 })();
