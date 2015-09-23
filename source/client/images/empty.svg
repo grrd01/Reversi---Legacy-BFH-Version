@@ -1,11 +1,11 @@
-<svg width="440" height="440" xmlns="http://www.w3.org/2000/svg">
+<svg width="206" height="206" viewBox="0 0 206 206" xmlns="http://www.w3.org/2000/svg">
  <defs>
-  <radialGradient r="0.4" cy="0.5" cx="0.5" id="empty">
-   <stop stop-opacity="0.63" stop-color="#000000" offset="0"/>
-   <stop stop-opacity="0.00" stop-color="#000000" offset="1"/>
+  <radialGradient fy="0.8" fx="0.8" r="2" cy="0.5" cx="0.5" id="white">
+   <stop stop-color="#ffffff" stop-opacity="0.1" offset="0"/>
+   <stop stop-color="#000000" stop-opacity="0.5" offset="0.5"/>
   </radialGradient>
  </defs>
  <g>
-  <rect id="stone_empty" height="200" width="200" y="0" x="0" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="url(#empty)"/>
+  <ellipse id="empty" ry="70" rx="70" cy="100" cx="100" stroke-linecap="null" stroke-linejoin="null" stroke-width="0" stroke="#000000" fill="url(#white)"/>
  </g>
 </svg>
