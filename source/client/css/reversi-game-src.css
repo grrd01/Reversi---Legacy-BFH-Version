@@ -1,6 +1,6 @@
 /*
  *  Reversi
- *  Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers Gérard, Jenzer Ulrich
+ *  Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers GÃ©rard, Jenzer Ulrich
  *
  *  Applikation spezifische CSS-File.
  *
@@ -66,8 +66,11 @@ html, body {
 }
 
 #game-logo-img {
-    width:50%;
-    vertical-align: text-top;
+    position: absolute;
+    top:calc(1px + 1px);
+    left: 63px;
+    width:calc(100% - 252px);
+    height: 59px;
 }
 
 .game-logo-text {
