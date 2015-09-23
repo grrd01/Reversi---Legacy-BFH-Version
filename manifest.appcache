@@ -3,7 +3,7 @@ CACHE MANIFEST
 # Time: Tue Sep 22 2015 17:59:10 GMT+0200 (Mitteleuropäische Sommerzeit)
 
 CACHE:
-reversi-game-src.html
+index.html
 js/reversi.min.js
 css/reversi.css
 images/arrow-thick-left-green-8x.png
