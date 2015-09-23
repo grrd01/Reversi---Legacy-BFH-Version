@@ -116,6 +116,27 @@ module.exports = function(grunt) {
                 ],
                 dest: '../build/manifest.appcache'
             }
+        },
+
+        karma: {
+            unit: {
+                options: {
+                    frameworks: ['jasmine'],
+                    singleRun: true,
+                    browsers: ['PhantomJS'], //'Firefox','IE'
+                    files: [
+                        //'../source/client/js/vendor/angular.js',
+                        //'../source/client/js/vendor/angular-mocks.js',
+                        '../source/client/js/vendor/angular.min.js',
+                        '../source/client/js/vendor/jquery-2.1.4.min.js',
+                        //'../source/client/js/vendor/bootstrap.min.js',
+                        //'../source/client/js/vendor/socket.io.js',
+                        //'../source/client/js/vendor/*.js',
+                        '../source/client/js/gameLogic.js',
+                        '../tests/client/*.js'
+                    ]
+                }
+            }
         }
     });
 
@@ -125,6 +146,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-manifest');
+    grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('default', [
         'uglify',
@@ -132,8 +154,12 @@ module.exports = function(grunt) {
         'cssmin',
         'htmlmin',
         'replace',
-        'manifest'
+        'manifest',
+        'karma'
     ]);
 
+    grunt.registerTask('test', [
+        'karma'
+    ]);
 
 };

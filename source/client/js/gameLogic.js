@@ -2,36 +2,7 @@ var gameLogic = function() {
     var board, columns= 8, rows= 8,
         init = function(){
             gameLogic.initEmptyBoard();
-            // uje gameLogic.showBoard();
-
-            //gameLogic.changeObjectState(3,3,1);
             gameLogic.setStartGame();
-            // uje gameLogic.showBoard();
-            // uje gameLogic.getFigures(1);
-            // uje gameLogic.getPossibleMoves(1);
-
-            // uje gameLogic.changeObjectState(4,2,1, true);
-            // uje gameLogic.showBoard();
-
-            // uje gameLogic.moveFromComputerPlayer(2);
-            // uje gameLogic.showBoard();
-
-            // uje gameLogic.moveFromComputerPlayer(1);
-            // uje gameLogic.showBoard();
-
-            // uje gameLogic.moveFromComputerPlayer(2);
-            // uje gameLogic.showBoard();
-
-            // uje gameLogic.moveFromComputerPlayer(1);
-            // uje gameLogic.showBoard();
-
-            //gameLogic.changeObjectState(3, 2, 2, true);
-            //gameLogic.showBoard();
-
-            //gameLogic.updateStates(1, 4, 2);
-            //gameLogic.showBoard();
-
-            // uje gameLogic.getPossibleMoves(2);
         },
 
         initEmptyBoard = function() {
@@ -44,7 +15,6 @@ var gameLogic = function() {
             //        console.log(board[i][j])
             //    }
             //}
-            Debugger;
 
             console.log(board);
             console.log("");
@@ -468,14 +438,3 @@ var gameLogic = function() {
 }();
 
 gameLogic.init();
-//gameLogic.initEmptyBoard();
-//gameLogic.showBoard();
-//
-////gameLogic.changeObjectState(3,3,1);
-//gameLogic.setStartGame();
-//gameLogic.showBoard();
-//gameLogic.getPossibleMoves();
-
-//function PlayObject(state) {
-//    this.value = state;
-//};
