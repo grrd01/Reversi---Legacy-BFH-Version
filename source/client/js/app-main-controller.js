@@ -124,18 +124,19 @@
         });
 
         $scope.$on('signInUnknownUser', function(event, args) {
-            //self.appScreenService.switchToScreen('register-screen-id');
             self.appScreenService.switchToScreen('login-screen-id');
             self.appAuthenticationService.showColoredMessage("Eingabe Fehler", "Unbekannter Name.", '#e81e1a');
         });
 
         $scope.$on('signInWrongPw', function(event, args) {
-            self.appScreenService.switchToScreen('login-screen-id');
-            self.appAuthenticationService.showColoredMessage("Eingabe Fehler", "Falsches Password.", '#e81e1a');
+            if (!self.appAuthenticationService.waitingForRegister) {
+                self.appScreenService.switchToScreen('login-screen-id');
+                self.appAuthenticationService.showColoredMessage("Eingabe Fehler", "Falsches Password.", '#e81e1a');
+            }
         });
 
         $scope.$on('registerNameOccupied', function(event, args) {
-            self.appScreenService.switchToScreen('login-screen-id');
+            self.appScreenService.switchToScreen('register-screen-id');
             self.appAuthenticationService.showColoredMessage("Eingabe Fehler", "Name bereits benutzt.", '#e81e1a');
         });
 
