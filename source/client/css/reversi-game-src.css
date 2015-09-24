@@ -87,6 +87,9 @@ html, body {
     border: 1px solid #585858;
     top: 1px;
 }
+.header-img:hover {
+    background-color: #97A4C8;
+}
 #header-img-home-id {
     position: absolute;
     left: 2px;
@@ -183,13 +186,13 @@ html, body {
     border-radius: 3px;
     margin: 1px;
     position: absolute;
-    top: 0px;
+    top: 0;
 }
 #img-left-player-info-id {
-    left: 0px;
+    left: 0;
 }
 #img-right-player-info-local-id, #img-right-player-info-computer-id, #img-right-player-info-online-id {
-    right: 0px;
+    right: 0;
 }
 
 .img-player-stone {
@@ -198,7 +201,7 @@ html, body {
     border-radius: 3px;
     margin: 1px;
     position: absolute;
-    top: 0px;
+    top: 0;
 }
 #img-player-stone-left-id {
 }
@@ -211,7 +214,7 @@ html, body {
     border-radius: 3px;
     margin: 1px;
     position: absolute;
-    top: 0px;
+    top: 0;
 }
 #img-player-status-left-id {
 }
