@@ -96,6 +96,17 @@ module.exports = function(grunt) {
                 ]
             }
         },
+
+        copy: {
+            main: {
+                files: [
+                    {expand: true, cwd: '../source/client/js/vendor/', src: '**', dest: '../build/js/vendor/'},
+                    {expand: true, cwd: '../source/client/css/vendor/', src: '**', dest: '../build/css/vendor/'},
+
+                ],
+            },
+        },
+
         manifest: {
             generate: {
                 options: {
@@ -145,6 +156,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-replace');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-manifest');
     grunt.loadNpmTasks('grunt-karma');
 
@@ -154,6 +166,7 @@ module.exports = function(grunt) {
         'cssmin',
         'htmlmin',
         'replace',
+        'copy',
         'manifest',
         'karma'
     ]);
