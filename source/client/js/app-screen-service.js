@@ -14,11 +14,12 @@
     var app = angular.module("ApplicationModule");
 
     // create the service
-    app.factory('AppScreenService', ['$window', 'AppSetupService', 'AppStatisticService', 'AppOnlineService', function ($window, appSetupService, appStatisticService, appOnlineService) {
+    app.factory('AppScreenService', ['$window', 'AppSetupService', 'AppStatisticService', 'AppGameStateService', 'AppOnlineService', function ($window, appSetupService, appStatisticService, appGameStateService, appOnlineService) {
         var AppScreenService = function () {
             var self = this;
             self.appSetupService = appSetupService;
             self.appStatisticService = appStatisticService;
+            self.appGameStateService = appGameStateService;
             self.appOnlineService = appOnlineService;
 
             self.lastScreenSwitch = "";
@@ -100,33 +101,12 @@
             }
 
             self.resizeHtmlElements = function(gsr) {
-                var logoFontSize = '42px';
-                var logoFontTop = '7px';
-                if (gsr.gameSizeWidth < 290) {
-                    logoFontSize = '6px';
-                    logoFontTop = '26px';
-                } else if (gsr.gameSizeWidth < 310) {
-                    logoFontSize = '10px';
-                    logoFontTop = '24px';
-                } else if (gsr.gameSizeWidth < 340) {
-                    logoFontSize = '16px';
-                    logoFontTop = '22px';
-                } else if (gsr.gameSizeWidth < 380) {
-                    logoFontSize = '20px';
-                    logoFontTop = '20px';
-                } else if (gsr.gameSizeWidth < 430) {
-                    logoFontSize = '28px';
-                    logoFontTop = '16px';
-                }
-                $('#game-logo-text-id').css('font-size', logoFontSize);
-                $('#game-logo-text-id').css('top', logoFontTop);
-
                 if (gsr.gameSizeWidth < 340) {
                     $('.startup-menu-img').css('margin-right', '1px');
                     $('.startup-menu-img').css('height', '12px');
                 } else if (gsr.gameSizeWidth < 400) {
-                        $('.startup-menu-img').css('margin-right', '5px');
-                        $('.startup-menu-img').css('height', '16px');
+                    $('.startup-menu-img').css('margin-right', '5px');
+                    $('.startup-menu-img').css('height', '16px');
                 } else if (gsr.gameSizeWidth < 500) {
                     $('.startup-menu-img').css('margin-right', '20px');
                     $('.startup-menu-img').css('height', '32px');
@@ -135,6 +115,8 @@
                     $('.startup-menu-img').css('height', '64px');
                 }
 
+                var setupWidth = $('.setup-screen').width() -30;
+                $('.btn-setup').css('max-width', '' + setupWidth +'px');
 
                 var infoMidd = gsr.gameSizeWidth /2;
                 var infoHeight = $('#game-player-info-id').height();
@@ -217,9 +199,16 @@
                 self.resizeHelpText(gsr);
             };
 
-            self.switchToScreen = function (onId, lastGameMode) {
+            self.switchToScreen = function (onId, lastGameMode, goBackMode) {
                 var img, imgSrc;
                 var isVisibleScreen = !$('#' + onId).is(':hidden');
+
+                goBackMode = goBackMode || false;
+                if (isVisibleScreen && !goBackMode) {
+                    if (onId === 'help-screen-id' || onId === 'setup-screen-id' || onId === 'statistic-screen-id') {
+                        return;
+                    }
+                }
 
                 $('#header-img-info-id').css("background-color", '');
                 $('#header-img-setup-id').css("background-color", '');
@@ -234,13 +223,13 @@
                 $('#wait-online-game-screen-id').hide();
                 $('#game-screen-id').hide();
 
+
                 if (!isVisibleScreen && onId === 'help-screen-id')
                     $('#header-img-info-id').css("background-color", '#DDDDDD');
                 if (!isVisibleScreen && onId === 'setup-screen-id')
                     $('#header-img-setup-id').css("background-color", '#DDDDDD');
                 if (!isVisibleScreen && onId === 'statistic-screen-id') {
                     $('#header-img-statistic-id').css("background-color", '#DDDDDD');
-
                     self.appStatisticService.inStatisticPage = true;
                     if (self.appOnlineService.socket === undefined) {
                         self.appOnlineService.connect();
@@ -251,9 +240,10 @@
                     self.appStatisticService.inStatisticPage = false;
                 }
 
-                if (isVisibleScreen && (lastGameMode !== undefined && lastGameMode.length > 0)) {
+                var isGameRun = self.appGameStateService.isGameRunning || false;
+                if (isGameRun && isVisibleScreen && (lastGameMode !== undefined && lastGameMode.length > 0)) {
                     $('#game-screen-id').show();
-                } else if (isVisibleScreen || onId === 'startup-screen-id') {
+                } else if ((isGameRun && isVisibleScreen) || goBackMode) {
                     $('#startup-screen-id').show();
                 } else {
                     $('#' + onId).show();
@@ -269,7 +259,6 @@
                         if (self.appSetupService.localUserImageWhite.length > 0) {
                             img = $('#local-user-img-id');
                             imgSrc = img.attr("src");
-
                             if (imgSrc != self.appSetupService.localUserImageWhite) {
                                 img.attr("src", self.appSetupService.localUserImageWhite);
                             }
@@ -277,7 +266,6 @@
                         if (self.appSetupService.localUserImageBlack.length > 0) {
                             img = $('#local-user-img-id-2');
                             imgSrc = img.attr("src");
-
                             if (imgSrc != self.appSetupService.localUserImageBlack) {
                                 img.attr("src", self.appSetupService.localUserImageBlack);
                             }
@@ -287,7 +275,6 @@
                     }
                     self.appSetupService.inSettingPage = true;
                 }
-
                 self.lastScreenSwitch = onId;
             };
 
@@ -367,7 +354,6 @@
             self.setOnlinePlayerImage = function(pic) {
                 var img = $('#img-left-player-info-local-id');
                 var imgSrc = img.attr("src");
-
                 if (pic != null && imgSrc != pic) {
                     img.attr("src", pic);
                 }
@@ -376,7 +362,6 @@
             self.setOnlineOpponentImage = function(pic) {
                 var img = $('#img-right-player-info-local-id');
                 var imgSrc = img.attr("src");
-
                 if (imgSrc != pic) {
                     img.attr("src", pic);
                 }
@@ -390,7 +375,6 @@
                 if (self.playersRightTurnOn) {
                     $('.img-player-status-right').fadeOut(100).fadeIn(100);
                 }
-
                 if (self.imageBlinkingOn) {
                     self.imageBlinkingId = setTimeout(self.imageBlinking, 1000); //Runs n millisecond
                 } else {
@@ -505,12 +489,9 @@
                 var ctx = canvas.getContext("2d");
                 ctx.drawImage(flieLocImg, 0, 0, width, height);
                 var localUserImage = canvas.toDataURL("image/png");
-
                 flieLocImg.src = localUserImage;
-
                 return localUserImage;
             }
-
         };
 
         // Service Objekt erstellen.

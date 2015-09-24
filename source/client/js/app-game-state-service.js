@@ -379,6 +379,9 @@
                             self.appOnlineService.stopPlay();
                             $rootScope.$broadcast('stopPlay');
                             console.log("(self.appOnlineService.onlineStartOpponent) stopPlay()");
+                        } else {
+                            $rootScope.$broadcast('stopPlay');
+                            console.log("(local or computer stopPlay()");
                         }
                     }
                 } else {

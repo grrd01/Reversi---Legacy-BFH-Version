@@ -38,8 +38,8 @@
             self.appScreenService.switchToLocalMode();
             self.appScreenService.resizeHandler();
             self.appLastGameMode = "LocalTowPlayer";
-            self.userLeftInfoText = "Spieler lokal 1";
-            self.userRightInfoText = "Spieler lokal 2";
+            self.userLeftInfoText = "Spieler 1";
+            self.userRightInfoText = "Spieler 2";
         };
         self.localPlayWithComputer = function () {
             self.appScreenService.switchToScreen('game-screen-id');
@@ -85,26 +85,26 @@
         self.goBack = function ($event) {
             switch(self.appScreenService.lastScreenSwitch) {
                 case 'statistic-screen-id':
-                    self.appScreenService.switchToScreen('statistic-screen-id', self.appLastGameMode);
+                    self.appScreenService.switchToScreen('statistic-screen-id', self.appLastGameMode, true);
                     break;
                 case "setup-screen-id":
-                    self.appScreenService.switchToScreen('setup-screen-id', self.appLastGameMode);
+                    self.appScreenService.switchToScreen('setup-screen-id', self.appLastGameMode, true);
                     break;
                 case "help-screen-id":
-                    self.appScreenService.switchToScreen('help-screen-id', self.appLastGameMode);
+                    self.appScreenService.switchToScreen('help-screen-id', self.appLastGameMode, true);
                     break;
             }
         };
 
         // init
         $('#header-img-info-id').click(function () {
-            self.appScreenService.switchToScreen('help-screen-id', self.appLastGameMode);
+            self.appScreenService.switchToScreen('help-screen-id');
         });
         $('#header-img-setup-id').click(function () {
-            self.appScreenService.switchToScreen('setup-screen-id', self.appLastGameMode);
+            self.appScreenService.switchToScreen('setup-screen-id');
         });
         $('#header-img-statistic-id').click(function () {
-            self.appScreenService.switchToScreen('statistic-screen-id', self.appLastGameMode);
+            self.appScreenService.switchToScreen('statistic-screen-id');
         });
         $('#header-img-home-id').click(function () {
             self.appScreenService.switchToScreen('startup-screen-id', self.appLastGameMode);
