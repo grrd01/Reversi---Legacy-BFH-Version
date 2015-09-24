@@ -106,7 +106,6 @@
                         }
                     }
                 }
-
                 if (state == 0) {
                     if (self.wrongStone !== undefined) {
                         if (xindex == self.wrongStone.x && yindex == self.wrongStone.y) {
@@ -114,7 +113,6 @@
                         }
                     }
                 }
-
                 return state;
             };
 

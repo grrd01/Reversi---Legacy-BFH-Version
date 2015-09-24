@@ -44,6 +44,7 @@
                 // event when signin was successfull
                 self.socket.on('signInOk', function () {
                     console.info("you successfully signed in");
+                    $rootScope.$broadcast('signInOk');
                     self.startPlay();
                 });
 
@@ -62,12 +63,14 @@
                 // event when register was successfull
                 self.socket.on('registerOk', function () {
                     console.info("you successfully registered");
+                    $rootScope.$broadcast('registerOk');
                     self.startPlay();
                 });
 
                 // event when register refused because name is already used
                 self.socket.on('registerNameOccupied', function () {
                     console.info("this username is no more available");
+                    $rootScope.$broadcast('registerNameOccupied');
                     self.signIn(self.userData.name, self.userData.password);
                 });
 

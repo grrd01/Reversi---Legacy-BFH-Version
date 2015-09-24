@@ -62,10 +62,7 @@
         };
 
         self.playerLogin = function () {
-            var valid = self.appAuthenticationService.login();
-            if (valid) {
-                self.appScreenService.switchToScreen('wait-online-game-screen-id');
-            }
+            self.appAuthenticationService.login();
         };
 
         self.switchToPlayerRegisterDialog = function () {
@@ -73,13 +70,7 @@
         };
 
         self.playerRegister = function () {
-            var valid = self.appAuthenticationService.register();
-            if (valid) {
-                self.appScreenService.switchToScreen('wait-online-game-screen-id');
-                self.appCardGameService.updateCardLayout();
-                self.appScreenService.resizeHandler();
-                self.appLastGameMode = "LocalTowPlayer";
-            }
+            self.appAuthenticationService.register();
         };
 
         self.goBack = function ($event) {
@@ -143,6 +134,22 @@
             self.appAuthenticationService.showColoredMessage("Eingabe Fehler", "Falsches Password.", '#e81e1a');
         });
 
+        $scope.$on('registerNameOccupied', function(event, args) {
+            self.appScreenService.switchToScreen('login-screen-id');
+            self.appAuthenticationService.showColoredMessage("Eingabe Fehler", "Name bereits benutzt.", '#e81e1a');
+        });
+
+        $scope.$on('signInOk', function(event, args) {
+            if (self.appAuthenticationService.waitingForLogin) {
+                console.info("you successfully signed in");
+                self.appScreenService.switchToScreen('wait-online-game-screen-id');
+            }
+        });
+
+        $scope.$on('registerOk', function(event, args) {
+            console.info("you successfully registered.");
+            self.appScreenService.switchToScreen('wait-online-game-screen-id');
+        });
 
         $scope.$on('onlineStartPlayer', function(event, args) {
             console.log("$scope.$on('onlineStartPlayer'...);");

@@ -20,8 +20,12 @@
             self.userData = { name: "", password: "", password2: ""};
 
             self.appOnlineService = appOnlineService;
+            self.waitingForLogin = false;
+            self.waitingForRegister = false;
+
 
             self.register = function() {
+                self.waitingForRegister = false;
                 if (self.userData.name.length <= 0) {
                     self.showColoredMessage("Eingabe Fehler", "Kein Name eingegeben.", '#e81e1a');
                 } else if (self.userData.password.length <= 0) {
@@ -30,7 +34,8 @@
                     self.showColoredMessage("Eingabe Fehler", "Beide Passwörter nicht gleich.", '#e81e1a');
                 } else {
                     self.appOnlineService.register(self.userData.name, self.userData.password);
-                    // registrierung erfolgreich!
+                    // warten auf registrierung (sever)!
+                    self.waitingForRegister = true;
                     return true;
                 }
                 // registrierung nicht erfolgreich!
@@ -38,11 +43,13 @@
             };
 
             self.login = function() {
+                self.waitingForLogin = false;
                 if (self.userData.name.length <= 0) {
                     self.showColoredMessage("Eingabe Fehler", "Kein Name eingegeben.", '#e81e1a');
                 } else {
                     self.appOnlineService.signIn(self.userData.name, self.userData.password);
-                    // login erfolgreich!
+                    self.waitingForLogin = true;
+                    // warte auf login (server)!
                     return true;
                 }
                 // login nicht erfolgreich!
