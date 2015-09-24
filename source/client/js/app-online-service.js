@@ -71,7 +71,6 @@
                 self.socket.on('registerNameOccupied', function () {
                     console.info("this username is no more available");
                     $rootScope.$broadcast('registerNameOccupied');
-                    self.signIn(self.userData.name, self.userData.password);
                 });
 
                 // event when you have to wait for an opponent

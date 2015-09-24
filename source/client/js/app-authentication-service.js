@@ -20,12 +20,9 @@
             self.userData = { name: "", password: "", password2: ""};
 
             self.appOnlineService = appOnlineService;
-            self.waitingForLogin = false;
-            self.waitingForRegister = false;
 
 
             self.register = function() {
-                self.waitingForRegister = false;
                 if (self.userData.name.length <= 0) {
                     self.showColoredMessage("Eingabe Fehler", "Kein Name eingegeben.", '#e81e1a');
                 } else if (self.userData.password.length <= 0) {
@@ -35,7 +32,6 @@
                 } else {
                     self.appOnlineService.register(self.userData.name, self.userData.password);
                     // warten auf registrierung (sever)!
-                    self.waitingForRegister = true;
                     return true;
                 }
                 // registrierung nicht erfolgreich!
@@ -43,12 +39,10 @@
             };
 
             self.login = function() {
-                self.waitingForLogin = false;
                 if (self.userData.name.length <= 0) {
                     self.showColoredMessage("Eingabe Fehler", "Kein Name eingegeben.", '#e81e1a');
                 } else {
                     self.appOnlineService.signIn(self.userData.name, self.userData.password);
-                    self.waitingForLogin = true;
                     // warte auf login (server)!
                     return true;
                 }
@@ -66,7 +60,6 @@
                 $('#modal-colored-body-text-p-id')[0].innerHTML = message;
                 $("#modal-colored-dialog").modal();
             }
-
         };
 
         // Service Objekt erstellen.

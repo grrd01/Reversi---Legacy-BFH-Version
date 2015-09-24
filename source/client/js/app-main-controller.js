@@ -129,10 +129,8 @@
         });
 
         $scope.$on('signInWrongPw', function(event, args) {
-            if (!self.appAuthenticationService.waitingForRegister) {
-                self.appScreenService.switchToScreen('login-screen-id');
-                self.appAuthenticationService.showColoredMessage("Eingabe Fehler", "Falsches Password.", '#e81e1a');
-            }
+            self.appScreenService.switchToScreen('login-screen-id');
+            self.appAuthenticationService.showColoredMessage("Eingabe Fehler", "Falsches Password.", '#e81e1a');
         });
 
         $scope.$on('registerNameOccupied', function(event, args) {
@@ -141,10 +139,8 @@
         });
 
         $scope.$on('signInOk', function(event, args) {
-            if (self.appAuthenticationService.waitingForLogin) {
-                console.info("you successfully signed in");
-                self.appScreenService.switchToScreen('wait-online-game-screen-id');
-            }
+            console.info("you successfully signed in");
+            self.appScreenService.switchToScreen('wait-online-game-screen-id');
         });
 
         $scope.$on('registerOk', function(event, args) {
