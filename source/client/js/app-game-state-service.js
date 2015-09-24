@@ -1,6 +1,6 @@
 /*
  * Reversi
- * Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers Gérard, Jenzer Ulrich
+ * Copyright (c) 2015 Nguyen Khoa Thien, Tyedmers GÃ©rard, Jenzer Ulrich
  *
  * Der Zustand der Applikation, benutzt die gameLogik Library.
  * (Angular Service)
@@ -145,7 +145,7 @@
                 return result;
             };
 
-            // es wir versucht ein stein zu legen, erfolgreich aber nur wenn möglich
+            // es wir versucht ein stein zu legen, erfolgreich aber nur wenn mÃ¶glich
             // und nicht der Computer daran ist!
             self.eventTrySetStone = function(eventIndex, fromOnlinePlayer) {
                 var xindex = eventIndex % 8;
@@ -309,21 +309,21 @@
                     var newDate = new Date();
                     var runTime = ((newDate.getTime() - self.gameStartTime.getTime()) / 1000).toFixed(0);
 
-                    var gmtp = "local paly: ";
+                    var gmtp = "Zweispieler Spiel - ";
                     if (self.isComputerGameRunning)
-                        gmtp = "local to computer: ";
+                        gmtp = "Spiel mit Computer -  ";
                     else if (self.isOnlineGameRunning)
-                        gmtp = "online paly: ";
+                        gmtp = "Spiel Online-Gegner - ";
                     else if (self.isOnlineComputerGameRunning)
-                        gmtp = "online to computer: ";
+                        gmtp = "online to computer -  ";
 
                     self.statusMessgaeText = "";
 
                     msg = "" + runTime;
-                    self.statusMessgaeText = gmtp + ", running: " + msg + " sec.";
+                    self.statusMessgaeText = gmtp +  msg + " sec.";
 
                     if (self.isComputerThinkingTime > 0) {
-                        self.statusMessgaeText = "the computer is thinking.";
+                        self.statusMessgaeText = "Der Computer denkt nach...";
                         self.isComputerThinkingTime--;
                     }
                     if (self.isComputerThinkingTime <= 0 && self.isComputerMove) {
@@ -343,14 +343,17 @@
                         $rootScope.$broadcast('update-card-layout');
                     }
 
-                    // prüfe ob spiel fertig ist
+                    // prÃ¼fe ob spiel fertig ist
                     if (self.isTheGameOver()) {
                         var whiteStones = self.gameLogic.getFigures(self.STONE_WHITE);
                         var blackStones = self.gameLogic.getFigures(self.STONE_BLACK);
 
-                        $('#modal-title-text-h4-id')[0].innerHTML = "Der Gewinner ist:";
-                        msg = (whiteStones.length > blackStones.length) ? "Weiss" : "Black";
-                        msg += "  [Weiss=" + whiteStones.length + ", Black=" +blackStones.length + "]";
+                        msg = (whiteStones.length > blackStones.length) ? "Weiss" : "Schwarz";
+                        $('#modal-title-text-h4-id')[0].innerHTML = "Der Gewinner ist: " + msg;
+                        if (whiteStones.length == blackStones.length){$('#modal-title-text-h4-id')[0].innerHTML = "Unentschieden ";}
+                        msg += " gewinnt mit " + Math.abs(whiteStones.length - blackStones.length) + " Steinen Vorsprung. <br><br>";
+                        if (whiteStones.length == blackStones.length){msg = "Das Spiel endet Unentschieden. <br><br>";}
+                        msg += "  Weiss=" + whiteStones.length + "<br  > Schwarz=" +blackStones.length ;
                         $('#modal-body-text-p-id')[0].innerHTML = msg;
                         $("#modal-dialog").modal();
                         self.isGameRunning = false;
@@ -381,9 +384,10 @@
                             $rootScope.$broadcast('stopPlay');
                             console.log("(local or computer stopPlay()");
                         }
+
                     }
                 } else {
-                    self.statusMessgaeText = "ready";
+                    self.statusMessgaeText = "bereit";
                 }
 
                 $('#game-player-status-p-id')[0].innerHTML = self.statusMessgaeText;
@@ -401,10 +405,7 @@
         // Service Objekt erstellen.
         var appGameStateService = new AppGameStateService();
 
-        // und zurückgeben
+        // und zurÃ¼ckgeben
         return appGameStateService;
     }]);
 })();
-
-
-
