@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # reversi v0.1.0
-# Time: Tue Sep 22 2015 17:59:10 GMT+0200 (Mitteleuropäische Sommerzeit)
+# Time: Thu Sep 24 2015 08:39:42 GMT+0200 (Mitteleuropäische Sommerzeit)
 
 CACHE:
 index.html
@@ -18,6 +18,7 @@ images/emptyuser-90x120.png
 images/home-8x.png
 images/logo.png
 images/network-8x.png
+images/ok.svg
 images/online-128.png
 images/people-8x.png
 images/question-128.png
@@ -29,6 +30,7 @@ images/stone-ok-l-128.png
 images/stone-wrong-l-128.png
 images/white-stone-128.png
 images/white_stone.svg
+images/wrong.svg
 
 NETWORK:
 *
@@ -36,4 +38,4 @@ NETWORK:
 SETTINGS:
 prefer-online
 
-# hash: d220fc98627a33f5cc2420646de595e3a5d07f72fbf2a3b608fe8e84f2f1c833
+# hash: 17755b6da14c1fd97516d986f086cd4d5a5fc2eba4c61b4a005e52947676dabb
