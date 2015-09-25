@@ -307,8 +307,8 @@
                     <form class="form-horizontal">
                         <div class="form-group">
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <h3 align="center" ng-show="main.appOnlineService.onlineState === 'none'">Warten auf Server.</h3>
-                                <h3 align="center" ng-show="main.appOnlineService.onlineState === 'connect'">Warten auf Spieler.</h3>
+                                <h3 ng-show="main.appOnlineService.onlineState === 'none'">Warten auf Server.</h3>
+                                <h3 ng-show="main.appOnlineService.onlineState === 'connect'">Warten auf Spieler.</h3>
                             </div>
                         </div>
                     </form>
