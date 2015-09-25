@@ -55,11 +55,12 @@
             };
 
             self.showColoredMessage = function(title, message, backgroundColor){
-                $('#modal-colored-title-text-h4-id')[0].innerHTML = title;
-                $('#modal-colored-title-text-h4-id').css("background-color", backgroundColor);
+                var $modal_colored_title_text_h4_id = $('#modal-colored-title-text-h4-id');
+                $modal_colored_title_text_h4_id[0].innerHTML = title;
+                $modal_colored_title_text_h4_id.css("background-color", backgroundColor);
                 $('#modal-colored-body-text-p-id')[0].innerHTML = message;
                 $("#modal-colored-dialog").modal();
-            }
+            };
         };
 
         // Service Objekt erstellen.
