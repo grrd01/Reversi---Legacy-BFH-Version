@@ -40,7 +40,7 @@
                     height: window.innerHeight - (2 * minMargin)
                 };
 
-                var newWidth, newHeight, newX, newY;
+                var newWidth, newHeight;
 
                 // Determine game size
                 if (gameSize.height / gameSize.width > viewport.height / viewport.width) {
@@ -98,27 +98,31 @@
                 $game_player_status_id.css('height', '' + statusHeight + 'px');
                 $game_player_status_id.css('left', '' + left + 'px');
                 $game_player_status_id.css('top', '' + statusTop + 'px');
-            }
+            };
 
             self.resizeHtmlElements = function(gsr) {
+                var $startup_menu_img = $('.startup-menu-img');
+                var $img_player_info = $('.img-player-info');
+                var $img_player_stone = $('.img-player-stone');
+                var $img_player_status = $('.img-player-status');
+                var $text_player_info = $('.text-player-info');
                 if (gsr.gameSizeWidth < 340) {
-                    $('.startup-menu-img').css('margin-right', '1px');
-                    $('.startup-menu-img').css('height', '12px');
+                    $startup_menu_img.css('margin-right', '1px');
+                    $startup_menu_img.css('height', '12px');
                 } else if (gsr.gameSizeWidth < 400) {
-                    $('.startup-menu-img').css('margin-right', '5px');
-                    $('.startup-menu-img').css('height', '16px');
+                    $startup_menu_img.css('margin-right', '5px');
+                    $startup_menu_img.css('height', '16px');
                 } else if (gsr.gameSizeWidth < 500) {
-                    $('.startup-menu-img').css('margin-right', '20px');
-                    $('.startup-menu-img').css('height', '32px');
+                    $startup_menu_img.css('margin-right', '20px');
+                    $startup_menu_img.css('height', '32px');
                 } else {
-                    $('.startup-menu-img').css('margin-right', '50px');
-                    $('.startup-menu-img').css('height', '64px');
+                    $startup_menu_img.css('margin-right', '50px');
+                    $startup_menu_img.css('height', '64px');
                 }
 
                 var setupWidth = $('.setup-screen').width() -30;
                 $('.btn-setup').css('max-width', '' + setupWidth +'px');
 
-                var infoMidd = gsr.gameSizeWidth /2;
                 var infoHeight = $('#game-player-info-id').height();
                 var fontSize = infoHeight * 0.20;
                 var playerImgHeight = infoHeight - 2 - (fontSize *1.05);
@@ -126,14 +130,14 @@
                 var statusImgHeight = playerImgHeight;
                 var playerImgWidth = playerImgHeight * 0.75;
 
-                $('.img-player-info').css('width', '' + playerImgWidth + 'px');
-                $('.img-player-info').css('height', '' + playerImgHeight + 'px');
+                $img_player_info.css('width', '' + playerImgWidth + 'px');
+                $img_player_info.css('height', '' + playerImgHeight + 'px');
 
-                $('.img-player-stone').css('width', '' + stoneImgHeight + 'px');
-                $('.img-player-stone').css('height', '' + stoneImgHeight + 'px');
+                $img_player_stone.css('width', '' + stoneImgHeight + 'px');
+                $img_player_stone.css('height', '' + stoneImgHeight + 'px');
 
-                $('.img-player-status').css('width', '' + statusImgHeight + 'px');
-                $('.img-player-status').css('height', '' + statusImgHeight + 'px');
+                $img_player_status.css('width', '' + statusImgHeight + 'px');
+                $img_player_status.css('height', '' + statusImgHeight + 'px');
 
                 $('#img-player-stone-left-id').css('left', '' + (playerImgWidth + 3) + 'px');
                 $('#img-player-stone-right-id').css('right', '' + (playerImgWidth + 3) + 'px');
@@ -145,9 +149,9 @@
                 $('#text-player-info-right-id').css('right', '' + 3 + 'px');
 
                 var textPlayerinfoY = infoHeight + 2 - (fontSize * 1.4);
-                $('.text-player-info').css('top', '' + textPlayerinfoY + 'px');
-                $('.text-player-info').css('font-size', '' + fontSize + 'px');
-            }
+                $text_player_info.css('top', '' + textPlayerinfoY + 'px');
+                $text_player_info.css('font-size', '' + fontSize + 'px');
+            };
 
             self.resizeHelpText = function(gsr) {
                 var helpHeight = $('#help-screen-id').height();
@@ -170,29 +174,31 @@
                 } else {
                     fontSize = '18px';
                 }
-                var oldFontSize = $('#help-text-id').css('font-size');
                 $('#help-text-id').css('font-size', fontSize);
-            }
+            };
 
             self.resizeHandler = function() {
                 var minMargin = 0; // minimum Rand in pixel;
                 var gsr = self.resizeGameEx(minMargin);
+                var $game_logo_id = $('#game-logo-id');
+                var $central_rectangle_id = $('#central-rectangle-id');
+                var $switch_area_screen = $('.switch-area-screen');
 
                 // container breite setzen
                 $('.container-game').css('width', '' + (gsr.gameSizeWidth) + 'px');
 
-                $('#game-logo-id').css('width', '' + (gsr.gameSizeWidth - 3) + 'px');
-                $('#game-logo-id').css('height', '' + 62 + 'px');
+                $game_logo_id.css('width', '' + (gsr.gameSizeWidth - 3) + 'px');
+                $game_logo_id.css('height', '' + 62 + 'px');
 
-                $('#central-rectangle-id').css('width', '' + gsr.gameSizeWidth + 'px');
-                $('#central-rectangle-id').css('height', '' + gsr.gameSizeHeight + 'px');
-                $('#central-rectangle-id').css('left', '' + gsr.gameX + 'px');
-                $('#central-rectangle-id').css('top', '' + gsr.gameY + 'px');
+                $central_rectangle_id.css('width', '' + gsr.gameSizeWidth + 'px');
+                $central_rectangle_id.css('height', '' + gsr.gameSizeHeight + 'px');
+                $central_rectangle_id.css('left', '' + gsr.gameX + 'px');
+                $central_rectangle_id.css('top', '' + gsr.gameY + 'px');
 
-                var gameLogoHeight = $('#game-logo-id').height() + 3; //+border
+                var gameLogoHeight = $game_logo_id.height() + 3; //+border
                 var gameScreenHeight = gsr.gameSizeHeight - gameLogoHeight;
-                $('.switch-area-screen').css('height', '' + gameScreenHeight + 'px');
-                $('.switch-area-screen').css('top', '' + gameLogoHeight + 'px');
+                $switch_area_screen.css('height', '' + gameScreenHeight + 'px');
+                $switch_area_screen.css('top', '' + gameLogoHeight + 'px');
 
                 self.resizeGameField(gsr);
                 self.resizeHtmlElements(gsr);
@@ -202,6 +208,11 @@
             self.switchToScreen = function (onId, lastGameMode, goBackMode) {
                 var img, imgSrc;
                 var isVisibleScreen = !$('#' + onId).is(':hidden');
+                var $header_img_info_id = $('#header-img-info-id');
+                var $header_img_setup_id = $('#header-img-setup-id');
+                var $header_img_statistic_id = $('#header-img-statistic-id');
+                var $startup_screen_id = $('#startup-screen-id');
+                var $game_screen_id = $('#game-screen-id');
 
                 goBackMode = goBackMode || false;
                 if (isVisibleScreen && !goBackMode) {
@@ -210,26 +221,26 @@
                     }
                 }
 
-                $('#header-img-info-id').css("background-color", '');
-                $('#header-img-setup-id').css("background-color", '');
-                $('#header-img-statistic-id').css("background-color", '');
+                $header_img_info_id.css("background-color", '');
+                $header_img_setup_id.css("background-color", '');
+                $header_img_statistic_id.css("background-color", '');
 
-                $('#startup-screen-id').hide();
+                $startup_screen_id.hide();
                 $('#help-screen-id').hide();
                 $('#setup-screen-id').hide();
                 $('#statistic-screen-id').hide();
                 $('#login-screen-id').hide();
                 $('#register-screen-id').hide();
                 $('#wait-online-game-screen-id').hide();
-                $('#game-screen-id').hide();
+                $game_screen_id.hide();
 
 
                 if (!isVisibleScreen && onId === 'help-screen-id')
-                    $('#header-img-info-id').css("background-color", '#DDDDDD');
+                    $header_img_info_id.css("background-color", '#DDDDDD');
                 if (!isVisibleScreen && onId === 'setup-screen-id')
-                    $('#header-img-setup-id').css("background-color", '#DDDDDD');
+                    $header_img_setup_id.css("background-color", '#DDDDDD');
                 if (!isVisibleScreen && onId === 'statistic-screen-id') {
-                    $('#header-img-statistic-id').css("background-color", '#DDDDDD');
+                    $header_img_statistic_id.css("background-color", '#DDDDDD');
                     self.appStatisticService.inStatisticPage = true;
                     if (self.appOnlineService.socket === undefined) {
                         self.appOnlineService.connect();
@@ -242,9 +253,9 @@
 
                 var isGameRun = self.appGameStateService.isGameRunning || false;
                 if (isGameRun && isVisibleScreen && (lastGameMode !== undefined && lastGameMode.length > 0)) {
-                    $('#game-screen-id').show();
+                    $game_screen_id.show();
                 } else if ((isGameRun && isVisibleScreen) || goBackMode) {
-                    $('#startup-screen-id').show();
+                    $startup_screen_id.show();
                 } else {
                     $('#' + onId).show();
                 }
@@ -486,7 +497,6 @@
                 }
                 canvas.width = width;
                 canvas.height = height;
-                var ctx = canvas.getContext("2d");
                 ctx.drawImage(flieLocImg, 0, 0, width, height);
                 var localUserImage = canvas.toDataURL("image/png");
                 flieLocImg.src = localUserImage;
