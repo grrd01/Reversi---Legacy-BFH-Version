@@ -77,6 +77,10 @@ h3 {
     height: 59px;
 }
 
+.startup-menu-img {
+    float:right;
+}
+
 .game-logo-text {
     position: absolute;
     text-align: left;
