@@ -34,7 +34,7 @@
                 // schwarzer Stein Feld
                 "./images/black_stone.svg",
                 // fragezeiche für unbekannten status auf dem Feld
-                "./images/question-128.png",
+                "./images/help.png",
                 // ok Feld
                 "./images/ok.svg",
                 // nicht erlauptes Feld
@@ -99,15 +99,13 @@
             self.switchOffAllBackImages = function() {
                 var allBackImgs = $(".pair-flip-image-back");
                 allBackImgs.each(function (index, item) {
-                    var classname = item.className;
-                    // uje console.log("classname: " + classname);
+
                 });
                 allBackImgs.css("visibility", "hidden");
 
                 var allFrontImgs = $(".pair-flip-image-front");
                 allFrontImgs.each(function (index, item) {
-                    var classname = item.className;
-                    // uje console.log("classname: " + classname);
+
                 });
                 allFrontImgs.css("visibility", "visible");
             };
@@ -195,14 +193,12 @@
                     var stoneId2 = self.gameResources.stoneId2[idx];
                     var stoneId3 = self.gameResources.stoneId3[idx];
                     var stoneId4 = self.gameResources.stoneId4[idx];
-                    var stoneId5 = self.gameResources.stoneId5[idx];
 
                     var imgVis0 = $(".pair-flip-image#" + stoneId0).css("visibility");
                     var imgVis1 = $(".pair-flip-image#" + stoneId1).css("visibility");
                     var imgVis2 = $(".pair-flip-image#" + stoneId2).css("visibility");
                     var imgVis3 = $(".pair-flip-image#" + stoneId3).css("visibility");
                     var imgVis4 = $(".pair-flip-image#" + stoneId4).css("visibility");
-                    var imgVis5 = $(".pair-flip-image#" + stoneId5).css("visibility");
 
                     var visActiveNr = -1;
                     if (imgVis0 === "visible") {
@@ -268,7 +264,6 @@
                 var imgVis2 = $(".pair-flip-image#" + stoneId2).css("visibility");
                 var imgVis3 = $(".pair-flip-image#" + stoneId3).css("visibility");
                 var imgVis4 = $(".pair-flip-image#" + stoneId4).css("visibility");
-                var imgVis5 = $(".pair-flip-image#" + stoneId5).css("visibility");
 
                 var visActive = undefined;
                 if (imgVis0 === "visible") {

@@ -266,8 +266,6 @@
                 } else /*if (playerMode === 'StartOpponent')*/ {
                 }
 
-                var tmp1 = self.appOnlineService.onlineStartPlayer;
-                var tmp2 = self.appOnlineService.onlineStartOpponent;
             };
 
             self.isTheGameOver = function() {

@@ -34,11 +34,11 @@
     <div class="central-rectangle" id="central-rectangle-id">
 
         <div class="game-logo" id="game-logo-id">
-            <img class="header-img" id="header-img-home-id" src="./images/home-8x.png" alt="H" title="Home">
+            <img class="header-img" id="header-img-home-id" src="./images/home.png" alt="H" title="Home">
             <img id="game-logo-img" src="images/logo.png" alt="Reversi">
-            <img class="header-img" id="header-img-info-id" src="./images/question-mark-8x.png" alt="?" title="Hilfe">
-            <img class="header-img" id="header-img-setup-id" src="./images/cog-8x.png" alt="*" title="Einstellungen">
-            <img class="header-img" id="header-img-statistic-id" src="./images/statistic-8x.png" alt="g" title="Highscores">
+            <img class="header-img" id="header-img-info-id" src="./images/help.png" alt="?" title="Hilfe">
+            <img class="header-img" id="header-img-setup-id" src="./images/settings.png" alt="*" title="Einstellungen">
+            <img class="header-img" id="header-img-statistic-id" src="./images/ranking.png" alt="g" title="Highscores">
         </div>
 
         <!--
@@ -60,7 +60,7 @@
                         <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
                             <button type="button" data-ng-click="main.localTowPlayerGame()" class="btn btn-lg btn-default btn-block">Zweispieler Spiel
                                 <span class="">
-                                   <img class="startup-menu-img" src="./images/people-8x.png" alt="2">
+                                   <img class="startup-menu-img" src="./images/2player.png" alt="2">
                                 </span>
                             </button>
                         </div>
@@ -68,7 +68,7 @@
                         <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
                             <button type="button" data-ng-click="main.localPlayWithComputer()" class="btn btn-lg btn-default btn-block">Spiel mit Computer
                                 <span class="">
-                                   <img class="startup-menu-img" src="./images/computer-8x.png" alt="C">
+                                   <img class="startup-menu-img" src="./images/computer.png" alt="C">
                                 </span>
                             </button>
                         </div>
@@ -79,7 +79,7 @@
                                 <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
                                 -->
                                 <span class="">
-                                   <img class="startup-menu-img" src="./images/network-8x.png" alt="N">
+                                   <img class="startup-menu-img" src="./images/online.png" alt="N">
                                 </span>
                             </button>
                         </div>
@@ -146,7 +146,7 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-offset-1 col-sm-offset-1 col-sm-offset-1 col-sm-10"  id="file-display-area">
-                                    <img id="local-user-img-id" src="images/emptyuser-90x120.png" alt="Spieler Weiss">
+                                    <img id="local-user-img-id" src="images/player.png" alt="Spieler Weiss">
                                 </div>
                             </div>
 
@@ -157,7 +157,7 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-offset-1 col-sm-offset-1 col-sm-offset-1 col-sm-10"  id="file-display-area-2">
-                                    <img id="local-user-img-id-2" src="images/emptyuser-90x120.png" alt="Spieler Schwarz">
+                                    <img id="local-user-img-id-2" src="images/player.png" alt="Spieler Schwarz">
                                 </div>
                             </div>
 
@@ -318,19 +318,19 @@
 
         <div class="switch-area-screen game-screen" id="game-screen-id">
             <div class="game-player-info" id="game-player-info-id">
-                <img class="img-player-info img-left-player-info" id="img-left-player-info-local-id" src="./images/emptyuser-90x120.png" alt="Spieler weiss">
-                <img class="img-player-info img-left-player-info" id="img-left-player-info-computer-id" src="./images/computer-8x.png" alt="Computer">
-                <img class="img-player-info img-left-player-info" id="img-left-player-info-online-id" src="./images/network-8x.png" alt="Online">
+                <img class="img-player-info img-left-player-info" id="img-left-player-info-local-id" src="./images/player.png" alt="Spieler weiss">
+                <img class="img-player-info img-left-player-info" id="img-left-player-info-computer-id" src="./images/computer.png" alt="Computer">
+                <img class="img-player-info img-left-player-info" id="img-left-player-info-online-id" src="./images/online.png" alt="Online">
 
-                <img class="img-player-info img-right-player-info" id="img-right-player-info-local-id" src="./images/emptyuser-90x120.png" alt="Spieler schwarz">
-                <img class="img-player-info img-right-player-info" id="img-right-player-info-computer-id" src="./images/computer-8x.png" alt="Computer">
-                <img class="img-player-info img-right-player-info" id="img-right-player-info-online-id" src="./images/network-8x.png" alt="Online">
+                <img class="img-player-info img-right-player-info" id="img-right-player-info-local-id" src="./images/player.png" alt="Spieler schwarz">
+                <img class="img-player-info img-right-player-info" id="img-right-player-info-computer-id" src="./images/computer.png" alt="Computer">
+                <img class="img-player-info img-right-player-info" id="img-right-player-info-online-id" src="./images/online.png" alt="Online">
 
                 <img class="img-player-stone" id="img-player-stone-left-id" src="./images/white_stone.svg" alt="Stein weiss">
                 <img class="img-player-stone" id="img-player-stone-right-id" src="./images/black_stone.svg" alt="Stein schwarz">
 
-                <img data-ng-show="main.appGameStateService.actualPlayerIsWhite" class="img-player-status" id="img-player-status-left-id" src="./images/arrow-thick-left-green-8x.png" alt="Pfeil links">
-                <img data-ng-show="main.appGameStateService.actualPlayerIsBlack" class="img-player-status" id="img-player-status-right-id" src="./images/arrow-thick-right-green-8x.png" alt="Pfeil rechts">
+                <img data-ng-show="main.appGameStateService.actualPlayerIsWhite" class="img-player-status" id="img-player-status-left-id" src="./images/arrow-left.png" alt="Pfeil links">
+                <img data-ng-show="main.appGameStateService.actualPlayerIsBlack" class="img-player-status" id="img-player-status-right-id" src="./images/arrow-right.png" alt="Pfeil rechts">
 
                 <p class="text-player-info" id="text-player-info-left-id">{{main.userLeftInfoText}}</p>
                 <p class="text-player-info" id="text-player-info-right-id">{{main.userRightInfoText}}</p>
