@@ -49,6 +49,10 @@ html, body {
     background-color: #6b7db1;
 }
 
+h3 {
+    text-align: center;
+}
+
 #central-rectangle-id {
     position: absolute;
     display: block;
