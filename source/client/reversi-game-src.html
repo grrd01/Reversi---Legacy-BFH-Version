@@ -6,7 +6,7 @@
 
     HTML-File der Applikation. Einziges HTML-File. Dieses wurde so gewählt, weil die App ja
     auch ohne Server laufen sollte. Ein nachladen von weiteren Seiten oder der Weg mit Angular
-    Routing oder ng-include, war leider deswegen hinfällig!
+    Routing oder data-ng-include, war leider deswegen hinfällig!
 
     -->
 
@@ -29,7 +29,7 @@
     <link rel="stylesheet" href="css/reversi-game-src.css">
 
 </head>
-<body ng-app="ApplicationModule" ng-controller="ApplicationMainCtrl as main" ng-cloak>
+<body data-ng-app="ApplicationModule" data-ng-controller="ApplicationMainCtrl as main" data-ng-cloak>
 
     <div class="central-rectangle" id="central-rectangle-id">
 
@@ -42,7 +42,7 @@
         </div>
 
         <!--
-            alle nachfolgenden div's ==> 'switch-area-screen' klassen wären besser über ng-include zu machen. Dieses funktioniert
+            alle nachfolgenden div's ==> 'switch-area-screen' klassen wären besser über data-ng-include zu machen. Dieses funktioniert
             aber leider nur über ein Server (funktioniert nicht wenn wenn lokal mit doppel-click auf html-file).
         -->
 
@@ -58,28 +58,28 @@
                         </div>
                     <p>
                         <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
-                            <button type="button" ng-click="main.localTowPlayerGame()" class="btn btn-lg btn-default btn-block">Zweispieler Spiel
+                            <button type="button" data-ng-click="main.localTowPlayerGame()" class="btn btn-lg btn-default btn-block">Zweispieler Spiel
                                 <span class="">
-                                   <img class="startup-menu-img" align="right" src="./images/people-8x.png" alt="2">
+                                   <img class="startup-menu-img" src="./images/people-8x.png" alt="2">
                                 </span>
                             </button>
                         </div>
                     <p>
                         <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
-                            <button type="button" ng-click="main.localPlayWithComputer()" class="btn btn-lg btn-default btn-block">Spiel mit Computer
+                            <button type="button" data-ng-click="main.localPlayWithComputer()" class="btn btn-lg btn-default btn-block">Spiel mit Computer
                                 <span class="">
-                                   <img class="startup-menu-img" align="right" src="./images/computer-8x.png" alt="C">
+                                   <img class="startup-menu-img" src="./images/computer-8x.png" alt="C">
                                 </span>
                             </button>
                         </div>
                     <p>
                         <div class="col-sm-offset-1 col-sm-10 col-xs-12 vertical-startup-margin-01">
-                            <button type="button" ng-click="main.onlinePlay()" class="btn btn-lg btn-default btn-block">Spiel Online-Gegener
+                            <button type="button" data-ng-click="main.onlinePlay()" class="btn btn-lg btn-default btn-block">Spiel Online-Gegener
                                 <!--
                                 <span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>
                                 -->
                                 <span class="">
-                                   <img class="startup-menu-img" align="right" src="./images/network-8x.png" alt="N">
+                                   <img class="startup-menu-img" src="./images/network-8x.png" alt="N">
                                 </span>
                             </button>
                         </div>
@@ -110,7 +110,7 @@
                     </div>
                 </div>
             </div>
-            <button type="button" ng-click="main.goBack($event)" class="btn btn-primary go-back-button">Zurück</button>
+            <button type="button" data-ng-click="main.goBack($event)" class="btn btn-primary go-back-button">Zurück</button>
         </div>
 
         <div class="switch-area-screen setup-screen" id="setup-screen-id">
@@ -125,7 +125,7 @@
                         <div class="col-sm-offset-1 col-sm-10 col-xs-12">
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" ng-model="main.appSetupService.showPosibleStones" />
+                                    <input type="checkbox" data-ng-model="main.appSetupService.showPosibleStones" />
                                     Mögliche Spielzüge anzeigen.
                                 </label>
                             </div>
@@ -146,7 +146,7 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-offset-1 col-sm-offset-1 col-sm-offset-1 col-sm-10"  id="file-display-area">
-                                    <img id="local-user-img-id" src="" alt="Spieler Weiss">
+                                    <img id="local-user-img-id" src="images/emptyuser-90x120.png" alt="Spieler Weiss">
                                 </div>
                             </div>
 
@@ -157,7 +157,7 @@
                                     </label>
                                 </div>
                                 <div class="col-sm-offset-1 col-sm-offset-1 col-sm-offset-1 col-sm-10"  id="file-display-area-2">
-                                    <img id="local-user-img-id-2" src="" alt="Spieler Schwarz">
+                                    <img id="local-user-img-id-2" src="images/emptyuser-90x120.png" alt="Spieler Schwarz">
                                 </div>
                             </div>
 
@@ -165,7 +165,7 @@
                     </form>
                 </div>
             </div>
-            <button type="button" ng-click="main.goBack($event)" class="btn btn-primary go-back-button">Zurück</button>
+            <button type="button" data-ng-click="main.goBack($event)" class="btn btn-primary go-back-button">Zurück</button>
         </div>
 
         <div class="switch-area-screen statistic-screen" id="statistic-screen-id">
@@ -181,7 +181,7 @@
                     </div>
                     <div class="span8">
                         <p>
-                            <div ng-cloak>
+                            <div data-ng-cloak>
                                 <table class="table table-striped">
                                     <thead>
                                         <tr>
@@ -194,7 +194,7 @@
                                         </tr>
                                     </thead>
                                     
-                                    <tr ng-repeat="r in main.appStatisticService.highscores">
+                                    <tr data-ng-repeat="r in main.appStatisticService.highscores">
                                         <td>{{ r.rank }}</td>
                                         <td>{{ r.name }}</td>
                                         <td>{{ r.gamesWon }}</td>
@@ -208,7 +208,7 @@
 
                 </div>
             </div>
-            <button type="button" ng-click="main.goBack($event)" class="btn btn-primary go-back-button">Zurück</button>
+            <button type="button" data-ng-click="main.goBack($event)" class="btn btn-primary go-back-button">Zurück</button>
         </div>
 
         <div class="switch-area-screen login-screen" id="login-screen-id">
@@ -227,21 +227,21 @@
                         <div class="form-group">
                             <label for="name" class="col-sm-offset-1 col-sm-10">Name</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <input id="name" name="name" class="form-control input-large" type="text" placeholder="Name" ng-model="main.appAuthenticationService.userData.name">
+                                <input id="name" name="name" class="form-control input-large" type="text" placeholder="Name" data-ng-model="main.appAuthenticationService.userData.name">
                             </div>
                         </div>
                         <div class="form-group">
                             <label for="password" class="col-sm-offset-1 col-sm-10">Password</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <input id="password" name="password" class="form-control input-large" type="password" placeholder="Password" ng-model="main.appAuthenticationService.userData.password">
+                                <input id="password" name="password" class="form-control input-large" type="password" placeholder="Password" data-ng-model="main.appAuthenticationService.userData.password">
                             </div>
                         </div>
                         <div class="form-group">
                             <div class="col-sm-offset-1 col-sm-3 col-xs-5">
-                                <button type="submit" ng-click="main.playerLogin()" class="btn btn-default">Sign in</button>
+                                <button type="submit" data-ng-click="main.playerLogin()" class="btn btn-default">Sign in</button>
                             </div>
                             <div class="col-sm-3 col-xs-5">
-                                <button type="submit" ng-click="main.switchToPlayerRegisterDialog()" class="btn btn-default">Register</button>
+                                <button type="submit" data-ng-click="main.switchToPlayerRegisterDialog()" class="btn btn-default">Register</button>
                             </div>
                         </div>
                     </form>
@@ -268,7 +268,7 @@
                         <div class="form-group" >
                             <label class="col-sm-offset-1 col-sm-10" for="name">Name:</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                 <input id="regname" name="name" class="form-control input-large" type="text" placeholder="Name" ng-model="main.appAuthenticationService.userData.name">
+                                 <input id="regname" name="name" class="form-control input-large" type="text" placeholder="Name" data-ng-model="main.appAuthenticationService.userData.name">
                             </div>
                         </div>
 
@@ -276,7 +276,7 @@
                         <div class="form-group">
                             <label class="col-sm-offset-1 col-sm-10" for="password">Password:</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <input id="regpassword" name="password" class="form-control input-large" type="password" placeholder="Password" ng-model="main.appAuthenticationService.userData.password">
+                                <input id="regpassword" name="password" class="form-control input-large" type="password" placeholder="Password" data-ng-model="main.appAuthenticationService.userData.password">
                             </div>
                         </div>
 
@@ -284,13 +284,13 @@
                         <div class="form-group">
                             <label class="col-sm-offset-1 col-sm-10" for="reenterpassword">Re-Enter Password:</label>
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <input id="reenterpassword" class="form-control input-large" name="reenterpassword" type="password" placeholder="Password" ng-model="main.appAuthenticationService.userData.password2">
+                                <input id="reenterpassword" class="form-control input-large" name="reenterpassword" type="password" placeholder="Password" data-ng-model="main.appAuthenticationService.userData.password2">
                             </div>
                         </div>
 
                         <div class="form-group">
                             <div class="col-sm-offset-1 col-sm-3 col-xs-5">
-                                <button type="submit" ng-click="main.playerRegister()" class="btn btn-default">Register</button>
+                                <button type="submit" data-ng-click="main.playerRegister()" class="btn btn-default">Register</button>
                             </div>
                         </div>
 
@@ -307,8 +307,8 @@
                     <form class="form-horizontal">
                         <div class="form-group">
                             <div class="col-sm-offset-1 col-sm-10 col-xs-12">
-                                <h3 ng-show="main.appOnlineService.onlineState === 'none'">Warten auf Server.</h3>
-                                <h3 ng-show="main.appOnlineService.onlineState === 'connect'">Warten auf Spieler.</h3>
+                                <h3 data-ng-show="main.appOnlineService.onlineState === 'none'">Warten auf Server.</h3>
+                                <h3 data-ng-show="main.appOnlineService.onlineState === 'connect'">Warten auf Spieler.</h3>
                             </div>
                         </div>
                     </form>
@@ -329,8 +329,8 @@
                 <img class="img-player-stone" id="img-player-stone-left-id" src="./images/white_stone.svg" alt="Stein weiss">
                 <img class="img-player-stone" id="img-player-stone-right-id" src="./images/black_stone.svg" alt="Stein schwarz">
 
-                <img ng-show="main.appGameStateService.actualPlayerIsWhite" class="img-player-status" id="img-player-status-left-id" src="./images/arrow-thick-left-green-8x.png" alt="Pfeil links">
-                <img ng-show="main.appGameStateService.actualPlayerIsBlack" class="img-player-status" id="img-player-status-right-id" src="./images/arrow-thick-right-green-8x.png" alt="Pfeil rechts">
+                <img data-ng-show="main.appGameStateService.actualPlayerIsWhite" class="img-player-status" id="img-player-status-left-id" src="./images/arrow-thick-left-green-8x.png" alt="Pfeil links">
+                <img data-ng-show="main.appGameStateService.actualPlayerIsBlack" class="img-player-status" id="img-player-status-right-id" src="./images/arrow-thick-right-green-8x.png" alt="Pfeil rechts">
 
                 <p class="text-player-info" id="text-player-info-left-id">{{main.userLeftInfoText}}</p>
                 <p class="text-player-info" id="text-player-info-right-id">{{main.userRightInfoText}}</p>
