@@ -382,7 +382,6 @@
                             $rootScope.$broadcast('stopPlay');
                             console.log("(local or computer stopPlay()");
                         }
-
                     }
                 } else {
                     self.statusMessgaeText = "bereit";
@@ -392,10 +391,6 @@
 
                 $timeout(self.timerHandler, 333);
             };
-
-            $('#modal-dialog').on('hidden.bs.modal', function (e) {
-                console.log("modal dialog is done.");
-            });
 
             $timeout(self.timerHandler, 1000);
         };

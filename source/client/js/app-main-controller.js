@@ -105,6 +105,15 @@
             self.appLastGameMode = "";
         });
 
+        $('#modal-dialog').on('hidden.bs.modal', function (e) {
+            console.log("modal dialog is done.");
+            self.appScreenService.switchToScreen('startup-screen-id');
+        });
+
+        $('#modal-colored-dialog').on('hidden.bs.modal', function (e) {
+            console.log("modal colored dialog is done.");
+        });
+
         // resize registrieren
         angular.element($window).bind('resize', function () {
             self.appScreenService.resizeHandler();
@@ -173,11 +182,10 @@
 
         $scope.$on('stopPlay', function(event, args) {
             console.log("$scope.$on('stopPlay');");
-
             if (!self.appGameStateService.gameLogic.isGameOver()) {
                 self.appAuthenticationService.showColoredMessage("Spielabbruch", "Gegner hat Spiel beendet.", '#e81e1a');
             }
-            self.appScreenService.switchToScreen('startup-screen-id');
+            //self.appScreenService.switchToScreen('startup-screen-id');
         });
 
         $scope.$on('connected', function (event, args) {
