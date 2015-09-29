@@ -270,14 +270,14 @@
                         if (self.appSetupService.localUserImageWhite.length > 0) {
                             img = $('#local-user-img-id');
                             imgSrc = img.attr("src");
-                            if (imgSrc != self.appSetupService.localUserImageWhite) {
+                            if (imgSrc != self.appSetupService.localUserImageWhite && self.appSetupService.localUserImageWhite != 'null') {
                                 img.attr("src", self.appSetupService.localUserImageWhite);
                             }
                         }
                         if (self.appSetupService.localUserImageBlack.length > 0) {
                             img = $('#local-user-img-id-2');
                             imgSrc = img.attr("src");
-                            if (imgSrc != self.appSetupService.localUserImageBlack) {
+                            if (imgSrc != self.appSetupService.localUserImageBlack && self.appSetupService.localUserImageBlack != 'null') {
                                 img.attr("src", self.appSetupService.localUserImageBlack);
                             }
                         }
@@ -347,33 +347,35 @@
                     $('#img-left-player-info-computer-id').hide();
                     $('#img-left-player-info-online-id').hide();
 
-                    $('#img-right-player-info-local-id').show();
+                    $('#img-right-player-info-local-id').hide();
                     $('#img-right-player-info-computer-id').hide();
-                    $('#img-right-player-info-online-id').hide();
+                    $('#img-right-player-info-online-id').show();
                 } else /*if (playerMode === 'StartOpponent')*/ {
-                    $('#img-left-player-info-local-id').show();
+                    $('#img-left-player-info-local-id').hide();
                     $('#img-left-player-info-computer-id').hide();
-                    $('#img-left-player-info-online-id').hide();
+                    $('#img-left-player-info-online-id').show();
 
                     $('#img-right-player-info-local-id').show();
                     $('#img-right-player-info-computer-id').hide();
                     $('#img-right-player-info-online-id').hide();
                 }
-                //self.updatePlayerImages();
+                self.updatePlayerImages();
             };
 
             self.setOnlinePlayerImage = function(pic) {
-                var img = $('#img-left-player-info-local-id');
+                //var img = $('#img-left-player-info-local-id');
+                var img = $('#img-left-player-info-online-id');
                 var imgSrc = img.attr("src");
-                if (pic != null && imgSrc != pic) {
+                if (pic != null && pic != 'null' && imgSrc != pic) {
                     img.attr("src", pic);
                 }
             };
 
             self.setOnlineOpponentImage = function(pic) {
-                var img = $('#img-right-player-info-local-id');
+                //var img = $('#img-right-player-info-local-id');
+                var img = $('#img-right-player-info-online-id');
                 var imgSrc = img.attr("src");
-                if (imgSrc != pic) {
+                if (pic != null && pic != 'null' && imgSrc != pic) {
                     img.attr("src", pic);
                 }
             };

@@ -190,7 +190,6 @@
                 self.appAuthenticationService.showColoredMessage("Spielabbruch", "Gegner hat Spiel beendet.", '#e81e1a');
                 self.gameCanceled = true;
             }
-            //self.appScreenService.switchToScreen('startup-screen-id');
         });
 
         $scope.$on('connected', function (event, args) {
@@ -209,8 +208,6 @@
                 self.userRightInfoText = args.data.name;
                 self.userLeftInfoText = self.appAuthenticationService.userData.name;
 
-                //self.appScreenService.setOnlinePlayerImage(args.data.pic);
-                //self.appScreenService.setOnlineOpponentImage(self.appSetupService.localUserImageWhite);
                 self.appScreenService.setOnlinePlayerImage(self.appSetupService.localUserImageWhite);
                 self.appScreenService.setOnlineOpponentImage(args.data.pic);
             } else /* if (self.appOnlineService.onlineStartOpponent) */ {
@@ -219,8 +216,6 @@
                 self.userLeftInfoText = args.data.name;
                 self.userRightInfoText = self.appAuthenticationService.userData.name;
 
-                //self.appScreenService.setOnlinePlayerImage(self.appSetupService.localUserImageBlack);
-                //self.appScreenService.setOnlineOpponentImage(args.data.pic);
                 self.appScreenService.setOnlinePlayerImage(args.data.pic);
                 self.appScreenService.setOnlineOpponentImage(self.appSetupService.localUserImageWhite);
             }
