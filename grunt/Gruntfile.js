@@ -104,11 +104,18 @@ module.exports = function(grunt) {
                     {expand: true, cwd: '../source/client/css/vendor/', src: '**', dest: '../build/css/vendor/'},
                     {expand: true, cwd: '../source/client/', src: 'apple-touch-icon.png', dest: '../build/'},
                     {expand: true, cwd: '../source/client/', src: 'favicon.ico', dest: '../build/'}
-
-
                 ]
             }
         },
+
+        rename: {
+            main: {
+                files: [
+                    {src: ['../build/reversi-game-src.html'], dest: '../build/index.html'},
+                ]
+            }
+        },
+
 
         manifest: {
             generate: {
@@ -119,7 +126,7 @@ module.exports = function(grunt) {
                     verbose: false,
                     timestamp: true,
                     hash: true,
-                    master: ['reversi-game-src.html'],
+                    master: ['index.html'],
                     process: function(path) {return path.substring(''.length);}
                 },
                 src: [
@@ -160,6 +167,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-replace');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-contrib-rename');
     grunt.loadNpmTasks('grunt-manifest');
     grunt.loadNpmTasks('grunt-karma');
 
@@ -170,6 +178,7 @@ module.exports = function(grunt) {
         'htmlmin',
         'replace',
         'copy',
+        'rename',
         'manifest',
         'karma'
     ]);
