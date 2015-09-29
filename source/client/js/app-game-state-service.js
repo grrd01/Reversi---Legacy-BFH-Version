@@ -285,6 +285,7 @@
                             self.setActualPlayerToWhite();
                         } else {
                             self.setActualPlayerToBlack();
+                            self.startComputerMove();
                         }
                         $rootScope.$broadcast('update-card-layout');
                     } else {

@@ -3,6 +3,14 @@ var gameLogic = function() {
         init = function(){
             gameLogic.initEmptyBoard();
             gameLogic.setStartGame();
+
+            //gameLogic.changeObjectState(0,7,2,false,false);
+            //gameLogic.changeObjectState(7,7,0,false,false);
+            //gameLogic.changeObjectState(7,0,0,false,false);
+            //
+            //gameLogic.changeObjectState(5,0,2,false,false);
+            //gameLogic.changeObjectState(6,0,0,false,false);
+
         },
 
         initEmptyBoard = function() {
@@ -43,7 +51,16 @@ var gameLogic = function() {
         },
 
         changeObjectState = function(col, row, state, isWithUpdate, isWithAutoPlayer) {
+            if (board[col][row] == 0){
+                console.log('set ' + col + " " + row +" to state " + state);
+            } else if ((board[col][row] == 1 && state == 2) || (board[col][row] == 2 && state == 1)) {
+                console.log('update ' + col + " " + row + " from " + board[col][row] + " to state " + state);
+            } else {
+                console.log('error? ' + col + " " + row +" from " + board[col][row] + " to state " + state);
+            }
+
             board[col][row] = state;
+
             if (isWithUpdate) {
                 updateStates(state, col, row);
             }
@@ -116,9 +133,10 @@ var gameLogic = function() {
                     // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                     updateFigures.push([indexX - 1, indexY - 1]);
                     if (!isVirtualChangeState) {
+                        // uje console.log("changeObjectState: X: " + indexX + " Y: " + indexY + " state: " + state);
                         changeObjectState(indexX - 1, indexY - 1, state);
                     }
-                    updateStateLeftTop(state, indexX - 1, indexY - 1, updateFigures)
+                    updateStateLeftTop(state, indexX - 1, indexY - 1, updateFigures, isVirtualChangeState)
                 }
             }
         },
@@ -131,7 +149,7 @@ var gameLogic = function() {
                     if (!isVirtualChangeState){
                         changeObjectState(indexX, indexY - 1, state);
                     }
-                    updateStateTop(state, indexX, indexY - 1, updateFigures)
+                    updateStateTop(state, indexX, indexY - 1, updateFigures, isVirtualChangeState)
                 }
             }
         },
@@ -144,7 +162,7 @@ var gameLogic = function() {
                     if (!isVirtualChangeState){
                         changeObjectState(indexX + 1, indexY - 1, state);
                     }
-                    updateStateRightTop(state, indexX + 1, indexY - 1, updateFigures)
+                    updateStateRightTop(state, indexX + 1, indexY - 1, updateFigures, isVirtualChangeState)
                 }
             }
         },
@@ -157,7 +175,7 @@ var gameLogic = function() {
                     if (!isVirtualChangeState){
                         changeObjectState(indexX - 1, indexY, state);
                     }
-                    updateStateLeft(state, indexX - 1, indexY, updateFigures)
+                    updateStateLeft(state, indexX - 1, indexY, updateFigures, isVirtualChangeState)
                 }
             }
         },
@@ -170,7 +188,7 @@ var gameLogic = function() {
                     if (!isVirtualChangeState){
                         changeObjectState(indexX + 1, indexY, state);
                     }
-                    updateStateRight(state, indexX + 1, indexY, updateFigures)
+                    updateStateRight(state, indexX + 1, indexY, updateFigures, isVirtualChangeState)
                 }
             }
         },
@@ -183,7 +201,7 @@ var gameLogic = function() {
                     if (!isVirtualChangeState){
                         changeObjectState(indexX - 1, indexY + 1, state);
                     }
-                    updateStateLeftBottom(state, indexX - 1, indexY + 1, updateFigures)
+                    updateStateLeftBottom(state, indexX - 1, indexY + 1, updateFigures, isVirtualChangeState)
                 }
             }
         },
@@ -196,7 +214,7 @@ var gameLogic = function() {
                     if (!isVirtualChangeState){
                         changeObjectState(indexX, indexY + 1, state);
                     }
-                    updateStateBottom(state, indexX, indexY + 1, updateFigures);
+                    updateStateBottom(state, indexX, indexY + 1, updateFigures, isVirtualChangeState);
                 }
             }
         },
@@ -209,7 +227,7 @@ var gameLogic = function() {
                     if (!isVirtualChangeState){
                         changeObjectState(indexX + 1, indexY + 1, state);
                     }
-                    updateStateRightBottom(state, indexX + 1, indexY + 1, updateFigures);
+                    updateStateRightBottom(state, indexX + 1, indexY + 1, updateFigures, isVirtualChangeState);
                 }
             }
         },
@@ -368,16 +386,13 @@ var gameLogic = function() {
                 console.log("possibleMoves.length: " + possibleMoves.length);
                 console.log("possibleMoves: " + possibleMoves);
 
-                //var corners =[[0,0],[0,columns-1],[rows-1,0],[columns-1, rows-1]];
-
-                //var randomIndex = Math.floor(Math.random() * 10 % (possibleMoves.length));
-                var randomIndex = getMoveByComputer(possibleMoves);
+                var randomIndex = getMoveByComputer(possibleMoves, state);
 
                 // uje console.log("randomIndex: " + randomIndex);
                 // uje console.log("moveFromComputerPlayer: " + possibleMoves[randomIndex]);
                 console.log("Computermove:");
-                console.log("randomIndex][0]: " + possibleMoves[randomIndex][0]);
-                console.log("randomIndex][1]: " + possibleMoves[randomIndex][1]);
+                //console.log("randomIndex][0]: " + possibleMoves[randomIndex][0]);
+                //console.log("randomIndex][1]: " + possibleMoves[randomIndex][1]);
                 changeObjectState(possibleMoves[randomIndex][0], possibleMoves[randomIndex][1], state ,true, false);
                 return true;
             }else{
@@ -386,9 +401,52 @@ var gameLogic = function() {
 
         },
 
-        getMoveByComputer = function(possibleMoves){
+        getMoveByComputer = function(possibleMoves, state){
             if (typeof possibleMoves != 'undefined' &&  possibleMoves.length > 0){
-                var randomIndex = Math.floor(Math.random() * 10 % (possibleMoves.length));
+                var randomIndex = 0;
+                //var randomIndex = Math.floor(Math.random() * 10 % (possibleMoves.length));
+
+                function IsInArray(value, array){
+                    for(var k = 0; k < array.length; k++){
+                        if(array[k][0] == value[0] && array[k][1] == value[1]){
+                            return k;
+                        }
+                    }
+                    return -1;
+                };
+
+                var tempArray = [];
+                for (var i = 0, len = possibleMoves.length; i < len; i++) {
+                    tempArray[i] = possibleMoves[i].slice();
+                }
+
+                var corners =[[0,0],[0,columns-1],[rows-1,0],[columns-1, rows-1]];
+                tempArray.forEach(function(posMove, i) {
+                    posMove[2] = updateStates(state, posMove[0], posMove[1],true).length;
+                });
+
+                tempArray.sort(function(a,b) {
+
+                    if ((IsInArray([a[0],a[1]],corners) > -1 && IsInArray([b[0],b[1]],corners) > -1) ||
+                        (IsInArray([a[0],a[1]],corners) == -1 && IsInArray([b[0],b[1]],corners) == -1)){
+                        if (a[2] == b[2]){
+                            return 0;
+                        }else if (a[2] > b[2]) {
+                            return -1;
+                        } else {
+                            return 1;
+                        }
+                    }else if(IsInArray([a[0],a[1]],corners) == -1 && IsInArray([b[0],b[1]],corners) > -1){
+                        return 1;
+                    }else if(IsInArray([a[0],a[1]],corners) > -1 && IsInArray([b[0],b[1]],corners) == -1){
+                        return -1;
+                    }else{
+                        return 0;
+                    }
+                });
+
+                randomIndex = IsInArray([tempArray[0][0],tempArray[0][1]], possibleMoves);
+
                 return randomIndex;
             }else {
                 return -1;
@@ -437,4 +495,3 @@ var gameLogic = function() {
     };
 }();
 
-gameLogic.init();
