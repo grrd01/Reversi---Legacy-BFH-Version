@@ -102,9 +102,12 @@ module.exports = function(grunt) {
                 files: [
                     {expand: true, cwd: '../source/client/js/vendor/', src: '**', dest: '../build/js/vendor/'},
                     {expand: true, cwd: '../source/client/css/vendor/', src: '**', dest: '../build/css/vendor/'},
+                    {expand: true, cwd: '../source/client/', src: 'apple-touch-icon.png', dest: '../build/'},
+                    {expand: true, cwd: '../source/client/', src: 'favicon.ico', dest: '../build/'}
 
-                ],
-            },
+
+                ]
+            }
         },
 
         manifest: {
