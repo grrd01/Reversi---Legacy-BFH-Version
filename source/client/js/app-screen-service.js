@@ -296,7 +296,7 @@
                         img = $('#img-left-player-info-local-id');
                         imgSrc = img.attr("src");
 
-                        if (imgSrc != self.appSetupService.localUserImageWhite) {
+                        if (imgSrc != self.appSetupService.localUserImageWhite && self.appSetupService.localUserImageWhite != 'null') {
                             img.attr("src", self.appSetupService.localUserImageWhite);
                         }
                     }
@@ -308,7 +308,7 @@
                         img = $('#img-right-player-info-local-id');
                         imgSrc = img.attr("src");
 
-                        if (imgSrc != self.appSetupService.localUserImageBlack) {
+                        if (imgSrc != self.appSetupService.localUserImageBlack && self.appSetupService.localUserImageBlack != 'null') {
                             img.attr("src", self.appSetupService.localUserImageBlack);
                         }
                     }
