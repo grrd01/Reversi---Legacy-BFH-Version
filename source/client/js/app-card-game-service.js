@@ -99,13 +99,11 @@
             self.switchOffAllBackImages = function() {
                 var allBackImgs = $(".pair-flip-image-back");
                 allBackImgs.each(function (index, item) {
-
                 });
                 allBackImgs.css("visibility", "hidden");
 
                 var allFrontImgs = $(".pair-flip-image-front");
                 allFrontImgs.each(function (index, item) {
-
                 });
                 allFrontImgs.css("visibility", "visible");
             };
@@ -251,6 +249,8 @@
                         } else if (stateNr == 4) {
                             if (self.appSetupService.showPosibleStones)
                                 self.doImageSwitch(xindex, yindex, stateNr);
+                            else (self.appSetupService.showPosibleStones)
+                                self.doImageSwitch(xindex, yindex, 0);
                         } else {
                             self.doImageSwitch(xindex, yindex, stateNr);
                         }
