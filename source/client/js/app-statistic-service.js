@@ -22,8 +22,10 @@
             //self.highscores = [];
             self.highscores = [
                 /* Test Daten */
+                /*
                 { gamesPlayed: 3, gamesWon: 3, name: "1", pointsWon: 55, rank: 5 },
                 { gamesPlayed: 7, gamesWon: 2, name: "ABCDEFGHJ-22-22", pointsWon: 43, rank: 4 }
+                */
             ];
 
             self.setHighscores = function (highscores) {
