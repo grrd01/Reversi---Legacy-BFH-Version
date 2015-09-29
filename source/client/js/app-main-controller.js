@@ -28,6 +28,7 @@
         self.appLastGameMode = "";
         self.userLeftInfoText = "";
         self.userRightInfoText = "";
+        self.gameCanceled = false;
 
         // functions
 
@@ -112,6 +113,9 @@
 
         $('#modal-colored-dialog').on('hidden.bs.modal', function (e) {
             console.log("modal colored dialog is done.");
+            if (self.gameCanceled === true)
+                self.appScreenService.switchToScreen('startup-screen-id');
+            self.gameCanceled = false;
         });
 
         // resize registrieren
@@ -184,6 +188,7 @@
             console.log("$scope.$on('stopPlay');");
             if (!self.appGameStateService.gameLogic.isGameOver()) {
                 self.appAuthenticationService.showColoredMessage("Spielabbruch", "Gegner hat Spiel beendet.", '#e81e1a');
+                self.gameCanceled = true;
             }
             //self.appScreenService.switchToScreen('startup-screen-id');
         });
