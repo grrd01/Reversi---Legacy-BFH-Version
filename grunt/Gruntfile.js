@@ -96,6 +96,20 @@ module.exports = function(grunt) {
                 ]
             }
         },
+
+        copy: {
+            main: {
+                files: [
+                    {expand: true, cwd: '../source/client/js/vendor/', src: '**', dest: '../build/js/vendor/'},
+                    {expand: true, cwd: '../source/client/css/vendor/', src: '**', dest: '../build/css/vendor/'},
+                    {expand: true, cwd: '../source/client/', src: 'apple-touch-icon.png', dest: '../build/'},
+                    {expand: true, cwd: '../source/client/', src: 'favicon.ico', dest: '../build/'}
+
+
+                ]
+            }
+        },
+
         manifest: {
             generate: {
                 options: {
@@ -116,6 +130,27 @@ module.exports = function(grunt) {
                 ],
                 dest: '../build/manifest.appcache'
             }
+        },
+
+        karma: {
+            unit: {
+                options: {
+                    frameworks: ['jasmine'],
+                    singleRun: true,
+                    browsers: ['PhantomJS'], //'Firefox','IE'
+                    files: [
+                        //'../source/client/js/vendor/angular.js',
+                        //'../source/client/js/vendor/angular-mocks.js',
+                        '../source/client/js/vendor/angular.min.js',
+                        '../source/client/js/vendor/jquery-2.1.4.min.js',
+                        //'../source/client/js/vendor/bootstrap.min.js',
+                        //'../source/client/js/vendor/socket.io.js',
+                        //'../source/client/js/vendor/*.js',
+                        '../source/client/js/gameLogic.js',
+                        '../tests/client/*.js'
+                    ]
+                }
+            }
         }
     });
 
@@ -124,7 +159,9 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-htmlmin');
     grunt.loadNpmTasks('grunt-replace');
+    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-manifest');
+    grunt.loadNpmTasks('grunt-karma');
 
     grunt.registerTask('default', [
         'uglify',
@@ -132,8 +169,13 @@ module.exports = function(grunt) {
         'cssmin',
         'htmlmin',
         'replace',
-        'manifest'
+        'copy',
+        'manifest',
+        'karma'
     ]);
 
+    grunt.registerTask('test', [
+        'karma'
+    ]);
 
 };
