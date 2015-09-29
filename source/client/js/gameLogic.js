@@ -495,3 +495,4 @@ var gameLogic = function() {
     };
 }();
 
+gameLogic.init();
