@@ -249,7 +249,7 @@
                         } else if (stateNr == 4) {
                             if (self.appSetupService.showPosibleStones)
                                 self.doImageSwitch(xindex, yindex, stateNr);
-                            else (self.appSetupService.showPosibleStones)
+                            else
                                 self.doImageSwitch(xindex, yindex, 0);
                         } else {
                             self.doImageSwitch(xindex, yindex, stateNr);
