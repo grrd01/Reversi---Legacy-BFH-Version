@@ -1,6 +1,6 @@
 CACHE MANIFEST
 # reversi v0.1.0
-# Time: Tue Sep 29 2015 11:52:44 GMT+0200 (Mitteleuropäische Sommerzeit)
+# Time: Wed Sep 30 2015 21:27:02 GMT+0200 (Mitteleuropäische Sommerzeit)
 
 CACHE:
 index.html
@@ -30,4 +30,4 @@ NETWORK:
 SETTINGS:
 prefer-online
 
-# hash: 16e7e1d3735b951ad825257d820ceee3983acfa380dae15563806b2e2c798f6b
+# hash: 855e35882380ae46bb2ec39136383b9371d2f8a083040c55499caee7c6167fe8
